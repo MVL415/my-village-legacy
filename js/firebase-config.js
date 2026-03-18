@@ -1,7 +1,7 @@
 // firebase-config.js
 
 const firebaseConfig = {
-  apiKey: "AIzaSyXXXXAIzaSyAU4jYF4RvMgKpcXZj-dm-s7OoqE3m0f7I",
+  apiKey: "AIzaSyAU4jYF4RvMgKpcXZj-dm-s7OoqE3m0f7I",
   authDomain: "my-village-legacy.firebaseapp.com",
   projectId: "my-village-legacy",
   storageBucket: "my-village-legacy.firebasestorage.app",
