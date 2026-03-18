@@ -149,7 +149,29 @@
 <footer>
   <p>© 2026 My Village Legacy</p>
 </footer>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDUcWnoh3vASnvvDyMtUemrjIPl-sBo65M",
+    authDomain: "my-village-legacy.firebaseapp.com",
+    projectId: "my-village-legacy",
+    storageBucket: "my-village-legacy.firebasestorage.app",
+    messagingSenderId: "278218988505",
+    appId: "1:278218988505:web:bd39762a18463b84ed17c8",
+    measurementId: "G-G4CP7064NN"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 <script src="js/script.js"></script>
 
 </body>
