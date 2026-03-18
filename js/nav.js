@@ -1,6 +1,8 @@
-const menuToggle = document.getElementById("menu-toggle")
-const nav = document.getElementById("main-nav")
+const toggle = document.getElementById("menu-toggle");
+const nav = document.getElementById("nav-menu");
 
-toggle.addEventListener("click", () => {
-nav.classList.toggle("show")
-})
+if (toggle && nav) {
+  toggle.addEventListener("click", () => {
+    nav.classList.toggle("show");
+  });
+}
