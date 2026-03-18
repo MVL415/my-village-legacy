@@ -1,3 +1,7 @@
+// auth.js
+
+console.log("auth.js loaded");
+
 const auth = firebase.auth();
 
 function signUp() {
@@ -28,12 +32,7 @@ function logOut() {
   });
 }
 
-auth.onAuthStateChanged(user => {
-  if (user) {
-    document.getElementById("user-status").innerText =
-      "Welcome, " + user.email;
-  } else {
-    document.getElementById("user-status").innerText =
-      "Not logged in";
-  }
-});
+// 👇 THIS makes functions accessible to HTML buttons
+window.signUp = signUp;
+window.logIn = logIn;
+window.logOut = logOut;
