@@ -24,32 +24,3 @@ function closeLightbox(){
   }
 }
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDUcWnoh3vASnvvDyMtUemrjIPl-sBo65M",
-  authDomain: "my-village-legacy.firebaseapp.com",
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-
-function signUp() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  auth.createUserWithEmailAndPassword(email, password)
-    .then(() => alert("User signed up!"))
-    .catch(err => alert(err.message));
-}
-
-function logIn() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  auth.signInWithEmailAndPassword(email, password)
-    .then(() => alert("Logged in!"))
-    .catch(err => alert(err.message));
-}
-
-function logOut() {
-  auth.signOut().then(() => alert("Logged out"));
-}
