@@ -32,7 +32,7 @@ function logOut() {
   });
 }
 
-// 👇 THIS makes functions accessible to HTML buttons
+//
 window.signUp = signUp;
 window.logIn = logIn;
 window.logOut = logOut;
