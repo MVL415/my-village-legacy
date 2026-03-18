@@ -11,6 +11,7 @@ function signUp() {
   auth.createUserWithEmailAndPassword(email, password)
     .then(() => {
       document.getElementById("user-status").innerText = "Account created!";
+      clearFields();
     })
     .catch(err => alert(err.message));
 }
@@ -22,6 +23,7 @@ function logIn() {
   auth.signInWithEmailAndPassword(email, password)
     .then(() => {
       document.getElementById("user-status").innerText = "Logged in!";
+      clearFields();
     })
     .catch(err => alert(err.message));
 }
@@ -29,7 +31,13 @@ function logIn() {
 function logOut() {
   auth.signOut().then(() => {
     document.getElementById("user-status").innerText = "Logged out!";
+    clearFields();
   });
+}
+
+function clearFields() {
+  document.getElementById("email").value = "";
+  document.getElementById("password").value = "";
 }
 
 auth.onAuthStateChanged(user => {
