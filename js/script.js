@@ -25,8 +25,8 @@ function closeLightbox(){
 }
 
 const firebaseConfig = {
-  apiKey: "YOUR_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  apiKey: "AIzaSyDUcWnoh3vASnvvDyMtUemrjIPl-sBo65M",
+  authDomain: "my-village-legacy.firebaseapp.com",
 };
 
 firebase.initializeApp(firebaseConfig);
