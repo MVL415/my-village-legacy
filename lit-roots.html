@@ -82,6 +82,20 @@
     <p><strong>Welcome to Living Legacy—where every read is a revolution.</strong></p>
   </section>
 
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+
+<section class="card">
+  <h2>Member Login</h2>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="signUp()">Sign Up</button>
+  <button onclick="logIn()">Log In</button>
+  <button onclick="logOut()">Log Out</button>
+</section>
+
   <section class="card feature">
   <h2>📚 Book of the Month</h2>
 
