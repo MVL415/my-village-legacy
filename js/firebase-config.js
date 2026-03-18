@@ -1,4 +1,5 @@
 // firebase-config.js
+
 const firebaseConfig = {
   apiKey: "AIzaSyXXXXAIzaSyAU4jYF4RvMgKpcXZj-dm-s7OoqE3m0f7I",
   authDomain: "my-village-legacy.firebaseapp.com",
