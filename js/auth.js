@@ -32,6 +32,16 @@ function logOut() {
   });
 }
 
+auth.onAuthStateChanged(user => {
+  if (user) {
+    document.getElementById("user-status").innerText =
+      "Welcome, " + user.email;
+  } else {
+    document.getElementById("user-status").innerText =
+      "Not logged in";
+  }
+});
+
 //
 window.signUp = signUp;
 window.logIn = logIn;
