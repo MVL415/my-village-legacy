@@ -1,59 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Living Legacy</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Lit Roots</title>
-
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/grid.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/grid.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <header class="site-header">
+  <div class="container nav-container">
+    <h1 class="logo">My Village Legacy</h1>
+    <button class="menu-toggle" id="menu-toggle">☰</button>
 
-<div class="container nav-container">
-
-<h1 class="logo">My Village Legacy</h1>
-
-<button class="menu-toggle" id="menu-toggle">☰</button>
-
-<nav class="main-nav" id="main-nav">
-
-<a href="index.html">Home</a>
-<a href="money.html">Money Matters</a>
-<a href="photos.html">Photo Corner</a>
-<a class="active" href="#">Lit Roots</a>
-<a href="https://www.myvillagelegacy.com" target="black">Shop MVL</a>
-
-</nav>
-
-</div>
-
+    <nav class="main-nav" id="main-nav">
+      <a href="index.html">Home</a>
+      <a href="money.html">Money Matters</a>
+      <a href="photos.html">Photo Corner</a>
+      <a class="active" href="#">Lit Roots</a>
+      <a href="https://www.myvillagelegacy.com" target="_blank">Shop MVL</a>
+    </nav>
+  </div>
 </header>
 
-<section class="page-hero">
-<h1>Lit Roots</h1>
-<p>Exploring stories that shape our community.</p>
-</section>
+<main class="container">
 
+  <!-- HERO -->
+  <section class="page-hero">
+    <h1>Living Legacy</h1>
+    <p>Where stories, culture, and community come together.</p>
+  </section>
 
+  <!-- SECTION 1 -->
+  <section class="grid-2">
+    <div>
+      <img src="https://myvillagelegacy.wordpress.com/wp-content/uploads/2025/04/img_2422-1.jpeg?w=1024" alt="Community reading">
+    </div>
 
+    <div>
+      <h2>Our Mission</h2>
+      <p>Here at Living Legacy, we’re all about:</p>
+      <ul>
+        <li>Amplifying diverse Black voices across genres and generations</li>
+        <li>Engaging in thought-provoking discussions beyond the page</li>
+        <li>Building a supportive community of readers and culture lovers</li>
+        <li>Connecting literature to real-world cultural movements</li>
+      </ul>
+    </div>
+  </section>
 
-<footer class="site-footer">
+  <!-- SECTION 2 -->
+  <section class="grid-2 reverse">
+    <div>
+      <h2>More Than a Book Club</h2>
+      <p>
+        Join us as we explore works that challenge, inspire, and reflect the
+        richness of the Black experience.
+      </p>
+      <p>
+        From Harlem Renaissance classics to Afrofuturism, we celebrate the
+        stories shaping culture and pushing literature forward.
+      </p>
+    </div>
 
-<p>© 2026 My Village Legacy</p>
+    <div>
+      <img src="https://myvillagelegacy.wordpress.com/wp-content/uploads/2025/04/img_4859.jpeg?w=1024" alt="Books and culture">
+    </div>
+  </section>
 
+  <!-- SECTION 3 -->
+  <section class="card">
+    <h2>Join the Movement</h2>
+    <p>
+      Let’s move beyond traditional book clubs and create a space where Black
+      literature thrives and voices are heard.
+    </p>
+    <p><strong>Welcome to Living Legacy—where every read is a revolution.</strong></p>
+  </section>
+
+  <!-- FEATURE IMAGE -->
+  <section>
+    <img src="https://myvillagelegacy.wordpress.com/wp-content/uploads/2025/04/moses-flora-1.png?w=663" alt="Book excerpt">
+    <p class="caption">
+      Moses & Flora excerpt from <em>Good Dirt</em> by Charmaine Wilkerson
+    </p>
+  </section>
+
+  <!-- POSTER -->
+  <section>
+    <img src="https://myvillagelegacy.wordpress.com/wp-content/uploads/2025/04/poster-pt-1-1.png?w=612" alt="Event poster">
+  </section>
+
+  <!-- COMMENT SECTION (SIMPLIFIED) -->
+  <section class="card">
+    <h2>Join the Conversation</h2>
+    <p>
+      Can’t make the live discussion? Share your thoughts below and be part of the conversation.
+    </p>
+
+    <textarea placeholder="Write your thoughts here..." style="width:100%; height:120px; margin-top:10px;"></textarea>
+    <button style="margin-top:10px;">Submit</button>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 My Village Legacy</p>
 </footer>
 
-
-<script src="js/nav.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>

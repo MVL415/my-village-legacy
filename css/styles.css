@@ -301,17 +301,30 @@ display:flex;
 
 }
 /* TWO COLUMN SECTION */
-.grid-2{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-margin:20px 0;
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
 }
 
-@media(max-width:800px){
-.grid-2{
-grid-template-columns:1fr;
+.grid-2.reverse {
+  direction: rtl;
 }
+
+.grid-2.reverse > * {
+  direction: ltr;
+}
+
+.grid-2 img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
 }
 
 
