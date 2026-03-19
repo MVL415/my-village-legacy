@@ -14,3 +14,19 @@ function closeLightbox(){
     lightbox.style.display = "none";
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.getElementById("newsletter-form");
+
+  if (form) {
+    form.addEventListener("submit", function () {
+      
+      setTimeout(() => {
+        form.reset(); // clears input
+      }, 500);
+
+    });
+  }
+
+});
