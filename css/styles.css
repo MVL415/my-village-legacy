@@ -533,3 +533,27 @@ background:#333;
   text-decoration: none;
   border-radius: 6px;
 }
+
+.newsletter {
+  text-align: center;
+  padding: 2rem;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.newsletter-form input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 250px;
+}
+
+.newsletter-form button {
+  padding: 10px 16px;
+}
