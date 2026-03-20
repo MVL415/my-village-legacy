@@ -634,20 +634,34 @@ background:#333;
   display: none;
   position: fixed;
   z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.8);
+
+  display: flex;              /* 👈 center it */
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-content {
+  position: relative;
   background: #fff;
-  margin: 5% auto;
+  margin: 5vh auto;
   padding: 20px;
+  width: 90%;
   max-width: 500px;
+  max-height: 85vh;   /* 👈 limits height */
+  overflow-y: auto;   /* 👈 enables scrolling */
   border-radius: 10px;
   text-align: center;
+}
+
+.modal-content {
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .modal-content img {
@@ -656,11 +670,33 @@ background:#333;
 }
 
 .close-btn {
+  position: sticky;   /* 👈 stays visible while scrolling */
+  top: 0;
   float: right;
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: bold;
   cursor: pointer;
+  background: #fff;
+  padding: 5px 10px;
+  z-index: 10;
 }
 
 .current-book {
   border: 3px solid #6a0dad;
 }
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }

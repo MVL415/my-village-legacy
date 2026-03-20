@@ -61,3 +61,56 @@ function openBookModal(title, author, img, review, question, bookId) {
 function closeBookModal() {
   document.getElementById("book-modal").style.display = "none";
 }
+
+function nextBook() {
+  currentIndex = (currentIndex + 1) % books.length;
+  openBookByIndex(currentIndex);
+}
+
+function prevBook() {
+  currentIndex = (currentIndex - 1 + books.length) % books.length;
+  openBookByIndex(currentIndex);
+}
+
+let startX = 0;
+
+const modal = document.getElementById("book-modal");
+
+modal.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+modal.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+
+  if (startX - endX > 50) nextBook();     // swipe left
+  if (endX - startX > 50) prevBook();     // swipe right
+});
+
+modal.addEventListener("mousedown", e => {
+  startX = e.clientX;
+});
+
+modal.addEventListener("mouseup", e => {
+  let endX = e.clientX;
+
+  if (startX - endX > 50) nextBook();
+  if (endX - startX > 50) prevBook();
+});
+
+function trackBookView(bookId) {
+  let viewed = JSON.parse(localStorage.getItem("viewedBooks")) || [];
+
+  if (!viewed.includes(bookId)) {
+    viewed.push(bookId);
+    localStorage.setItem("viewedBooks", JSON.stringify(viewed));
+  }
+}
+
+function updateProgress() {
+  let viewed = JSON.parse(localStorage.getItem("viewedBooks")) || [];
+  document.getElementById("progress").innerText =
+    `📚 Books explored: ${viewed.length}`;
+}
+
+updateProgress();
