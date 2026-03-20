@@ -557,3 +557,110 @@ background:#333;
 .newsletter-form button {
   padding: 10px 16px;
 }
+
+.reading-journey {
+  margin: 60px 0;
+}
+
+.section-sub {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.journey-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px;
+  scroll-snap-type: x mandatory;
+}
+
+.book-card {
+  min-width: 260px;
+  max-width: 260px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  scroll-snap-align: start;
+  text-align: center;
+}
+
+.book-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.book-card h3 {
+  font-size: 1.1rem;
+  margin: 10px 0 5px;
+}
+
+.author {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.review {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.question {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6a0dad;
+}
+
+.journey-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.journey-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  transition: 0.2s;
+}
+
+.book-modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  max-width: 500px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.close-btn {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.current-book {
+  border: 3px solid #6a0dad;
+}

@@ -73,8 +73,70 @@
       <img src="https://myvillagelegacy.wordpress.com/wp-content/uploads/2025/04/img_4859.jpeg?w=1024" alt="Books and culture">
     </div>
   </section>
+
+  <section class="reading-journey">
+
+  <h2 class="section-title">📚 My 40 Books for 40 Journey</h2>
+
+  <p class="section-sub">
+    Follow along as I read 40 books this year. Scroll from where I started to where I am now.
+  </p>
+
+  <div class="journey-scroll">
+
+    <!-- BOOK CARD -->
+<p class="progress">📖 8 / 40 books completed</p>
+
+   <div class="book-card" onclick="openBookModal(
+  'The Spook Who Sat by the Door',
+  'Sam Greenlee',
+  'images/book1.jpg',
+  'A deeper reflection on power, identity, and resistance. This book challenged how I think about strategy and systems.',
+  '💬 What message stood out to you most?',
+  'spook-book'
+)">
+  <img src="images/book1.jpg" alt="">
+  <h3>The Spook Who Sat by the Door</h3>
+  <p class="author">Sam Greenlee</p>
+</div>
+
+    <div class="book-card">
+      <img src="images/book2.jpg" alt="Christine">
+
+      <h3>Christine</h3>
+      <p class="author">Stephen King</p>
+
+      <p class="review">
+        A chilling look at obsession and transformation — more psychological than expected.
+      </p>
+
+      <p class="question">
+        💬 Was Christine evil… or a reflection of Arnie?
+      </p>
+    </div>
+
+    <div class="book-card">
+      <img src="images/book3.jpg" alt="Brimstone">
+
+      <h3>Brimstone</h3>
+      <p class="author">Callie Hart</p>
+
+      <p class="review">
+        Dark, intense, and immersive — definitely pulls you into another world.
+      </p>
+
+      <p class="question">
+        💬 Would you survive in this world?
+      </p>
+    </div>
+
+    <!-- ADD MORE BOOKS SAME FORMAT -->
+
+  </div>
+
+</section>
  
-  <!-- SECTION 3 -->
+  <!-- SECTION 4 -->
 <section class="card">
   <h2>🔐 Member Login</h2>
    <p>
@@ -144,6 +206,27 @@
         async>
   </script>
 </section>
+
+<div id="book-modal" class="book-modal">
+
+  <div class="modal-content">
+
+    <span class="close-btn" onclick="closeBookModal()">×</span>
+
+    <img id="modal-img" src="" alt="">
+
+    <h2 id="modal-title"></h2>
+    <p id="modal-author"></p>
+
+    <p id="modal-review"></p>
+    <p id="modal-question"></p>
+
+    <!-- COMMENTS -->
+    <div id="comments-section"></div>
+
+  </div>
+
+</div>
 
 </main>
 
