@@ -31,15 +31,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-function openBookModal(title, author, img, review, question, bookId) {
+function openBookByIndex(index) {
+  currentIndex = index;
+  const book = books[index];
 
-  document.getElementById("book-modal").style.display = "block";
+  const modal = document.getElementById("book-modal");
+  modal.style.display = "flex";   // 👈 only here
 
-  document.getElementById("modal-title").innerText = title;
-  document.getElementById("modal-author").innerText = author;
-  document.getElementById("modal-img").src = img;
-  document.getElementById("modal-review").innerText = review;
-  document.getElementById("modal-question").innerText = question;
+  document.getElementById("modal-title").innerText = book.title;
+  document.getElementById("modal-author").innerText = book.author;
+  document.getElementById("modal-img").src = book.img;
+  document.getElementById("modal-review").innerText = book.review;
+  document.getElementById("modal-question").innerText = book.question;
+
+  trackBookView(book.id);
+
 
   // Load comments (Giscus)
   const comments = document.getElementById("comments-section");
@@ -113,4 +119,8 @@ function updateProgress() {
     `📚 Books explored: ${viewed.length}`;
 }
 
-updateProgress();
+document.getElementById("book-modal").addEventListener("click", function(e) {
+  if (e.target.id === "book-modal") {
+    closeBookModal();
+  }
+});

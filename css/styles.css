@@ -631,13 +631,12 @@ background:#333;
 }
 
 .book-modal {
-  display: none;
+  display: none;   /* 👈 hidden by default */
   position: fixed;
-  z-index: 999;
   inset: 0;
   background: rgba(0,0,0,0.8);
+  z-index: 999;
 
-  display: flex;              /* 👈 center it */
   align-items: center;
   justify-content: center;
 }
