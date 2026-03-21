@@ -688,14 +688,20 @@ background:#333;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 28px;
-  background: rgba(0,0,0,0.5);
-  color: white;
+  font-size: 26px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
   border: none;
-  padding: 10px;
+  padding: 10px 14px;
   cursor: pointer;
   border-radius: 50%;
+  z-index: 20;
 }
 
-.prev { left: 10px; }
-.next { right: 10px; }
+.prev {
+  left: -15px;   /* 👈 slightly outside card */
+}
+
+.next {
+  right: -15px;
+}

@@ -82,6 +82,48 @@
     Follow along as I read 40 books this year. Scroll from where I started to where I am now.
   </p>
 
+  <p class="progress">📖 8 / 40 books completed</p>
+
+  <div class="journey-scroll">
+
+    <!-- BOOK CARD -->
+    <div class="book-card" onclick="openBookByIndex(0)">
+      <img src="images/book8.jpg" alt="">
+      <h3>The Spook Who Sat by the Door</h3>
+      <p class="author">Sam Greenlee</p>
+    </div>
+
+    <div class="book-card" onclick="openBookByIndex(1)">
+      <img src="images/book7.jpg" alt="">
+      <h3>Christine</h3>
+      <p class="author">Stephen King</p>
+    </div>
+
+    <div class="book-card" onclick="openBookByIndex(2)">
+      <img src="images/book6.jpg" alt="">
+      <h3>Brimstone</h3>
+      <p class="author">Callie Hart</p>
+    </div>
+
+    <div class="book-card" onclick="openBookByIndex(3)">
+      <img src="images/book5.jpg" alt="">
+      <h3>Quicksilver</h3>
+      <p class="author">Callie Hart</p>
+    </div>
+
+  </div>
+
+</section>
+
+*
+  <section class="reading-journey">
+
+  <h2 class="section-title">📚 My 40 for 40 Journey</h2>
+
+  <p class="section-sub">
+    Follow along as I read 40 books this year. Scroll from where I started to where I am now.
+  </p>
+
   
 
     <!-- BOOK CARD -->
@@ -134,7 +176,7 @@
     <div class="book-card">
       <img src="images/book5.jpg" alt="Quicksilver">
 
-      <h3>Brimstone</h3>
+      <h3>Quicksilver</h3>
       <p class="author">Callie Hart</p>
 
       <p class="review">
@@ -147,14 +189,14 @@
     </div>
     </div>
     
-<button class="nav-btn prev" onclick="prevBook()">❮</button>
-<button class="nav-btn next" onclick="nextBook()">❯</button>
+
     <!-- ADD MORE BOOKS SAME FORMAT -->
 
   </div>
 
 </section>
- 
+ *
+
   <!-- SECTION 4 -->
 <section class="card">
   <h2>🔐 Member Login</h2>
@@ -232,13 +274,19 @@
 
     <span class="close-btn" onclick="closeBookModal()">×</span>
 
-    <img id="modal-img" src="" alt="">
+    <!-- 👇 BUTTONS LIVE HERE -->
+    <button class="nav-btn prev" onclick="prevBook()">❮</button>
+    <button class="nav-btn next" onclick="nextBook()">❯</button>
 
+    <img id="modal-img" src="">
     <h2 id="modal-title"></h2>
     <p id="modal-author"></p>
-
     <p id="modal-review"></p>
     <p id="modal-question"></p>
+
+  </div>
+
+</div>
 
     <!-- COMMENTS -->
     <div id="comments-section"></div>
