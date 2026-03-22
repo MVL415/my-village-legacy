@@ -229,38 +229,131 @@ function postComment() {
 
   if (!input.value.trim()) return;
 
-  db.collection("comments").add({
-    text: input.value,
-    user: user.email,
-    bookId: books[currentIndex].id,
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
+ db.collection("comments").add({
+  text: input.value,
+  user: user.email,
+  bookId: books[currentIndex].id,
+  likes: 0,
+  createdAt: firebase.firestore.FieldValue.serverTimestamp()
+});
 
   input.value = "";
   console.log("Posting comment for:", books[currentIndex].id);
 }
 
-function loadComments(bookId) {
+function loadComments(bookId, sort = "new") {
   const container = document.getElementById("comments-list");
   container.innerHTML = "Loading...";
 
-  db.collection("comments")
-    .where("bookId", "==", bookId)
-    .onSnapshot(snapshot => {
+  let query = db.collection("comments")
+    .where("bookId", "==", bookId);
 
-      container.innerHTML = "";
+  query = sort === "top"
+    ? query.orderBy("likes", "desc")
+    : query.orderBy("createdAt", "desc");
 
-      snapshot.forEach(doc => {
-        const c = doc.data();
+  query.onSnapshot(snapshot => {
 
-        container.innerHTML += `
-          <div class="comment">
-            <strong>${c.user}</strong>
-            <p>${c.text}</p>
-          </div>
-        `;
-      });
-
+    const comments = [];
+    snapshot.forEach(doc => {
+      comments.push({ id: doc.id, ...doc.data() });
     });
+
+    // separate parent + replies
+    const parents = comments.filter(c => !c.parentId);
+    const replies = comments.filter(c => c.parentId);
+
+    container.innerHTML = "";
+
+    parents.forEach(c => {
+
+      const childReplies = replies.filter(r => r.parentId === c.id);
+
+      container.innerHTML += `
+        <div class="comment">
+          
+          <div class="avatar">${c.displayName.charAt(0).toUpperCase()}</div>
+
+          <div class="comment-content">
+            
+            <div class="comment-header">
+              <strong>${c.displayName}</strong>
+            </div>
+
+            <div class="comment-text">${c.text}</div>
+
+            <div class="comment-actions">
+              <span onclick="likeComment('${c.id}', ${JSON.stringify(c.likedBy || [])})">
+                ❤️ ${c.likes || 0}
+              </span>
+              · <span onclick="replyToComment('${c.id}')">Reply</span>
+              · <span onclick="editComment('${c.id}', \`${c.text}\`)">Edit</span>
+              · <span onclick="deleteComment('${c.id}')">Delete</span>
+            </div>
+
+            <div class="replies">
+              ${childReplies.map(r => `
+                <div class="comment reply">
+                  <div class="avatar">${r.displayName.charAt(0).toUpperCase()}</div>
+                  <div class="comment-content">
+                    <strong>${r.displayName}</strong>
+                    <div>${r.text}</div>
+                  </div>
+                </div>
+              `).join("")}
+            </div>
+
+          </div>
+        </div>
+      `;
+    });
+
+  });
 }
 
+function likeComment(commentId, likedBy = []) {
+  const user = firebase.auth().currentUser;
+  if (!user) return alert("Login to like");
+
+  const ref = db.collection("comments").doc(commentId);
+
+  if (likedBy.includes(user.uid)) return; // already liked
+
+  ref.update({
+    likes: firebase.firestore.FieldValue.increment(1),
+    likedBy: firebase.firestore.FieldValue.arrayUnion(user.uid)
+  });
+}
+
+function replyToComment(parentId) {
+  const text = prompt("Write your reply:");
+
+  const user = firebase.auth().currentUser;
+  if (!user || !text) return;
+
+  db.collection("comments").add({
+    text,
+    user: user.email,
+    displayName: user.email.split("@")[0],
+    bookId: books[currentIndex].id,
+    likes: 0,
+    likedBy: [],
+    parentId: parentId, // 👈 attaches reply
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+function editComment(id, oldText) {
+  const newText = prompt("Edit your comment:", oldText);
+  if (!newText) return;
+
+  db.collection("comments").doc(id).update({
+    text: newText
+  });
+}
+
+function deleteComment(id) {
+  if (!confirm("Delete this comment?")) return;
+
+  db.collection("comments").doc(id).delete();
+}

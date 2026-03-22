@@ -167,13 +167,20 @@
     </div>
 
    <div class="comments-box">
+
   <h3>💬 Join the Discussion</h3>
 
   <textarea id="comment-input" placeholder="Share your thoughts..."></textarea>
 
-  <button onclick="postComment()">Post Comment</button>
+  <button class="comment-btn" onclick="postComment()">Post Comment</button>
+  
+<div class="comment-sort">
+  <button onclick="loadComments(books[currentIndex].id, 'new')">Newest</button>
+  <button onclick="loadComments(books[currentIndex].id, 'top')">Top</button>
+</div>
 
-  <div id="comments-list"></div>
+  <div id="comments-list" class="comments-list"></div>
+
 </div>
 
 </div>
