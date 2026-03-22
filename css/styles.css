@@ -742,6 +742,14 @@ background:#333;
   top: -18px;
 }
 
+.modal-content img {
+  width: 120px;          /* 👈 smaller size */
+  height: auto;
+  display: block;
+  margin: 0 auto 15px;
+  border-radius: 8px;
+}
+
 .modal-body {
   display: flex;
   gap: 15px;
