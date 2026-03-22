@@ -777,3 +777,32 @@ background:#333;
     text-align: center;
   }
 }
+
+.comment-section {
+  margin-top: 25px;
+}
+
+#comment-input {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+#comments-list {
+  margin-top: 15px;
+}
+
+.comment {
+  background: #f7f7f7;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.comment strong {
+  display: block;
+  font-size: 0.9rem;
+}

@@ -231,3 +231,53 @@ document.addEventListener("DOMContentLoaded", function () {
     percentText.innerText = Math.round(percent) + "%";
   }
 });
+
+const db = firebase.firestore();
+
+function postComment() {
+  const input = document.getElementById("comment-input");
+  const user = firebase.auth().currentUser;
+
+  if (!user) {
+    alert("Please log in to comment");
+    return;
+  }
+
+  if (!input.value.trim()) return;
+
+  db.collection("comments").add({
+    text: input.value,
+    user: user.email,
+    bookId: books[currentIndex].id,
+    createdAt: new Date()
+  });
+
+  input.value = "";
+}
+
+function loadComments(bookId) {
+  const container = document.getElementById("comments-list");
+  container.innerHTML = "Loading...";
+
+  db.collection("comments")
+    .where("bookId", "==", bookId)
+    .orderBy("createdAt", "desc")
+    .onSnapshot(snapshot => {
+
+      container.innerHTML = "";
+
+      snapshot.forEach(doc => {
+        const c = doc.data();
+
+        container.innerHTML += `
+          <div class="comment">
+            <strong>${c.user}</strong>
+            <p>${c.text}</p>
+          </div>
+        `;
+      });
+
+    });
+}
+
+loadComments(book.id);
