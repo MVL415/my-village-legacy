@@ -60,7 +60,7 @@ const books = [
     title: "The Spook Who Sat by the Door",
     author: "Sam Greenlee",
     img: "images/book8.jpg",
-    review: "A deeper reflection on power, identity, and resistance. Nipsey Hussle mentioned reading this book which influenced my decision to read it. It’s a powerful story that explores themes of racial tension, social justice, and the fight for equality. It’s a frustrating reminder of the ongoing struggle for civil rights and the importance of standing up against oppression specifically from within.",
+    review: "Nipsey Hussle mentioned reading this book which influenced my decision to read it. It’s a powerful story that explores themes of racial tension, social justice, and the fight for equality. It’s a frustrating reminder of the ongoing struggle for civil rights and the importance of standing up against oppression specifically from within.",
     question: "💬 Being such a short read, were you left wanting more? Or did you feel like Greenlee wrapped it up perfectly? What do you think the story would look like if it were set in today’s world?"
   }
  
@@ -104,7 +104,7 @@ function openBookByIndex(index) {
   const book = books[index];
 
   const modal = document.getElementById("book-modal");
-  modal.style.display = "flex";   // 👈 only here
+  modal.style.display = "flex";
 
   document.getElementById("modal-title").innerText = book.title;
   document.getElementById("modal-author").innerText = book.author;
@@ -114,24 +114,26 @@ function openBookByIndex(index) {
 
   trackBookView(book.id);
 
-
-  // Load comments (Giscus)
+  // 👇 LOAD COMMENTS PER BOOK
   const comments = document.getElementById("comments-section");
- comments.innerHTML = "";
+  comments.innerHTML = "";
 
-const script = document.createElement("script");
-script.src = "https://giscus.app/client.js";
-script.setAttribute("data-repo", "MVL415/mvl-comments");
-script.setAttribute("data-repo-id", "R_kgDORqDULQ");
-script.setAttribute("data-category", "General");
-script.setAttribute("data-category-id", "DIC_kwDORqDULc4C4qCr");
-script.setAttribute("data-mapping", "specific");
-script.setAttribute("data-term", book.id);
-script.setAttribute("data-theme", "preferred_color_scheme");
-script.crossOrigin = "anonymous";
-script.async = true;
+  const script = document.createElement("script");
+  script.src = "https://giscus.app/client.js";
 
-comments.appendChild(script);
+  script.setAttribute("data-repo", "MVL415/mvl-comments");
+  script.setAttribute("data-repo-id", "R_kgDORqDULQ");
+  script.setAttribute("data-category", "General");
+  script.setAttribute("data-category-id", "DIC_kwDORqDULc4C4qCr");
+
+  script.setAttribute("data-mapping", "specific"); // 🔥 KEY FIX
+  script.setAttribute("data-term", book.id);       // 🔥 UNIQUE THREAD
+
+  script.setAttribute("data-theme", "preferred_color_scheme");
+  script.crossOrigin = "anonymous";
+  script.async = true;
+
+  comments.appendChild(script);
 }
 
 function closeBookModal() {
