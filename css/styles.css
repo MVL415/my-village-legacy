@@ -733,3 +733,11 @@ background:#333;
   border-radius: 10px;
   transition: width 1s ease-in-out;
 }
+
+.progress-percent {
+  font-size: 10px;
+  color: white;
+  position: absolute;
+  right: 5px;
+  top: -18px;
+}
