@@ -115,25 +115,7 @@ function openBookByIndex(index) {
   trackBookView(book.id);
 
   // 👇 LOAD COMMENTS PER BOOK
-  const comments = document.getElementById("comments-section");
-  comments.innerHTML = "";
-
-  const script = document.createElement("script");
-  script.src = "https://giscus.app/client.js";
-
-  script.setAttribute("data-repo", "MVL415/mvl-comments");
-  script.setAttribute("data-repo-id", "R_kgDORqDULQ");
-  script.setAttribute("data-category", "General");
-  script.setAttribute("data-category-id", "DIC_kwDORqDULc4C4qCr");
-
-  script.setAttribute("data-mapping", "specific"); // 🔥 KEY FIX
-  script.setAttribute("data-term", book.id);       // 🔥 UNIQUE THREAD
-
-  script.setAttribute("data-theme", "preferred_color_scheme");
-  script.crossOrigin = "anonymous";
-  script.async = true;
-
-  comments.appendChild(script);
+  loadComments(book.id);
 }
 
 function closeBookModal() {
