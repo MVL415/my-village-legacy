@@ -255,7 +255,7 @@ function postComment() {
   });
 
   input.value = "";
-  console.log("SAVING FOR:", books[currentIndex].id);
+  console.log("Posting comment for:", books[currentIndex].id);
 }
 
 function loadComments(bookId) {
@@ -279,7 +279,7 @@ function loadComments(bookId) {
           </div>
         `;
 
-        console.log("BOOK ID:", bookId);
+      console.log("Loading comments for:", bookId);
       });
 
     });
