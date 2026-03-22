@@ -264,7 +264,6 @@ function loadComments(bookId) {
 
   db.collection("comments")
     .where("bookId", "==", bookId)
-    .orderBy("createdAt", "desc")
     .onSnapshot(snapshot => {
 
       container.innerHTML = "";
@@ -278,11 +277,8 @@ function loadComments(bookId) {
             <p>${c.text}</p>
           </div>
         `;
-
-      console.log("Loading comments for:", bookId);
       });
 
     });
 }
 
-loadComments(book.id);
