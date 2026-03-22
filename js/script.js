@@ -124,10 +124,10 @@ script.src = "https://giscus.app/client.js";
 script.setAttribute("data-repo", "MVL415/mvl-comments");
 script.setAttribute("data-repo-id", "R_kgDORqDULQ");
 script.setAttribute("data-category", "General");
-script.setAttribute("data-category-id", "YOUR_CATEGORY_ID");
+script.setAttribute("data-category-id", "DIC_kwDORqDULc4C4qCr");
 script.setAttribute("data-mapping", "specific");
 script.setAttribute("data-term", book.id);
-script.setAttribute("data-theme", "light");
+script.setAttribute("data-theme", "preferred_color_scheme");
 script.crossOrigin = "anonymous";
 script.async = true;
 
