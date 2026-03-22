@@ -1,3 +1,70 @@
+const books = [
+  {
+    id: "spook",
+    title: "The Spook Who Sat by the Door",
+    author: "Sam Greenlee",
+    img: "images/book8.jpg",
+    review: "A powerful and strategic look at identity, resistance, and systems. This one stays with you.",
+    question: "💬 What message stood out to you most?"
+  },
+  {
+    id: "christine",
+    title: "Christine",
+    author: "Stephen King",
+    img: "images/book7.jpg",
+    review: "More psychological than horror—obsession, identity, and transformation.",
+    question: "💬 Was Christine evil… or a reflection of Arnie?"
+  },
+  {
+    id: "brimstone",
+    title: "Brimstone",
+    author: "Callie Hart",
+    img: "images/book6.jpg",
+    review: "Dark, immersive, and intense. Pulls you into a completely different world.",
+    question: "💬 Would you survive in this world?"
+  },
+  {
+    id: "quicksilver",
+    title: "Quicksilver",
+    author: "Callie Hart",
+    img: "images/book5.jpg",
+    review: "My first fantasy read—rich world-building and unforgettable characters.",
+    question: "💬 Was it hard to return to reality after this one?"
+  },
+  {
+    id: "nipsey",
+    title: "The Marathon Don't Stop",
+    author: "Rob Kenner",
+    img: "images/book4.jpg",
+    review: "A powerful biography that shows discipline, vision, and purpose.",
+    question: "💬 What part of Nipsey’s mindset inspired you most?"
+  },
+  {
+    id: "twice",
+    title: "Twice",
+    author: "Mitch Albom",
+    img: "images/book3.jpg",
+    review: "Emotional and reflective—makes you think about time and choices.",
+    question: "💬 If you had a second chance, what would you change?"
+  },
+  {
+    id: "divorce",
+    title: "The Perfect Divorce",
+    author: "Jeneva Rose",
+    img: "images/book2.jpg",
+    review: "Twists, tension, and drama—keeps you guessing the whole way.",
+    question: "💬 Did you see the ending coming?"
+  },
+  {
+    id: "marriage",
+    title: "The Perfect Marriage",
+    author: "Jeneva Rose",
+    img: "images/book1.jpg",
+    review: "Fast-paced thriller with constant twists—hard to put down.",
+    question: "💬 Who did you trust most while reading?"
+  }
+];
+
 function openLightbox(img){
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightbox-img");
@@ -49,19 +116,21 @@ function openBookByIndex(index) {
 
   // Load comments (Giscus)
   const comments = document.getElementById("comments-section");
-  comments.innerHTML = `
-    <script src="https://giscus.app/client.js"
-      data-repo="MVL415/mvl-comments"
-      data-repo-id="R_kgDORqDULQ"
-      data-category="General"
-      data-category-id="YOUR_CATEGORY_ID"
-      data-mapping="specific"
-      data-term="${bookId}"
-      data-theme="light"
-      crossorigin="anonymous"
-      async>
-    </script>
-  `;
+ comments.innerHTML = "";
+
+const script = document.createElement("script");
+script.src = "https://giscus.app/client.js";
+script.setAttribute("data-repo", "MVL415/mvl-comments");
+script.setAttribute("data-repo-id", "R_kgDORqDULQ");
+script.setAttribute("data-category", "General");
+script.setAttribute("data-category-id", "YOUR_CATEGORY_ID");
+script.setAttribute("data-mapping", "specific");
+script.setAttribute("data-term", book.id);
+script.setAttribute("data-theme", "light");
+script.crossOrigin = "anonymous";
+script.async = true;
+
+comments.appendChild(script);
 }
 
 function closeBookModal() {
@@ -78,30 +147,36 @@ function prevBook() {
   openBookByIndex(currentIndex);
 }
 
-let startX = 0;
+document.addEventListener("DOMContentLoaded", function () {
 
-const modal = document.getElementById("book-modal");
+  const modal = document.getElementById("book-modal");
 
-modal.addEventListener("touchstart", e => {
-  startX = e.touches[0].clientX;
-});
+  if (!modal) return;
 
-modal.addEventListener("touchend", e => {
-  let endX = e.changedTouches[0].clientX;
+  let startX = 0;
 
-  if (startX - endX > 50) nextBook();     // swipe left
-  if (endX - startX > 50) prevBook();     // swipe right
-});
+  modal.addEventListener("touchstart", e => {
+    startX = e.touches[0].clientX;
+  });
 
-modal.addEventListener("mousedown", e => {
-  startX = e.clientX;
-});
+  modal.addEventListener("touchend", e => {
+    let endX = e.changedTouches[0].clientX;
 
-modal.addEventListener("mouseup", e => {
-  let endX = e.clientX;
+    if (startX - endX > 50) nextBook();
+    if (endX - startX > 50) prevBook();
+  });
 
-  if (startX - endX > 50) nextBook();
-  if (endX - startX > 50) prevBook();
+  modal.addEventListener("mousedown", e => {
+    startX = e.clientX;
+  });
+
+  modal.addEventListener("mouseup", e => {
+    let endX = e.clientX;
+
+    if (startX - endX > 50) nextBook();
+    if (endX - startX > 50) prevBook();
+  });
+
 });
 
 function trackBookView(bookId) {
@@ -142,8 +217,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-const percentText = document.getElementById("progress-percent");
+document.addEventListener("DOMContentLoaded", function () {
+  const read = 8;
+  const goal = 40;
+  const percent = (read / goal) * 100;
 
-if (percentText) {
-  percentText.innerText = Math.round(percent) + "%";
-}
+  const percentText = document.getElementById("progress-percent");
+
+  if (percentText) {
+    percentText.innerText = Math.round(percent) + "%";
+  }
+});
