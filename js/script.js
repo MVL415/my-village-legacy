@@ -124,3 +124,26 @@ document.getElementById("book-modal").addEventListener("click", function(e) {
     closeBookModal();
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  const read = 8;
+  const goal = 40;
+
+  const percent = (read / goal) * 100;
+
+  const bar = document.getElementById("progress-fill");
+
+  if (bar) {
+    setTimeout(() => {
+      bar.style.width = percent + "%";
+    }, 300); // slight delay for smooth animation
+  }
+
+});
+
+const percentText = document.getElementById("progress-percent");
+
+if (percentText) {
+  percentText.innerText = Math.round(percent) + "%";
+}
