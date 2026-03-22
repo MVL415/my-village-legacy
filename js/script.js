@@ -255,6 +255,7 @@ function postComment() {
   });
 
   input.value = "";
+  console.log("SAVING FOR:", books[currentIndex].id);
 }
 
 function loadComments(bookId) {
@@ -277,6 +278,8 @@ function loadComments(bookId) {
             <p>${c.text}</p>
           </div>
         `;
+
+        console.log("BOOK ID:", bookId);
       });
 
     });
