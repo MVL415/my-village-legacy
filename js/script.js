@@ -232,8 +232,11 @@ function postComment() {
  db.collection("comments").add({
   text: input.value,
   user: user.email,
+  displayName: user.email.split("@")[0], // 👈 REQUIRED
   bookId: books[currentIndex].id,
   likes: 0,
+  likedBy: [],
+  parentId: null,
   createdAt: firebase.firestore.FieldValue.serverTimestamp()
 });
 
@@ -248,9 +251,7 @@ function loadComments(bookId, sort = "new") {
   let query = db.collection("comments")
     .where("bookId", "==", bookId);
 
-  query = sort === "top"
-    ? query.orderBy("likes", "desc")
-    : query.orderBy("createdAt", "desc");
+query = query.orderBy("createdAt", "desc");
 
   query.onSnapshot(snapshot => {
 
@@ -267,46 +268,52 @@ function loadComments(bookId, sort = "new") {
 
     parents.forEach(c => {
 
-      const childReplies = replies.filter(r => r.parentId === c.id);
+  const name = c.displayName || (c.user ? c.user.split("@")[0] : "User");
+  const initials = name.charAt(0).toUpperCase();
 
-      container.innerHTML += `
-        <div class="comment">
-          
-          <div class="avatar">${c.displayName.charAt(0).toUpperCase()}</div>
+  const childReplies = replies.filter(r => r.parentId === c.id);
 
-          <div class="comment-content">
-            
-            <div class="comment-header">
-              <strong>${c.displayName}</strong>
-            </div>
+  container.innerHTML += `
+    <div class="comment">
+      
+      <div class="avatar">${initials}</div>
 
-            <div class="comment-text">${c.text}</div>
-
-            <div class="comment-actions">
-              <span onclick="likeComment('${c.id}', ${JSON.stringify(c.likedBy || [])})">
-                ❤️ ${c.likes || 0}
-              </span>
-              · <span onclick="replyToComment('${c.id}')">Reply</span>
-              · <span onclick="editComment('${c.id}', \`${c.text}\`)">Edit</span>
-              · <span onclick="deleteComment('${c.id}')">Delete</span>
-            </div>
-
-            <div class="replies">
-              ${childReplies.map(r => `
-                <div class="comment reply">
-                  <div class="avatar">${r.displayName.charAt(0).toUpperCase()}</div>
-                  <div class="comment-content">
-                    <strong>${r.displayName}</strong>
-                    <div>${r.text}</div>
-                  </div>
-                </div>
-              `).join("")}
-            </div>
-
-          </div>
+      <div class="comment-content">
+        
+        <div class="comment-header">
+          <strong>${name}</strong>
         </div>
-      `;
-    });
+
+        <div class="comment-text">${c.text}</div>
+
+        <div class="comment-actions">
+          <span onclick="likeComment('${c.id}', ${JSON.stringify(c.likedBy || [])})">
+            ❤️ ${c.likes || 0}
+          </span>
+          · <span onclick="replyToComment('${c.id}')">Reply</span>
+          · <span onclick="editComment('${c.id}', \`${c.text}\`)">Edit</span>
+          · <span onclick="deleteComment('${c.id}')">Delete</span>
+        </div>
+
+        <div class="replies">
+          ${childReplies.map(r => {
+            const rName = r.displayName || (r.user ? r.user.split("@")[0] : "User");
+            return `
+              <div class="comment reply">
+                <div class="avatar">${rName.charAt(0).toUpperCase()}</div>
+                <div class="comment-content">
+                  <strong>${rName}</strong>
+                  <div>${r.text}</div>
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+
+      </div>
+    </div>
+  `;
+});
 
   });
 }
