@@ -238,6 +238,8 @@ function postComment() {
   const input = document.getElementById("comment-input");
   const user = firebase.auth().currentUser;
 
+  console.log("USER:", user);
+
   if (!user) {
     alert("Please log in to comment");
     return;
@@ -249,7 +251,7 @@ function postComment() {
     text: input.value,
     user: user.email,
     bookId: books[currentIndex].id,
-    createdAt: new Date()
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
   });
 
   input.value = "";
