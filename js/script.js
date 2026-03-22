@@ -1,51 +1,11 @@
 const books = [
-  {
-    id: "spook",
-    title: "The Spook Who Sat by the Door",
-    author: "Sam Greenlee",
-    img: "images/book8.jpg",
-    review: "A deeper reflection on power, identity, and resistance. Nipsey Hussle mentioned reading this book which influenced my decision to read it. It’s a powerful story that explores themes of racial tension, social justice, and the fight for equality. It’s a frustrating reminder of the ongoing struggle for civil rights and the importance of standing up against oppression specifically from within.",
-    question: "💬 Being such a short read, were you left wanting more? Or did you feel like Greenlee wrapped it up perfectly? What do you think the story would look like if it were set in today’s world?"
-  },
-  {
-    id: "christine",
-    title: "Christine",
-    author: "Stephen King",
-    img: "images/book7.jpg",
-    review: "More psychological than horror—obsession, identity, and transformation.",
-    question: "💬 Was Christine evil… or a reflection of Arnie?"
-  },
-  {
-    id: "brimstone",
-    title: "Brimstone",
-    author: "Callie Hart",
-    img: "images/book6.jpg",
-    review: "Dark, immersive, and intense. Pulls you into a completely different world.",
-    question: "💬 Would you survive in this world?"
-  },
-  {
-    id: "quicksilver",
-    title: "Quicksilver",
-    author: "Callie Hart",
-    img: "images/book5.jpg",
-    review: "My first fantasy read—rich world-building and unforgettable characters.",
-    question: "💬 Was it hard to return to reality after this one?"
-  },
-  {
-    id: "nipsey",
-    title: "The Marathon Don't Stop",
-    author: "Rob Kenner",
-    img: "images/book4.jpg",
-    review: "A powerful biography that shows discipline, vision, and purpose.",
-    question: "💬 What part of Nipsey’s mindset inspired you most?"
-  },
-  {
-    id: "twice",
-    title: "Twice",
-    author: "Mitch Albom",
-    img: "images/book3.jpg",
-    review: "Emotional and reflective—makes you think about time and choices.",
-    question: "💬 If you had a second chance, what would you change?"
+   {
+    id: "marriage",
+    title: "The Perfect Marriage",
+    author: "Jeneva Rose",
+    img: "images/book1.jpg",
+    review: "Fast-paced thriller with constant twists—hard to put down.",
+    question: "💬 Who did you trust most while reading?"
   },
   {
     id: "divorce",
@@ -56,13 +16,54 @@ const books = [
     question: "💬 Did you see the ending coming?"
   },
   {
-    id: "marriage",
-    title: "The Perfect Marriage",
-    author: "Jeneva Rose",
-    img: "images/book1.jpg",
-    review: "Fast-paced thriller with constant twists—hard to put down.",
-    question: "💬 Who did you trust most while reading?"
+    id: "twice",
+    title: "Twice",
+    author: "Mitch Albom",
+    img: "images/book3.jpg",
+    review: "Emotional and reflective—makes you think about time and choices.",
+    question: "💬 If you had a second chance, what would you change?"
+  },
+  {
+    id: "nipsey",
+    title: "The Marathon Don't Stop",
+    author: "Rob Kenner",
+    img: "images/book4.jpg",
+    review: "A powerful biography that shows discipline, vision, and purpose.",
+    question: "💬 What part of Nipsey’s mindset inspired you most?"
+  },
+  {
+    id: "quicksilver",
+    title: "Quicksilver",
+    author: "Callie Hart",
+    img: "images/book5.jpg",
+    review: "My first fantasy read—rich world-building and unforgettable characters.",
+    question: "💬 Was it hard to return to reality after this one?"
+  },
+  {
+    id: "brimstone",
+    title: "Brimstone",
+    author: "Callie Hart",
+    img: "images/book6.jpg",
+    review: "Dark, immersive, and intense. The sequel pulls you into a completely different world from the first book.",
+    question: "💬 Would you survive in this world?"
+  },
+  {
+    id: "christine",
+    title: "Christine",
+    author: "Stephen King",
+    img: "images/book7.jpg",
+    review: "More psychological than horror—obsession, identity, and transformation.",
+    question: "💬 Was Christine evil… or a reflection of Arnie?"
+  },
+  {
+    id: "spook",
+    title: "The Spook Who Sat by the Door",
+    author: "Sam Greenlee",
+    img: "images/book8.jpg",
+    review: "A deeper reflection on power, identity, and resistance. Nipsey Hussle mentioned reading this book which influenced my decision to read it. It’s a powerful story that explores themes of racial tension, social justice, and the fight for equality. It’s a frustrating reminder of the ongoing struggle for civil rights and the importance of standing up against oppression specifically from within.",
+    question: "💬 Being such a short read, were you left wanting more? Or did you feel like Greenlee wrapped it up perfectly? What do you think the story would look like if it were set in today’s world?"
   }
+ 
 ];
 
 function openLightbox(img){
