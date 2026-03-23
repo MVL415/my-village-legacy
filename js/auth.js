@@ -1,4 +1,5 @@
 // auth.js
+const db = firebase.firestore();
 
 console.log("auth.js loaded");
 
@@ -40,10 +41,7 @@ function logIn() {
 }
 
 function logOut() {
-  auth.signOut().then(() => {
-    document.getElementById("user-status").innerText = "Logged out!";
-    clearFields();
-  });
+  auth.signOut();
 }
 
 function clearAuthFields() {
@@ -77,22 +75,25 @@ firebase.auth().onAuthStateChanged(async user => {
     loggedOut.style.display = "none";
     loggedIn.style.display = "flex";
 
-    const doc = await db.collection("users").doc(user.uid).get();
-    const profile = doc.data() || {};
+    try {
+      const doc = await db.collection("users").doc(user.uid).get();
+      const profile = doc.data() || {};
 
-    const name = profile.displayName || user.email.split("@")[0];
-    const avatarEl = document.getElementById("auth-avatar");
-    const userEl = document.getElementById("auth-user");
-    
-    const uid = userId || firebase.auth().currentUser?.uid;
+      const name = profile.displayName || user.email.split("@")[0];
 
-    userEl.innerText = name;
+      const avatarEl = document.getElementById("auth-avatar");
+      const userEl = document.getElementById("auth-user");
 
-    // 👇 THIS replaces the "U"
-    if (profile.photoURL) {
-      avatarEl.innerHTML = `<img src="${profile.photoURL}" class="avatar-img">`;
-    } else {
-      avatarEl.innerText = name.charAt(0).toUpperCase();
+      userEl.innerText = name;
+
+      if (profile.photoURL) {
+        avatarEl.innerHTML = `<img src="${profile.photoURL}" class="avatar-img">`;
+      } else {
+        avatarEl.innerText = name.charAt(0).toUpperCase();
+      }
+
+    } catch (err) {
+      console.log("Auth UI error:", err);
     }
 
   } else {
