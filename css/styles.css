@@ -792,14 +792,25 @@ background:#333;
   font-size: 14px;
 }
 
+#book-input {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
 .comment-btn {
+  display: block;
+  margin: 0 auto 16px;
+  padding: 12px 24px;
+  border-radius: 999px;
   background: black;
   color: white;
   border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
 }
 
 .comment-btn:hover {
