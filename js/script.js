@@ -271,10 +271,7 @@ function loadComments(context, sort = "new") {
     container = document.getElementById("book-list");
   }
 
-  if (!container) {
-    console.log("No container found for:", context);
-    return;
-  }
+if (!container) return;
 
   container.innerHTML = "Loading...";
 
