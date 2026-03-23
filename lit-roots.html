@@ -192,14 +192,16 @@
         <input type="text" id="edit-name" placeholder="Your display name">
       </div>
 
-      <div class="edit-group">
-        <label>Profile Image URL</label>
-        <input type="text" id="edit-photo" placeholder="Paste image link">
+       <div class="edit-group">
+        <label class="upload-label">Upload Profile Photo</label>
+        <input type="file" id="edit-photo-file" accept="image/*">
+
+<img id="profile-preview" class="profile-preview" style="display:none;">
       </div>
 
       <div class="edit-actions">
-        <button class="btn-outline" onclick="cancelEdit()">Cancel</button>
-        <button class="btn-solid" onclick="saveProfile()">Save</button>
+        <button onclick="cancelEdit()">Cancel</button>
+        <button class="btn-solid" onclick="saveProfile(this)">Save</button>
       </div>
 
     </div>
