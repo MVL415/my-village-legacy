@@ -66,7 +66,7 @@ window.signUp = signUp;
 window.logIn = logIn;
 window.logOut = logOut;
 
-firebase.auth().onAuthStateChanged(user => {
+firebase.auth().onAuthStateChanged(async user => {
 
   const loggedOut = document.getElementById("auth-logged-out");
   const loggedIn = document.getElementById("auth-logged-in");
@@ -74,15 +74,24 @@ firebase.auth().onAuthStateChanged(user => {
   const avatar = document.getElementById("auth-avatar");
 
   if (user) {
+
     loggedOut.style.display = "none";
     loggedIn.style.display = "flex";
 
-    const name = user.email.split("@")[0];
+    // 🔥 GET PROFILE FROM FIRESTORE
+    const doc = await firebase.firestore().collection("users").doc(user.uid).get();
+    const profile = doc.data() || {};
+
+    const name = profile.displayName || user.email.split("@")[0];
 
     userDisplay.innerText = name;
 
     if (avatar) {
-      avatar.innerText = name.charAt(0).toUpperCase();
+      if (profile.photoURL) {
+        avatar.innerHTML = `<img src="${profile.photoURL}" class="avatar-img">`;
+      } else {
+        avatar.innerText = name.charAt(0).toUpperCase();
+      }
     }
 
   } else {

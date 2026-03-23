@@ -227,26 +227,14 @@ async function postComment() {
 
   if (!input.value.trim()) return;
 
-  let displayName = user.email.split("@")[0];
-  let photoURL = "";
-
-  try {
-    const userDoc = await db.collection("users").doc(user.uid).get();
-    if (userDoc.exists) {
-      const profile = userDoc.data();
-      displayName = profile.displayName || displayName;
-      photoURL = profile.photoURL || "";
-    }
-  } catch (err) {
-    console.log("Profile fetch failed, using fallback");
-  }
+  const doc = await db.collection("users").doc(user.uid).get();
+  const profile = doc.data() || {};
 
   await db.collection("comments").add({
     text: input.value,
     userId: user.uid,
-    user: user.email, // 👈 keep for backward compatibility
-    displayName,
-    photoURL,
+    displayName: profile.displayName || "User",
+    photoURL: profile.photoURL || "",
     bookId: books[currentIndex].id,
     likes: 0,
     likedBy: [],
@@ -282,15 +270,13 @@ query = query.orderBy("createdAt", "desc");
 
     parents.forEach(c => {
 
-  const name =
-    c.displayName ||
-    (c.user ? c.user.split("@")[0] : "User");
+  const name = c.displayName || "User";
 
   const initials = name.charAt(0).toUpperCase();
 
-  const avatar = c.photoURL
-    ? `<img src="${c.photoURL}" class="avatar-img">`
-    : `<div class="avatar">${initials}</div>`;
+ const avatar = c.photoURL
+  ? `<img src="${c.photoURL}" class="avatar-img">`
+  : `<div class="avatar">${name.charAt(0).toUpperCase()}</div>`;
 
   const childReplies = replies.filter(r => r.parentId === c.id);
 
@@ -320,13 +306,11 @@ query = query.orderBy("createdAt", "desc");
 
         <div class="replies">
           ${childReplies.map(r => {
-            const rName =
-              r.displayName ||
-              (r.user ? r.user.split("@")[0] : "User");
+           const rName = r.displayName || "User";
 
-            const rAvatar = r.photoURL
-              ? `<img src="${r.photoURL}" class="avatar-img">`
-              : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
+const rAvatar = r.photoURL
+  ? `<img src="${r.photoURL}" class="avatar-img">`
+  : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
 
             return `
               <div class="comment reply">
