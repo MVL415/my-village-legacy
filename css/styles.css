@@ -826,8 +826,8 @@ background:#333;
 }
 
 .avatar-img {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -949,10 +949,16 @@ background:#333;
 .user-pill {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: #f3f3f3;
-  padding: 6px 10px;
+  gap: 10px;
+  background: rgba(0,0,0,0.05);
+  padding: 6px 12px;
   border-radius: 999px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.user-pill:hover {
+  background: rgba(0,0,0,0.1);
 }
 
 /* AVATAR */

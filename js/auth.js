@@ -70,42 +70,33 @@ firebase.auth().onAuthStateChanged(async user => {
 
   const loggedOut = document.getElementById("auth-logged-out");
   const loggedIn = document.getElementById("auth-logged-in");
-  const userDisplay = document.getElementById("auth-user");
-  const avatar = document.getElementById("auth-avatar");
+
+  if (!loggedOut || !loggedIn) return;
 
   if (user) {
-
     loggedOut.style.display = "none";
     loggedIn.style.display = "flex";
 
-    let name = user.email.split("@")[0];
-    let photo = "";
+    const doc = await db.collection("users").doc(user.uid).get();
+    const profile = doc.data() || {};
 
-    try {
-      const doc = await firebase.firestore().collection("users").doc(user.uid).get();
+    const name = profile.displayName || user.email.split("@")[0];
+    const avatarEl = document.getElementById("auth-avatar");
+    const userEl = document.getElementById("auth-user");
+    
+    const uid = userId || firebase.auth().currentUser?.uid;
 
-      if (doc.exists) {
-        const profile = doc.data();
-        name = profile.displayName || name;
-        photo = profile.photoURL || "";
-      }
-    } catch (err) {
-      console.log("Profile load failed");
-    }
+    userEl.innerText = name;
 
-    userDisplay.innerText = name;
-
-    if (avatar) {
-      if (photo) {
-        avatar.innerHTML = `<img src="${photo}" class="avatar-img">`;
-      } else {
-        avatar.innerText = name.charAt(0).toUpperCase();
-      }
+    // 👇 THIS replaces the "U"
+    if (profile.photoURL) {
+      avatarEl.innerHTML = `<img src="${profile.photoURL}" class="avatar-img">`;
+    } else {
+      avatarEl.innerText = name.charAt(0).toUpperCase();
     }
 
   } else {
-    loggedOut.style.display = "flex";
+    loggedOut.style.display = "block";
     loggedIn.style.display = "none";
   }
-
 });
