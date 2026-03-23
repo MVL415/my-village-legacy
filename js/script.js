@@ -608,8 +608,14 @@ async function editProfile() {
   const profile = doc.data() || {};
 
   document.getElementById("edit-name").value = profile.displayName || "";
-  document.getElementById("edit-photo").value = profile.photoURL || "";
+  document.getElementById("edit-photo-file").addEventListener("change", function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
 
+  const preview = document.getElementById("profile-preview");
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = "block";
+});
   document.getElementById("profile-view").style.display = "none";
   document.getElementById("profile-edit").style.display = "block";
 }
@@ -619,21 +625,48 @@ function cancelEdit() {
   document.getElementById("profile-edit").style.display = "none";
 }
 
-async function saveProfile() {
+async function saveProfile(button) {
   const user = firebase.auth().currentUser;
-
   if (!user) return;
 
   const name = document.getElementById("edit-name").value;
-  const photo = document.getElementById("edit-photo").value;
+  const file = document.getElementById("edit-photo-file").files[0];
+
+  // 👇 UI feedback START
+  button.innerText = "Saving...";
+  button.disabled = true;
+
+  let photoURL = "";
+
+  if (file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "profile_upload");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dhyhrbgaz/image/upload",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const data = await res.json();
+    photoURL = data.secure_url;
+  }
 
   await db.collection("users").doc(user.uid).set({
     displayName: name,
-    photoURL: photo,
+    photoURL: photoURL || "",
     email: user.email
   }, { merge: true });
 
+  // 👇 UI feedback RESET
+  button.innerText = "Save";
+  button.disabled = false;
+
   closeProfile();
+
 
   // 🔥 refresh auth UI instantly
   firebase.auth().onAuthStateChanged(user => {});
