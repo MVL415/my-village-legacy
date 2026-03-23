@@ -782,6 +782,18 @@ background:#333;
   margin-top: 20px;
 }
 
+.comments-box textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  resize: none;
+  margin-bottom: 12px;
+}
+
+
 #comment-input {
   width: 100%;
   min-height: 80px;
@@ -805,11 +817,12 @@ background:#333;
 .comment-btn {
   display: block;
   margin: 0 auto 16px;
-  padding: 12px 24px;
+  padding: 12px 28px;
   border-radius: 999px;
   background: black;
   color: white;
   border: none;
+  font-weight:600;
   cursor: pointer;
 }
 
@@ -873,13 +886,22 @@ background:#333;
   margin-top: 8px;
 }
 
+.comment-sort {
+  text-align: center;
+  margin-bottom: 12px;
+}
+
 .comment-sort button {
-  margin-right: 10px;
-  padding: 6px 10px;
+  margin: 0 6px;
+  padding: 6px 14px;
+  border-radius: 12px;
   border: none;
   background: #eee;
-  border-radius: 6px;
   cursor: pointer;
+}
+
+.comments-list {
+  margin-top: 10px;
 }
 
 .auth-bar {

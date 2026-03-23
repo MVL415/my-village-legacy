@@ -127,20 +127,23 @@
     Share your thoughts, what you're reading, and connect with the community.
   </p>
 
-  <div class="comment-sort">
-  <button onclick="loadCommunityComments('new')">Newest</button>
-  <button onclick="loadCommunityComments('top')">Top</button>
-</div>
-
   <div class="comments-box">
 
-   <textarea id="community-input"></textarea>
+    <textarea
+      id="community-input"
+      placeholder="Share your thoughts..."
+    ></textarea>
 
-<button onclick="postComment('community')">
-  Post Comment
-</button>
+    <button class="comment-btn" onclick="postComment('community')">
+      Post Comment
+    </button>
 
-<div id="community-list"></div>
+    <div class="comment-sort">
+      <button onclick="loadComments('community', 'new')">Newest</button>
+      <button onclick="loadComments('community', 'top')">Top</button>
+    </div>
+
+    <div id="community-list" class="comments-list"></div>
 
   </div>
 </section>
