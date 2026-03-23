@@ -474,3 +474,5 @@ async function saveProfile() {
   // 🔥 refresh auth UI instantly
   firebase.auth().onAuthStateChanged(user => {});
 }
+
+window.openProfile = openProfile;
