@@ -116,8 +116,10 @@ function openBookByIndex(index) {
 
   trackBookView(book.id);
 
-  // 👇 LOAD COMMENTS PER BOOK
-  loadComments(`book-${book.id}`);
+  // ✅ Wait for modal to render before loading comments
+  setTimeout(() => {
+    loadComments(`book-${book.id}`);
+  }, 50);
 }
 
 function closeBookModal() {
@@ -259,11 +261,24 @@ async function postComment(context) {
 }
 
 function loadComments(context, sort = "new") {
- const container =
-  context === "community"
-    ? document.getElementById("community-list")
-    : document.getElementById("book-list");
 
+  // ✅ FIXED CONTAINER LOGIC
+  let container = null;
+
+  if (context === "community") {
+    container = document.getElementById("community-list");
+  } else if (context.startsWith("book-")) {
+    container = document.getElementById("book-list");
+  }
+
+  if (!container) {
+    console.log("No container found for:", context);
+    return;
+  }
+
+  container.innerHTML = "Loading...";
+
+  // 🔽 EVERYTHING BELOW STAYS THE SAME
   let query = db.collection("comments")
     .where("context", "==", context);
 
