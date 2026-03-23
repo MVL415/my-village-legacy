@@ -173,6 +173,25 @@
 
 </section> 
 
+<div id="profile-modal" class="profile-modal">
+
+  <div class="profile-content">
+
+    <span class="close-btn" onclick="closeProfile()">×</span>
+
+    <div id="profile-view"></div>
+
+    <div id="profile-edit" style="display:none;">
+      <input type="text" id="edit-name" placeholder="Display name">
+      <input type="text" id="edit-photo" placeholder="Image URL">
+
+      <button onclick="saveProfile()">Save</button>
+    </div>
+
+  </div>
+
+</div>
+
 <div id="book-modal" class="book-modal">
 
   <div class="modal-content">

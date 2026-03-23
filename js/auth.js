@@ -9,24 +9,24 @@ function signUp() {
   const password = document.getElementById("auth-password").value;
 
   firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(userCred => {
+
+      const user = userCred.user;
+
+      // 🔥 CREATE USER PROFILE IN FIRESTORE
+      return firebase.firestore().collection("users").doc(user.uid).set({
+        email: user.email,
+        displayName: user.email.split("@")[0],
+        photoURL: "",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+    })
     .then(() => {
       clearAuthFields();
     })
     .catch(err => alert(err.message));
 }
-
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    const db = firebase.firestore();
-
-    db.collection("users").doc(user.uid).set({
-      email: user.email,
-      displayName: user.email.split("@")[0],
-      photoURL: "",
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    }, { merge: true });
-  }
-});
 
 function logIn() {
   const email = document.getElementById("auth-email").value;

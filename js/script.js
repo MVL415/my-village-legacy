@@ -297,7 +297,9 @@ query = query.orderBy("createdAt", "desc");
   container.innerHTML += `
     <div class="comment">
       
-      ${avatar}
+      <div onclick="openProfile('${c.userId}')">
+  ${avatar}
+</div>
 
       <div class="comment-content">
         
@@ -391,4 +393,62 @@ function deleteComment(id) {
   if (!confirm("Delete this comment?")) return;
 
   db.collection("comments").doc(id).delete();
+}
+async function openProfile(userId) {
+
+  const modal = document.getElementById("profile-modal");
+  const view = document.getElementById("profile-view");
+  const edit = document.getElementById("profile-edit");
+
+  edit.style.display = "none";
+
+  const doc = await db.collection("users").doc(userId).get();
+  const user = doc.data() || {};
+
+  const name = user.displayName || "User";
+
+  const avatar = user.photoURL
+    ? `<img src="${user.photoURL}" class="profile-avatar">`
+    : `<div class="profile-avatar avatar">${name.charAt(0)}</div>`;
+
+  const currentUser = firebase.auth().currentUser;
+
+  view.innerHTML = `
+    ${avatar}
+    <div class="profile-name">${name}</div>
+    <p>${user.email || ""}</p>
+
+    ${currentUser && currentUser.uid === userId
+      ? `<button class="profile-btn" onclick="editProfile()">Edit Profile</button>`
+      : ""
+    }
+  `;
+
+  modal.style.display = "flex";
+}
+
+function closeProfile() {
+  document.getElementById("profile-modal").style.display = "none";
+}
+
+function editProfile() {
+  document.getElementById("profile-view").style.display = "none";
+  document.getElementById("profile-edit").style.display = "block";
+}
+
+async function saveProfile() {
+  const user = firebase.auth().currentUser;
+
+  if (!user) return;
+
+  const name = document.getElementById("edit-name").value;
+  const photo = document.getElementById("edit-photo").value;
+
+  await db.collection("users").doc(user.uid).set({
+    displayName: name,
+    photoURL: photo,
+    email: user.email
+  }, { merge: true });
+
+  closeProfile();
 }
