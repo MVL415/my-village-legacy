@@ -390,6 +390,59 @@ function deleteComment(id) {
 
   db.collection("comments").doc(id).delete();
 }
+
+async function postCommunityComment() {
+  const input = document.getElementById("comment-input");
+  const user = firebase.auth().currentUser;
+
+  if (!user) return alert("Log in first");
+
+  if (!input.value.trim()) return;
+
+  await db.collection("communityComments").add({
+    text: input.value,
+    userId: user.uid,
+    displayName: user.email.split("@")[0],
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  input.value = "";
+}
+
+function loadCommunityComments() {
+  const container = document.getElementById("community-comments");
+
+  db.collection("communityComments")
+    .orderBy("createdAt", "desc")
+    .onSnapshot(snapshot => {
+
+      container.innerHTML = "";
+
+      snapshot.forEach(doc => {
+        const c = doc.data();
+
+        const name = c.displayName || "User";
+
+        container.innerHTML += `
+          <div class="comment">
+            <div class="avatar">${name.charAt(0).toUpperCase()}</div>
+            <div class="comment-content">
+              <strong>${name}</strong>
+              <p>${c.text}</p>
+            </div>
+          </div>
+        `;
+      });
+
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("community-comments")) {
+    loadCommunityComments();
+  }
+});
+
 async function openProfile(userId) {
 
   const modal = document.getElementById("profile-modal");

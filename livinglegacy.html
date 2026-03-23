@@ -68,9 +68,9 @@
     <!-- LOGGED IN -->
     <div id="auth-logged-in" class="auth-user" style="display:none;">
       
-      <div class="user-pill">
-        <div id="auth-avatar" class="avatar">U</div>
-        <span id="auth-user"></span>
+      <div class="user-pill" onclick="openProfile()">
+      <div id="auth-avatar" class="avatar"></div>
+      <span id="auth-user"></span>
       </div>
 
       <button class="btn-ghost" onclick="logOut()">Log Out</button>
@@ -121,27 +121,23 @@
   </section>
 
     <!-- COMMENT SECTION (SIMPLIFIED) -->
-  <section class="card">
-    <h2>💬 Discussion</h2>
-    <p>
-      Can’t make the live discussion? Share your thoughts below and be part of the conversation.
-    </p>
+<section class="card">
+  <h2>💬 Community Discussion</h2>
+  <p>
+    Share your thoughts, what you're reading, and connect with the community.
+  </p>
 
-  <script src="https://giscus.app/client.js"
-        data-repo="MVL415/mvl-comments"
-        data-repo-id="R_kgDORqDULQ"
-        data-category="General"
-        data-category-id="DIC_kwDORqDULc4C4qCr"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="en"
-        crossorigin="anonymous"
-        async>
-  </script>
+  <div class="comments-box">
+
+    <textarea id="comment-input" placeholder="Share something with the community..."></textarea>
+
+    <button class="comment-btn" onclick="postCommunityComment()">
+      Post Comment
+    </button>
+
+    <div id="community-comments" class="comments-list"></div>
+
+  </div>
 </section>
 
   
@@ -155,6 +151,7 @@
 
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script src="js/firebase-config.js"></script>
 <script src="js/auth.js"></script>
