@@ -140,7 +140,38 @@
   </div>
 </section>
 
-  
+  <div id="profile-modal" class="profile-modal">
+
+  <div class="profile-content">
+
+    <span class="close-btn" onclick="closeProfile()">×</span>
+
+    <div id="profile-view"></div>
+
+    <div id="profile-edit" style="display:none;" class="profile-edit">
+
+      <h3>Edit Profile</h3>
+
+      <div class="edit-group">
+        <label>Name</label>
+        <input type="text" id="edit-name">
+      </div>
+
+      <div class="edit-group">
+        <label>Profile Image URL</label>
+        <input type="text" id="edit-photo">
+      </div>
+
+      <div class="edit-actions">
+        <button onclick="cancelEdit()">Cancel</button>
+        <button onclick="saveProfile()">Save</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 </main>
 
 <footer>

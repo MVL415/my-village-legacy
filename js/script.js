@@ -1,3 +1,5 @@
+const db = firebase.firestore();
+
 const books = [
    {
     id: "marriage",
@@ -179,11 +181,15 @@ function updateProgress() {
     `📚 Books explored: ${viewed.length}`;
 }
 
-document.getElementById("book-modal").addEventListener("click", function(e) {
-  if (e.target.id === "book-modal") {
-    closeBookModal();
-  }
-});
+const modalEl = document.getElementById("book-modal");
+
+if (modalEl) {
+  modalEl.addEventListener("click", function(e) {
+    if (e.target.id === "book-modal") {
+      closeBookModal();
+    }
+  });
+}
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -213,8 +219,6 @@ document.addEventListener("DOMContentLoaded", function () {
     percentText.innerText = Math.round(percent) + "%";
   }
 });
-
-const db = firebase.firestore();
 
 async function postComment() {
   const input = document.getElementById("comment-input");
@@ -395,7 +399,10 @@ async function postCommunityComment() {
   const input = document.getElementById("comment-input");
   const user = firebase.auth().currentUser;
 
-  if (!user) return alert("Log in first");
+  if (!user) {
+    alert("Log in first");
+    return;
+  }
 
   if (!input.value.trim()) return;
 
