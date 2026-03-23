@@ -1167,3 +1167,7 @@ button:hover {
   margin-top: 10px;
   object-fit: cover;
 }
+
+html {
+  scroll-behavior: smooth;
+}

@@ -574,3 +574,10 @@ window.openProfile = openProfile;
 window.addEventListener("beforeunload", () => {
   Object.values(activeListeners).forEach(unsub => unsub());
 });
+
+window.addEventListener("load", () => {
+  if (window.location.hash === "#community-discussion") {
+    const input = document.getElementById("community-input");
+    if (input) input.focus();
+  }
+});
