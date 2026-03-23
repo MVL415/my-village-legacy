@@ -37,22 +37,48 @@
     <p>Where stories, culture, and community come together.</p>
   </section>
 
-  <section class="card">
-  <h2>🔐 Member Login</h2>
-   <p>
-      Let’s move beyond traditional book clubs and create a space where Black
-      literature thrives and voices are heard.
-    </p>
-    <p><strong>Welcome to Living Legacy — where every read is a revolution.</strong></p>
+ <section class="card">
+  <h2>🔐 Member Access</h2>
 
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
+  <p>
+    Let’s move beyond traditional book clubs and create a space where Black
+    literature thrives and voices are heard.
+  </p>
 
-  <button type="button" onclick="signUp()">Sign Up</button>
-  <button type="button" onclick="logIn()">Log In</button>
-  <button type="button" onclick="logOut()">Log Out</button>
+  <p><strong>Welcome to Living Legacy — where every read is a revolution.</strong></p>
 
-  <p id="user-status"></p>
+  <!-- AUTH BAR -->
+  <div class="auth-bar">
+
+    <!-- LOGGED OUT -->
+    <div id="auth-logged-out" class="auth-card">
+
+      <div class="auth-input-group">
+        <input type="email" id="auth-email" placeholder="Email">
+        <input type="password" id="auth-password" placeholder="Password">
+      </div>
+
+      <div class="auth-actions">
+        <button class="btn-outline" onclick="signUp()">Sign Up</button>
+        <button class="btn-solid" onclick="logIn()">Log In</button>
+      </div>
+
+    </div>
+
+    <!-- LOGGED IN -->
+    <div id="auth-logged-in" class="auth-user" style="display:none;">
+      
+      <div class="user-pill">
+        <div id="auth-avatar" class="avatar">U</div>
+        <span id="auth-user"></span>
+      </div>
+
+      <button class="btn-ghost" onclick="logOut()">Log Out</button>
+
+    </div>
+
+  </div>
+
 </section>
 
   <!-- SECTION 1 -->
