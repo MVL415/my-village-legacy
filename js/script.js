@@ -227,14 +227,26 @@ async function postComment() {
 
   if (!input.value.trim()) return;
 
-  const userDoc = await db.collection("users").doc(user.uid).get();
-  const profile = userDoc.data();
+  let displayName = user.email.split("@")[0];
+  let photoURL = "";
 
-  db.collection("comments").add({
+  try {
+    const userDoc = await db.collection("users").doc(user.uid).get();
+    if (userDoc.exists) {
+      const profile = userDoc.data();
+      displayName = profile.displayName || displayName;
+      photoURL = profile.photoURL || "";
+    }
+  } catch (err) {
+    console.log("Profile fetch failed, using fallback");
+  }
+
+  await db.collection("comments").add({
     text: input.value,
     userId: user.uid,
-    displayName: profile.displayName,
-    photoURL: profile.photoURL,
+    user: user.email, // 👈 keep for backward compatibility
+    displayName,
+    photoURL,
     bookId: books[currentIndex].id,
     likes: 0,
     likedBy: [],
@@ -259,6 +271,7 @@ query = query.orderBy("createdAt", "desc");
     const comments = [];
     snapshot.forEach(doc => {
       comments.push({ id: doc.id, ...doc.data() });
+      console.log("Loaded comments:", comments);
     });
 
     // separate parent + replies
@@ -269,12 +282,15 @@ query = query.orderBy("createdAt", "desc");
 
     parents.forEach(c => {
 
-  const name = c.displayName || (c.user ? c.user.split("@")[0] : "User");
+  const name =
+    c.displayName ||
+    (c.user ? c.user.split("@")[0] : "User");
+
   const initials = name.charAt(0).toUpperCase();
-  
+
   const avatar = c.photoURL
-  ? `<img src="${c.photoURL}" class="avatar-img">`
-  : `<div class="avatar">${initials}</div>`;
+    ? `<img src="${c.photoURL}" class="avatar-img">`
+    : `<div class="avatar">${initials}</div>`;
 
   const childReplies = replies.filter(r => r.parentId === c.id);
 
@@ -289,35 +305,37 @@ query = query.orderBy("createdAt", "desc");
           <strong>${name}</strong>
         </div>
 
-        <div class="comment-text">${c.text}</div>
+        <div class="comment-text">${c.text || ""}</div>
 
         <div class="comment-actions">
           <span onclick="likeComment('${c.id}', ${JSON.stringify(c.likedBy || [])})">
             ❤️ ${c.likes || 0}
           </span>
           · <span onclick="replyToComment('${c.id}')">Reply</span>
-          · <span onclick="editComment('${c.id}', \`${c.text}\`)">Edit</span>
+          · <span onclick="editComment('${c.id}', \`${c.text || ""}\`)">Edit</span>
           · <span onclick="deleteComment('${c.id}')">Delete</span>
         </div>
 
         <div class="replies">
           ${childReplies.map(r => {
-  const rName = r.displayName || (r.user ? r.user.split("@")[0] : "User");
+            const rName =
+              r.displayName ||
+              (r.user ? r.user.split("@")[0] : "User");
 
-  const rAvatar = r.photoURL
-    ? `<img src="${r.photoURL}" class="avatar-img">`
-    : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
+            const rAvatar = r.photoURL
+              ? `<img src="${r.photoURL}" class="avatar-img">`
+              : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
 
-  return `
-    <div class="comment reply">
-      ${rAvatar}
-      <div class="comment-content">
-        <strong>${rName}</strong>
-        <div>${r.text}</div>
-      </div>
-    </div>
-  `;
-}).join("")}
+            return `
+              <div class="comment reply">
+                ${rAvatar}
+                <div class="comment-content">
+                  <strong>${rName}</strong>
+                  <div>${r.text || ""}</div>
+                </div>
+              </div>
+            `;
+          }).join("")}
         </div>
 
       </div>
