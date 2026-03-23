@@ -1,3 +1,5 @@
+let activeListeners = {};
+
 const db = firebase.firestore();
 
 const books = [
@@ -124,6 +126,13 @@ function openBookByIndex(index) {
 
 function closeBookModal() {
   document.getElementById("book-modal").style.display = "none";
+
+  const context = `book-${books[currentIndex].id}`;
+
+  if (activeListeners[context]) {
+    activeListeners[context]();
+    delete activeListeners[context];
+  }
 }
 
 function nextBook() {
@@ -275,7 +284,11 @@ if (!container) return;
 
   container.innerHTML = "Loading...";
 
-  // 🔽 EVERYTHING BELOW STAYS THE SAME
+    // 🧹 Clean up existing listener for this context
+if (activeListeners[context]) {
+  activeListeners[context](); // unsubscribe
+}
+
   let query = db.collection("comments")
     .where("context", "==", context);
 
@@ -283,7 +296,7 @@ if (!container) return;
     ? query.orderBy("likes", "desc")
     : query.orderBy("createdAt", "desc");
 
-  query.onSnapshot(snapshot => {
+  activeListeners[context] = query.onSnapshot(snapshot => {
 
     const comments = [];
     snapshot.forEach(doc => {
@@ -558,3 +571,6 @@ async function saveProfile(button) {
 }
 
 window.openProfile = openProfile;
+window.addEventListener("beforeunload", () => {
+  Object.values(activeListeners).forEach(unsub => unsub());
+});
