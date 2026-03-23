@@ -398,23 +398,30 @@ async function openProfile(userId) {
 
   edit.style.display = "none";
 
-  const doc = await db.collection("users").doc(userId).get();
+  // 👇 fallback to current user if no ID passed
+  const currentUser = firebase.auth().currentUser;
+  const uid = userId || currentUser?.uid;
+
+  if (!uid) {
+    alert("Not logged in");
+    return;
+  }
+
+  const doc = await db.collection("users").doc(uid).get();
   const user = doc.data() || {};
 
-  const name = c.displayName || "User";
+  const name = user.displayName || user.email?.split("@")[0] || "User";
 
   const avatar = user.photoURL
     ? `<img src="${user.photoURL}" class="profile-avatar">`
-    : `<div class="profile-avatar avatar">${name.charAt(0)}</div>`;
-
-  const currentUser = firebase.auth().currentUser;
+    : `<div class="profile-avatar avatar">${name.charAt(0).toUpperCase()}</div>`;
 
   view.innerHTML = `
     ${avatar}
     <div class="profile-name">${name}</div>
     <p>${user.email || ""}</p>
 
-    ${currentUser && currentUser.uid === userId
+    ${currentUser && currentUser.uid === uid
       ? `<button class="profile-btn" onclick="editProfile()">Edit Profile</button>`
       : ""
     }
@@ -422,8 +429,8 @@ async function openProfile(userId) {
 
   modal.style.display = "flex";
 
-  console.log("Current:", firebase.auth().currentUser?.uid);
-console.log("Profile:", userId);
+  console.log("Current:", currentUser?.uid);
+  console.log("Profile:", uid);
 }
 
 function closeProfile() {
