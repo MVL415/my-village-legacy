@@ -221,30 +221,34 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function postComment(context) {
-  const input = document.getElementById(`${context}-input`);
-  const user = firebase.auth().currentUser;
 
-  if (!user) return alert("Login to comment");
-  if (!input.value.trim()) return;
+  const user = firebase.auth().currentUser;
+  if (!user) return alert("Login required");
+
+  const input =
+    context === "community"
+      ? document.getElementById("community-input")
+      : document.getElementById("book-input");
+
+  if (!input || !input.value.trim()) return;
 
   let name = user.email.split("@")[0];
-  let photoURL = "";
+  let photo = "";
 
   try {
     const doc = await db.collection("users").doc(user.uid).get();
-    if (doc.exists) {
-      const profile = doc.data();
-      name = profile.displayName || name;
-      photoURL = profile.photoURL || "";
-    }
+    const profile = doc.data() || {};
+
+    name = profile.displayName || name;
+    photo = profile.photoURL || "";
   } catch {}
 
   await db.collection("comments").add({
     text: input.value,
     userId: user.uid,
     displayName: name,
-    photoURL,
-    context: context, // 🔥 KEY
+    photoURL: photo,
+    context: context,
     likes: 0,
     likedBy: [],
     parentId: null,
