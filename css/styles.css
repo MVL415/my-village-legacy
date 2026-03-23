@@ -870,3 +870,36 @@ background:#333;
   border-radius: 6px;
   cursor: pointer;
 }
+
+.auth-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0 20px;
+  flex-wrap: wrap;
+}
+
+.auth-bar input {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.auth-bar button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+.auth-bar button:hover {
+  opacity: 0.85;
+}
+
+#auth-user {
+  font-weight: 600;
+}

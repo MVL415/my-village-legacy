@@ -5,13 +5,12 @@ console.log("auth.js loaded");
 const auth = firebase.auth();
 
 function signUp() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = document.getElementById("auth-email").value;
+  const password = document.getElementById("auth-password").value;
 
-  auth.createUserWithEmailAndPassword(email, password)
+  firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(() => {
-      document.getElementById("user-status").innerText = "Account created!";
-      clearFields();
+      clearAuthFields();
     })
     .catch(err => alert(err.message));
 }
@@ -30,13 +29,12 @@ firebase.auth().onAuthStateChanged(user => {
 });
 
 function logIn() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = document.getElementById("auth-email").value;
+  const password = document.getElementById("auth-password").value;
 
-  auth.signInWithEmailAndPassword(email, password)
+  firebase.auth().signInWithEmailAndPassword(email, password)
     .then(() => {
-      document.getElementById("user-status").innerText = "Logged in!";
-      clearFields();
+      clearAuthFields();
     })
     .catch(err => alert(err.message));
 }
@@ -48,9 +46,9 @@ function logOut() {
   });
 }
 
-function clearFields() {
-  document.getElementById("email").value = "";
-  document.getElementById("password").value = "";
+function clearAuthFields() {
+  document.getElementById("auth-email").value = "";
+  document.getElementById("auth-password").value = "";
 }
 
 auth.onAuthStateChanged(user => {
@@ -67,3 +65,24 @@ auth.onAuthStateChanged(user => {
 window.signUp = signUp;
 window.logIn = logIn;
 window.logOut = logOut;
+
+firebase.auth().onAuthStateChanged(user => {
+
+  const loggedOut = document.getElementById("auth-logged-out");
+  const loggedIn = document.getElementById("auth-logged-in");
+  const userDisplay = document.getElementById("auth-user");
+
+  if (user) {
+    if (loggedOut) loggedOut.style.display = "none";
+    if (loggedIn) loggedIn.style.display = "flex";
+
+    if (userDisplay) {
+      userDisplay.innerText = "👋 " + user.email.split("@")[0];
+    }
+
+  } else {
+    if (loggedOut) loggedOut.style.display = "flex";
+    if (loggedIn) loggedIn.style.display = "none";
+  }
+
+});

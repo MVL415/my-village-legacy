@@ -31,6 +31,23 @@
 
 <main class="container">
 
+  <div class="auth-bar">
+
+  <div id="auth-logged-out">
+    <input type="email" id="auth-email" placeholder="Email">
+    <input type="password" id="auth-password" placeholder="Password">
+
+    <button onclick="signUp()">Sign Up</button>
+    <button onclick="logIn()">Log In</button>
+  </div>
+
+  <div id="auth-logged-in" style="display:none;">
+    <span id="auth-user"></span>
+    <button onclick="logOut()">Log Out</button>
+  </div>
+
+</div>
+
   <section class="reading-journey">
 
   <h2 class="section-title">📚 My 40 for 40 Journey 📚</h2>
