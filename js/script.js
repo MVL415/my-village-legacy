@@ -406,42 +406,102 @@ async function postCommunityComment() {
 
   if (!input.value.trim()) return;
 
-  await db.collection("communityComments").add({
-    text: input.value,
-    userId: user.uid,
-    displayName: user.email.split("@")[0],
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
+ await db.collection("communityComments").add({
+  text: input.value,
+  userId: user.uid,
+  displayName: name,
+  photoURL: photo,
+  likes: 0,
+  likedBy: [],
+  parentId: null,
+  createdAt: firebase.firestore.FieldValue.serverTimestamp()
+});
 
   input.value = "";
 }
 
-function loadCommunityComments() {
+function loadCommunityComments(sort = "new") {
   const container = document.getElementById("community-comments");
+  container.innerHTML = "Loading...";
 
-  db.collection("communityComments")
-    .orderBy("createdAt", "desc")
-    .onSnapshot(snapshot => {
+  let query = db.collection("communityComments");
 
-      container.innerHTML = "";
+  query = sort === "top"
+    ? query.orderBy("likes", "desc")
+    : query.orderBy("createdAt", "desc");
 
-      snapshot.forEach(doc => {
-        const c = doc.data();
+  query.onSnapshot(snapshot => {
 
-        const name = c.displayName || "User";
+    const comments = [];
 
-        container.innerHTML += `
-          <div class="comment">
-            <div class="avatar">${name.charAt(0).toUpperCase()}</div>
-            <div class="comment-content">
-              <strong>${name}</strong>
-              <p>${c.text}</p>
-            </div>
-          </div>
-        `;
-      });
-
+    snapshot.forEach(doc => {
+      comments.push({ id: doc.id, ...doc.data() });
     });
+
+    const parents = comments.filter(c => !c.parentId);
+    const replies = comments.filter(c => c.parentId);
+
+    container.innerHTML = "";
+
+    parents.forEach(c => {
+
+      const name = c.displayName || "User";
+      const initials = name.charAt(0).toUpperCase();
+
+      const avatar = c.photoURL
+        ? `<img src="${c.photoURL}" class="avatar-img">`
+        : `<div class="avatar">${initials}</div>`;
+
+      const childReplies = replies.filter(r => r.parentId === c.id);
+
+      container.innerHTML += `
+        <div class="comment">
+
+          ${avatar}
+
+          <div class="comment-content">
+
+            <div class="comment-header">
+              <strong>${name}</strong>
+            </div>
+
+            <div class="comment-text">${c.text}</div>
+
+            <div class="comment-actions">
+              <span onclick="likeCommunityComment('${c.id}', ${JSON.stringify(c.likedBy || [])})">
+                ❤️ ${c.likes || 0}
+              </span>
+              · <span onclick="replyToCommunityComment('${c.id}')">Reply</span>
+              · <span onclick="editCommunityComment('${c.id}', \`${c.text}\`)">Edit</span>
+              · <span onclick="deleteCommunityComment('${c.id}')">Delete</span>
+            </div>
+
+            <div class="replies">
+              ${childReplies.map(r => {
+                const rName = r.displayName || "User";
+
+                const rAvatar = r.photoURL
+                  ? `<img src="${r.photoURL}" class="avatar-img">`
+                  : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
+
+                return `
+                  <div class="comment reply">
+                    ${rAvatar}
+                    <div class="comment-content">
+                      <strong>${rName}</strong>
+                      <div>${r.text}</div>
+                    </div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+
+          </div>
+        </div>
+      `;
+    });
+
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -449,6 +509,50 @@ document.addEventListener("DOMContentLoaded", () => {
     loadCommunityComments();
   }
 });
+
+function likeCommunityComment(commentId, likedBy = []) {
+  const user = firebase.auth().currentUser;
+  if (!user) return alert("Login to like");
+
+  if (likedBy.includes(user.uid)) return;
+
+  db.collection("communityComments").doc(commentId).update({
+    likes: firebase.firestore.FieldValue.increment(1),
+    likedBy: firebase.firestore.FieldValue.arrayUnion(user.uid)
+  });
+}
+
+function replyToCommunityComment(parentId) {
+  const text = prompt("Write your reply:");
+  const user = firebase.auth().currentUser;
+
+  if (!user || !text) return;
+
+  db.collection("communityComments").add({
+    text,
+    userId: user.uid,
+    displayName: user.email.split("@")[0],
+    parentId: parentId,
+    likes: 0,
+    likedBy: [],
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
+}
+
+function editCommunityComment(id, oldText) {
+  const newText = prompt("Edit your comment:", oldText);
+  if (!newText) return;
+
+  db.collection("communityComments").doc(id).update({
+    text: newText
+  });
+}
+
+function deleteCommunityComment(id) {
+  if (!confirm("Delete this comment?")) return;
+
+  db.collection("communityComments").doc(id).delete();
+}
 
 async function openProfile(userId) {
 
