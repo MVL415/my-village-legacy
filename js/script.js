@@ -216,11 +216,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const db = firebase.firestore();
 
-function postComment() {
+async function postComment() {
   const input = document.getElementById("comment-input");
   const user = firebase.auth().currentUser;
-
-  console.log("USER:", user);
 
   if (!user) {
     alert("Please log in to comment");
@@ -229,19 +227,22 @@ function postComment() {
 
   if (!input.value.trim()) return;
 
- db.collection("comments").add({
-  text: input.value,
-  user: user.email,
-  displayName: user.email.split("@")[0], // 👈 REQUIRED
-  bookId: books[currentIndex].id,
-  likes: 0,
-  likedBy: [],
-  parentId: null,
-  createdAt: firebase.firestore.FieldValue.serverTimestamp()
-});
+  const userDoc = await db.collection("users").doc(user.uid).get();
+  const profile = userDoc.data();
+
+  db.collection("comments").add({
+    text: input.value,
+    userId: user.uid,
+    displayName: profile.displayName,
+    photoURL: profile.photoURL,
+    bookId: books[currentIndex].id,
+    likes: 0,
+    likedBy: [],
+    parentId: null,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  });
 
   input.value = "";
-  console.log("Posting comment for:", books[currentIndex].id);
 }
 
 function loadComments(bookId, sort = "new") {
@@ -270,13 +271,17 @@ query = query.orderBy("createdAt", "desc");
 
   const name = c.displayName || (c.user ? c.user.split("@")[0] : "User");
   const initials = name.charAt(0).toUpperCase();
+  
+  const avatar = c.photoURL
+  ? `<img src="${c.photoURL}" class="avatar-img">`
+  : `<div class="avatar">${initials}</div>`;
 
   const childReplies = replies.filter(r => r.parentId === c.id);
 
   container.innerHTML += `
     <div class="comment">
       
-      <div class="avatar">${initials}</div>
+      ${avatar}
 
       <div class="comment-content">
         
@@ -297,17 +302,22 @@ query = query.orderBy("createdAt", "desc");
 
         <div class="replies">
           ${childReplies.map(r => {
-            const rName = r.displayName || (r.user ? r.user.split("@")[0] : "User");
-            return `
-              <div class="comment reply">
-                <div class="avatar">${rName.charAt(0).toUpperCase()}</div>
-                <div class="comment-content">
-                  <strong>${rName}</strong>
-                  <div>${r.text}</div>
-                </div>
-              </div>
-            `;
-          }).join("")}
+  const rName = r.displayName || (r.user ? r.user.split("@")[0] : "User");
+
+  const rAvatar = r.photoURL
+    ? `<img src="${r.photoURL}" class="avatar-img">`
+    : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
+
+  return `
+    <div class="comment reply">
+      ${rAvatar}
+      <div class="comment-content">
+        <strong>${rName}</strong>
+        <div>${r.text}</div>
+      </div>
+    </div>
+  `;
+}).join("")}
         </div>
 
       </div>

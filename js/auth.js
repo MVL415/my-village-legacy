@@ -16,6 +16,19 @@ function signUp() {
     .catch(err => alert(err.message));
 }
 
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    const db = firebase.firestore();
+
+    db.collection("users").doc(user.uid).set({
+      email: user.email,
+      displayName: user.email.split("@")[0],
+      photoURL: "",
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+  }
+});
+
 function logIn() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
