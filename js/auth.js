@@ -78,17 +78,26 @@ firebase.auth().onAuthStateChanged(async user => {
     loggedOut.style.display = "none";
     loggedIn.style.display = "flex";
 
-    // 🔥 GET PROFILE FROM FIRESTORE
-    const doc = await firebase.firestore().collection("users").doc(user.uid).get();
-    const profile = doc.data() || {};
+    let name = user.email.split("@")[0];
+    let photo = "";
 
-    const name = profile.displayName || user.email.split("@")[0];
+    try {
+      const doc = await firebase.firestore().collection("users").doc(user.uid).get();
+
+      if (doc.exists) {
+        const profile = doc.data();
+        name = profile.displayName || name;
+        photo = profile.photoURL || "";
+      }
+    } catch (err) {
+      console.log("Profile load failed");
+    }
 
     userDisplay.innerText = name;
 
     if (avatar) {
-      if (profile.photoURL) {
-        avatar.innerHTML = `<img src="${profile.photoURL}" class="avatar-img">`;
+      if (photo) {
+        avatar.innerHTML = `<img src="${photo}" class="avatar-img">`;
       } else {
         avatar.innerText = name.charAt(0).toUpperCase();
       }

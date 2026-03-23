@@ -227,14 +227,26 @@ async function postComment() {
 
   if (!input.value.trim()) return;
 
-  const doc = await db.collection("users").doc(user.uid).get();
-  const profile = doc.data() || {};
+  let name = user.email.split("@")[0];
+  let photo = "";
+
+  try {
+    const doc = await db.collection("users").doc(user.uid).get();
+
+    if (doc.exists) {
+      const profile = doc.data();
+      name = profile.displayName || name;
+      photo = profile.photoURL || "";
+    }
+  } catch (err) {
+    console.log("Profile fallback used");
+  }
 
   await db.collection("comments").add({
     text: input.value,
     userId: user.uid,
-    displayName: profile.displayName || "User",
-    photoURL: profile.photoURL || "",
+    displayName: name,
+    photoURL: photo,
     bookId: books[currentIndex].id,
     likes: 0,
     likedBy: [],
@@ -389,7 +401,7 @@ async function openProfile(userId) {
   const doc = await db.collection("users").doc(userId).get();
   const user = doc.data() || {};
 
-  const name = user.displayName || "User";
+  const name = c.displayName || "User";
 
   const avatar = user.photoURL
     ? `<img src="${user.photoURL}" class="profile-avatar">`
