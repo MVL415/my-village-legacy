@@ -235,29 +235,23 @@
       </div>
 
     </div>
-
-<textarea id="book-input"></textarea>
-
-<button onclick="postComment(`book-${books[currentIndex].id}`)">
-  Post Comment
-</button>
-
-<div id="book-list"></div>
    
 <div class="comments-box">
 
   <h3>💬 Join the Discussion</h3>
 
-  <textarea id="comment-input" placeholder="Share your thoughts..."></textarea>
+  <textarea id="book-input" placeholder="Share your thoughts..."></textarea>
 
-  <button class="comment-btn" onclick="postComment()">Post Comment</button>
-  
-<div class="comment-sort">
-  <button onclick="loadComments(books[currentIndex].id, 'new')">Newest</button>
-  <button onclick="loadComments(books[currentIndex].id, 'top')">Top</button>
-</div>
+  <button class="comment-btn" onclick="postComment(`book-${books[currentIndex].id}`)">
+    Post Comment
+  </button>
 
-  <div id="book-comments-list" class="comments-list"></div>
+  <div class="comment-sort">
+    <button onclick="loadComments(`book-${books[currentIndex].id}`, 'new')">Newest</button>
+    <button onclick="loadComments(`book-${books[currentIndex].id}`, 'top')">Top</button>
+  </div>
+
+  <div id="book-list" class="comments-list"></div>
 
 </div>
 

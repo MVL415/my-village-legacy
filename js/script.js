@@ -255,8 +255,10 @@ async function postComment(context) {
 }
 
 function loadComments(context, sort = "new") {
-  const container = document.getElementById(`${context}-list`);
-  container.innerHTML = "Loading...";
+ const container =
+  context === "community"
+    ? document.getElementById("community-list")
+    : document.getElementById("book-list");
 
   let query = db.collection("comments")
     .where("context", "==", context);
