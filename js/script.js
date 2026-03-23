@@ -421,15 +421,31 @@ async function openProfile(userId) {
   `;
 
   modal.style.display = "flex";
+
+  console.log("Current:", firebase.auth().currentUser?.uid);
+console.log("Profile:", userId);
 }
 
 function closeProfile() {
   document.getElementById("profile-modal").style.display = "none";
 }
 
-function editProfile() {
+async function editProfile() {
+
+  const user = firebase.auth().currentUser;
+  const doc = await db.collection("users").doc(user.uid).get();
+  const profile = doc.data() || {};
+
+  document.getElementById("edit-name").value = profile.displayName || "";
+  document.getElementById("edit-photo").value = profile.photoURL || "";
+
   document.getElementById("profile-view").style.display = "none";
   document.getElementById("profile-edit").style.display = "block";
+}
+
+function cancelEdit() {
+  document.getElementById("profile-view").style.display = "block";
+  document.getElementById("profile-edit").style.display = "none";
 }
 
 async function saveProfile() {
@@ -447,4 +463,7 @@ async function saveProfile() {
   }, { merge: true });
 
   closeProfile();
+
+  // 🔥 refresh auth UI instantly
+  firebase.auth().onAuthStateChanged(user => {});
 }

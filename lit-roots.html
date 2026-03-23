@@ -50,6 +50,19 @@
 
   <!-- LOGGED IN -->
   <div id="auth-logged-in" class="auth-user" style="display:none;">
+  
+  <div class="user-pill" onclick="openProfile(firebase.auth().currentUser.uid)">
+    <div id="auth-avatar" class="avatar">U</div>
+    <span id="auth-user"></span>
+  </div>
+
+  <button class="btn-ghost" onclick="openProfile(firebase.auth().currentUser.uid)">
+    Profile
+  </button>
+
+  <button class="btn-ghost" onclick="logOut()">Log Out</button>
+
+</div>
     
     <div class="user-pill">
       <div id="auth-avatar" class="avatar">U</div>
@@ -179,16 +192,34 @@
 
     <span class="close-btn" onclick="closeProfile()">×</span>
 
+    <!-- 👇 VIEW MODE -->
     <div id="profile-view"></div>
 
-    <div id="profile-edit" style="display:none;">
-      <input type="text" id="edit-name" placeholder="Display name">
-      <input type="text" id="edit-photo" placeholder="Image URL">
+    <!-- 👇 EDIT MODE (PUT YOUR CODE HERE) -->
+    <div id="profile-edit" style="display:none;" class="profile-edit">
 
-      <button onclick="saveProfile()">Save</button>
+      <h3>Edit Profile</h3>
+
+      <div class="edit-group">
+        <label>Name</label>
+        <input type="text" id="edit-name" placeholder="Your display name">
+      </div>
+
+      <div class="edit-group">
+        <label>Profile Image URL</label>
+        <input type="text" id="edit-photo" placeholder="Paste image link">
+      </div>
+
+      <div class="edit-actions">
+        <button class="btn-outline" onclick="cancelEdit()">Cancel</button>
+        <button class="btn-solid" onclick="saveProfile()">Save</button>
+      </div>
+
     </div>
 
   </div>
+
+</div>
 
 </div>
 
