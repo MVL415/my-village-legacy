@@ -117,7 +117,7 @@ function openBookByIndex(index) {
   trackBookView(book.id);
 
   // 👇 LOAD COMMENTS PER BOOK
-  loadComments(book.id);
+  loadComments(`book-${book.id}`);
 }
 
 function closeBookModal() {
@@ -220,38 +220,31 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-async function postComment() {
-  const input = document.getElementById("comment-input");
+async function postComment(context) {
+  const input = document.getElementById(`${context}-input`);
   const user = firebase.auth().currentUser;
 
-  if (!user) {
-    alert("Please log in to comment");
-    return;
-  }
-
+  if (!user) return alert("Login to comment");
   if (!input.value.trim()) return;
 
   let name = user.email.split("@")[0];
-  let photo = "";
+  let photoURL = "";
 
   try {
     const doc = await db.collection("users").doc(user.uid).get();
-
     if (doc.exists) {
       const profile = doc.data();
       name = profile.displayName || name;
-      photo = profile.photoURL || "";
+      photoURL = profile.photoURL || "";
     }
-  } catch (err) {
-    console.log("Profile fallback used");
-  }
+  } catch {}
 
   await db.collection("comments").add({
     text: input.value,
     userId: user.uid,
     displayName: name,
-    photoURL: photo,
-    bookId: books[currentIndex].id,
+    photoURL,
+    context: context, // 🔥 KEY
     likes: 0,
     likedBy: [],
     parentId: null,
@@ -261,24 +254,24 @@ async function postComment() {
   input.value = "";
 }
 
-function loadComments(bookId, sort = "new") {
-  const container = document.getElementById("comments-list");
+function loadComments(context, sort = "new") {
+  const container = document.getElementById(`${context}-list`);
   container.innerHTML = "Loading...";
 
   let query = db.collection("comments")
-    .where("bookId", "==", bookId);
+    .where("context", "==", context);
 
-query = query.orderBy("createdAt", "desc");
+  query = sort === "top"
+    ? query.orderBy("likes", "desc")
+    : query.orderBy("createdAt", "desc");
 
   query.onSnapshot(snapshot => {
 
     const comments = [];
     snapshot.forEach(doc => {
       comments.push({ id: doc.id, ...doc.data() });
-      console.log("Loaded comments:", comments);
     });
 
-    // separate parent + replies
     const parents = comments.filter(c => !c.parentId);
     const replies = comments.filter(c => c.parentId);
 
@@ -286,65 +279,80 @@ query = query.orderBy("createdAt", "desc");
 
     parents.forEach(c => {
 
-  const name = c.displayName || "User";
+      const name = c.displayName || "User";
 
-  const initials = name.charAt(0).toUpperCase();
+      const avatar = c.photoURL
+        ? `<img src="${c.photoURL}" class="avatar-img">`
+        : `<div class="avatar">${name.charAt(0).toUpperCase()}</div>`;
 
- const avatar = c.photoURL
-  ? `<img src="${c.photoURL}" class="avatar-img">`
-  : `<div class="avatar">${name.charAt(0).toUpperCase()}</div>`;
+      const childReplies = replies.filter(r => r.parentId === c.id);
 
-  const childReplies = replies.filter(r => r.parentId === c.id);
+      container.innerHTML += `
+        <div class="comment">
 
-  container.innerHTML += `
-    <div class="comment">
-      
-      <div onclick="openProfile('${c.userId}')">
-  ${avatar}
-</div>
+          <div onclick="openProfile('${c.userId}')">
+            ${avatar}
+          </div>
 
-      <div class="comment-content">
-        
-        <div class="comment-header">
-          <strong>${name}</strong>
+          <div class="comment-content">
+            
+            <div class="comment-header">
+              <strong>${name}</strong>
+            </div>
+
+            <div class="comment-text">${c.text || ""}</div>
+
+            <div class="comment-actions">
+              <span onclick="likeComment('${c.id}', ${JSON.stringify(c.likedBy || [])})">
+                ❤️ ${c.likes || 0}
+              </span>
+              · <span onclick="replyToComment('${c.id}', '${context}')">Reply</span>
+              · <span onclick="editComment('${c.id}', \`${c.text || ""}\`)">Edit</span>
+              · <span onclick="deleteComment('${c.id}')">Delete</span>
+            </div>
+
+            <div class="replies">
+              ${childReplies.map(r => {
+                const rName = r.displayName || "User";
+                const rAvatar = r.photoURL
+                  ? `<img src="${r.photoURL}" class="avatar-img">`
+                  : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
+
+                return `
+                  <div class="comment reply">
+                    ${rAvatar}
+                    <div class="comment-content">
+                      <strong>${rName}</strong>
+                      <div>${r.text || ""}</div>
+                    </div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+
+          </div>
         </div>
+      `;
+    });
 
-        <div class="comment-text">${c.text || ""}</div>
+  });
+}
 
-        <div class="comment-actions">
-          <span onclick="likeComment('${c.id}', ${JSON.stringify(c.likedBy || [])})">
-            ❤️ ${c.likes || 0}
-          </span>
-          · <span onclick="replyToComment('${c.id}')">Reply</span>
-          · <span onclick="editComment('${c.id}', \`${c.text || ""}\`)">Edit</span>
-          · <span onclick="deleteComment('${c.id}')">Delete</span>
-        </div>
+function replyToComment(parentId, context) {
+  const text = prompt("Write your reply:");
+  const user = firebase.auth().currentUser;
 
-        <div class="replies">
-          ${childReplies.map(r => {
-           const rName = r.displayName || "User";
+  if (!user || !text) return;
 
-const rAvatar = r.photoURL
-  ? `<img src="${r.photoURL}" class="avatar-img">`
-  : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
-
-            return `
-              <div class="comment reply">
-                ${rAvatar}
-                <div class="comment-content">
-                  <strong>${rName}</strong>
-                  <div>${r.text || ""}</div>
-                </div>
-              </div>
-            `;
-          }).join("")}
-        </div>
-
-      </div>
-    </div>
-  `;
-});
-
+  db.collection("comments").add({
+    text,
+    userId: user.uid,
+    displayName: user.email.split("@")[0],
+    context: context, // 🔥 IMPORTANT
+    parentId: parentId,
+    likes: 0,
+    likedBy: [],
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
   });
 }
 
@@ -362,23 +370,7 @@ function likeComment(commentId, likedBy = []) {
   });
 }
 
-function replyToComment(parentId) {
-  const text = prompt("Write your reply:");
 
-  const user = firebase.auth().currentUser;
-  if (!user || !text) return;
-
-  db.collection("comments").add({
-    text,
-    user: user.email,
-    displayName: user.email.split("@")[0],
-    bookId: books[currentIndex].id,
-    likes: 0,
-    likedBy: [],
-    parentId: parentId, // 👈 attaches reply
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
-}
 
 function editComment(id, oldText) {
   const newText = prompt("Edit your comment:", oldText);
@@ -395,119 +387,10 @@ function deleteComment(id) {
   db.collection("comments").doc(id).delete();
 }
 
-async function postCommunityComment() {
-  const input = document.getElementById("comment-input");
-  const user = firebase.auth().currentUser;
 
-  if (!user) {
-    alert("Log in first");
-    return;
-  }
-
-  if (!input.value.trim()) return;
-
- await db.collection("communityComments").add({
-  text: input.value,
-  userId: user.uid,
-  displayName: name,
-  photoURL: photo,
-  likes: 0,
-  likedBy: [],
-  parentId: null,
-  createdAt: firebase.firestore.FieldValue.serverTimestamp()
-});
-
-  input.value = "";
-}
-
-function loadCommunityComments(sort = "new") {
-  const container = document.getElementById("community-comments");
-  container.innerHTML = "Loading...";
-
-  let query = db.collection("communityComments");
-
-  query = sort === "top"
-    ? query.orderBy("likes", "desc")
-    : query.orderBy("createdAt", "desc");
-
-  query.onSnapshot(snapshot => {
-
-    const comments = [];
-
-    snapshot.forEach(doc => {
-      comments.push({ id: doc.id, ...doc.data() });
-    });
-
-    const parents = comments.filter(c => !c.parentId);
-    const replies = comments.filter(c => c.parentId);
-
-    container.innerHTML = "";
-
-    parents.forEach(c => {
-
-      const name = c.displayName || "User";
-      const initials = name.charAt(0).toUpperCase();
-
-      const avatar = c.photoURL
-        ? `<img src="${c.photoURL}" class="avatar-img">`
-        : `<div class="avatar">${initials}</div>`;
-
-      const childReplies = replies.filter(r => r.parentId === c.id);
-
-      container.innerHTML += `
-        <div class="comment">
-
-          ${avatar}
-
-          <div class="comment-content">
-
-            <div class="comment-header">
-              <strong>${name}</strong>
-            </div>
-
-            <div class="comment-text">${c.text}</div>
-
-            <div class="comment-actions">
-              <span onclick="likeCommunityComment('${c.id}', ${JSON.stringify(c.likedBy || [])})">
-                ❤️ ${c.likes || 0}
-              </span>
-              · <span onclick="replyToCommunityComment('${c.id}')">Reply</span>
-              · <span onclick="editCommunityComment('${c.id}', \`${c.text}\`)">Edit</span>
-              · <span onclick="deleteCommunityComment('${c.id}')">Delete</span>
-            </div>
-
-            <div class="replies">
-              ${childReplies.map(r => {
-                const rName = r.displayName || "User";
-
-                const rAvatar = r.photoURL
-                  ? `<img src="${r.photoURL}" class="avatar-img">`
-                  : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
-
-                return `
-                  <div class="comment reply">
-                    ${rAvatar}
-                    <div class="comment-content">
-                      <strong>${rName}</strong>
-                      <div>${r.text}</div>
-                    </div>
-                  </div>
-                `;
-              }).join("")}
-            </div>
-
-          </div>
-        </div>
-      `;
-    });
-
-  });
-}
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("community-comments")) {
-    loadCommunityComments();
-  }
+  loadComments("community");
 });
 
 function likeCommunityComment(commentId, likedBy = []) {
@@ -522,22 +405,6 @@ function likeCommunityComment(commentId, likedBy = []) {
   });
 }
 
-function replyToCommunityComment(parentId) {
-  const text = prompt("Write your reply:");
-  const user = firebase.auth().currentUser;
-
-  if (!user || !text) return;
-
-  db.collection("communityComments").add({
-    text,
-    userId: user.uid,
-    displayName: user.email.split("@")[0],
-    parentId: parentId,
-    likes: 0,
-    likedBy: [],
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
-}
 
 function editCommunityComment(id, oldText) {
   const newText = prompt("Edit your comment:", oldText);
