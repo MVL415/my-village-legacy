@@ -71,18 +71,23 @@ firebase.auth().onAuthStateChanged(user => {
   const loggedOut = document.getElementById("auth-logged-out");
   const loggedIn = document.getElementById("auth-logged-in");
   const userDisplay = document.getElementById("auth-user");
+  const avatar = document.getElementById("auth-avatar");
 
   if (user) {
-    if (loggedOut) loggedOut.style.display = "none";
-    if (loggedIn) loggedIn.style.display = "flex";
+    loggedOut.style.display = "none";
+    loggedIn.style.display = "flex";
 
-    if (userDisplay) {
-      userDisplay.innerText = "👋 " + user.email.split("@")[0];
+    const name = user.email.split("@")[0];
+
+    userDisplay.innerText = name;
+
+    if (avatar) {
+      avatar.innerText = name.charAt(0).toUpperCase();
     }
 
   } else {
-    if (loggedOut) loggedOut.style.display = "flex";
-    if (loggedIn) loggedIn.style.display = "none";
+    loggedOut.style.display = "flex";
+    loggedIn.style.display = "none";
   }
 
 });

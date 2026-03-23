@@ -31,19 +31,33 @@
 
 <main class="container">
 
-  <div class="auth-bar">
+<div class="auth-bar">
 
-  <div id="auth-logged-out">
-    <input type="email" id="auth-email" placeholder="Email">
-    <input type="password" id="auth-password" placeholder="Password">
+  <!-- LOGGED OUT -->
+  <div id="auth-logged-out" class="auth-card">
 
-    <button onclick="signUp()">Sign Up</button>
-    <button onclick="logIn()">Log In</button>
+    <div class="auth-input-group">
+      <input type="email" id="auth-email" placeholder="Email">
+      <input type="password" id="auth-password" placeholder="Password">
+    </div>
+
+    <div class="auth-actions">
+      <button class="btn-outline" onclick="signUp()">Sign Up</button>
+      <button class="btn-solid" onclick="logIn()">Log In</button>
+    </div>
+
   </div>
 
-  <div id="auth-logged-in" style="display:none;">
-    <span id="auth-user"></span>
-    <button onclick="logOut()">Log Out</button>
+  <!-- LOGGED IN -->
+  <div id="auth-logged-in" class="auth-user" style="display:none;">
+    
+    <div class="user-pill">
+      <div id="auth-avatar" class="avatar">U</div>
+      <span id="auth-user"></span>
+    </div>
+
+    <button class="btn-ghost" onclick="logOut()">Log Out</button>
+
   </div>
 
 </div>
