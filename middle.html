@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/grid.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -23,32 +24,39 @@
 <button class="menu-toggle" id="menu-toggle">☰</button>
 
 <nav class="main-nav" id="nav-menu">
-
-  <a href="index.html">Home</a>
+  <a href="index.html">
+  <i class="fa-solid fa-house"></i>Home
+</a>
 
   <!-- MONEY DROPDOWN -->
   <div class="nav-item">
-    <a class="active" href="money.html">Money Matters ▾</a>
+    <a class="active" href="money.html">
+      <i class="fa-solid fa-coins"></i>Money Matters ▾</a>
     <div class="dropdown">
-       <a href="money.html">Generational Wealth</a>
+       <a class="active" href="money.html">Generational Wealth</a>
       <a href="k5.html">K–5</a>
-      <a class="active" href="middle.html">Middle School</a>
+       <a class="active" href="middle.html">Middle School</a>
       <a href="high.html">High School</a>
     </div>
   </div>
 
-  <a href="photos.html">Photo Corner</a>
+ <a href="photos.html">
+  <i class="fa-solid fa-camera"></i>Photo Corner
+</a>
 
   <!-- LIT ROOTS DROPDOWN -->
   <div class="nav-item">
-    <a href="lit-roots.html">Lit Roots ▾</a>
+    <a href="lit-roots.html">
+      <i class="fa-solid fa-book"></i>Lit Roots ▾</a>
     <div class="dropdown">
       <a href="lit-roots.html">40 for 40</a>
       <a href="livinglegacy.html">Living Legacy Book Club</a>
     </div>
   </div>
 
-  <a href="https://www.myvillagelegacy.com" target="_blank">Shop MVL</a>
+ <a href="https://www.myvillagelegacy.com" target="_blank" class="nav-cta">
+  <i class="fa-solid fa-bag-shopping"></i> Shop MVL
+</a>
 
 </nav>
 
@@ -212,9 +220,17 @@ Middle school is the bridge between learning and real-world application. The hab
 <!-- NAV BUTTONS -->
 <section class="cta-grid">
 
-<a href="k5.html" class="btn-solid">Elementary</a>
-<a href="middle.html" class="btn-outline">Middle School</a>
-<a href="high.html" class="btn-solid">High School</a>
+<a href="k5.html" class="btn-solid">
+  <i class="fa-solid fa-seedling"></i> Elementary
+</a>
+
+<a class="active" href="middle.html" class="btn-outline">
+  <i class="fa-solid fa-book-open"></i> Middle School
+</a>
+
+<a href="high.html" class="btn-solid">
+  <i class="fa-solid fa-graduation-cap"></i> High School
+</a>
 
 </section>
 </main>
@@ -232,6 +248,10 @@ Middle school is the bridge between learning and real-world application. The hab
 <script src="js/firebase-config.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/script.js"></script>
+
+<button id="backToTop" class="back-to-top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
 
 </body>
 </html>

@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/grid.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
@@ -26,11 +26,14 @@
 
 <nav class="main-nav" id="nav-menu">
 
-  <a class="active" href="index.html">Home</a>
+  <a class="active" href="index.html">
+  <i class="fa-solid fa-house"></i>Home
+</a>
 
   <!-- MONEY DROPDOWN -->
   <div class="nav-item">
-    <a href="money.html">Money Matters ▾</a>
+    <a href="money.html">
+      <i class="fa-solid fa-coins"></i>Money Matters ▾</a>
     <div class="dropdown">
       <a href="money.html">Generational Wealth</a>
       <a href="k5.html">K–5</a>
@@ -39,18 +42,23 @@
     </div>
   </div>
 
-  <a href="photos.html">Photo Corner</a>
+ <a href="photos.html">
+  <i class="fa-solid fa-camera"></i>Photo Corner
+</a>
 
   <!-- LIT ROOTS DROPDOWN -->
   <div class="nav-item">
-    <a href="lit-roots.html">Lit Roots ▾</a>
+    <a href="lit-roots.html">
+      <i class="fa-solid fa-book"></i>Lit Roots ▾</a>
     <div class="dropdown">
       <a href="lit-roots.html">40 for 40</a>
       <a href="livinglegacy.html">Living Legacy Book Club</a>
     </div>
   </div>
 
-  <a href="https://www.myvillagelegacy.com" target="_blank">Shop MVL</a>
+ <a href="https://www.myvillagelegacy.com" target="_blank" class="nav-cta">
+  <i class="fa-solid fa-bag-shopping"></i> Shop MVL
+</a>
 
 </nav>
 
@@ -193,6 +201,10 @@ Ready for some change.
 <script src="js/firebase-config.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/script.js"></script>
+
+<button id="backToTop" class="back-to-top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
 
 </body>
 </html>

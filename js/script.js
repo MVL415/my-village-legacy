@@ -581,3 +581,41 @@ window.addEventListener("load", () => {
     if (input) input.focus();
   }
 });
+
+const backToTop = document.getElementById("backToTop");
+
+// Show button when scrolling
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 300) {
+    backToTop.classList.add("show");
+  } else {
+    backToTop.classList.remove("show");
+  }
+});
+
+// Scroll to top
+backToTop.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+const backToTop = document.getElementById("backToTop");
+
+if (backToTop) {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTop.classList.add("show");
+    } else {
+      backToTop.classList.remove("show");
+    }
+  });
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+}
