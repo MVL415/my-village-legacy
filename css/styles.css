@@ -85,20 +85,6 @@ border-radius:6px;
 margin-bottom:var(--space-sm);
 }
 
-.cta{
-padding:18px;
-border-radius:12px;
-font-size:var(--text-lg);
-font-weight:600;
-
-transition:0.2s;
-}
-
-.cta:hover{
-transform:translateY(-3px);
-opacity:0.9;
-}
-
 .container{
 max-width:1100px;
 margin:auto;
@@ -162,7 +148,9 @@ font-size:36px;
 
   background: var(--secondary);
   color: white;
+
   font-weight: 600;
+  min-width: 140px; /* 🔥 THIS fixes uneven size */
   transition: 0.2s;
 }
 
@@ -407,7 +395,7 @@ line-height:1.8;
 }
 
 
-/* CTA BUTTONS */
+/* CTA grid */
 .cta-grid{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -421,31 +409,6 @@ grid-template-columns:1fr;
 }
 }
 
-.cta{
-text-align:center;
-padding:20px;
-border-radius:12px;
-text-decoration:none;
-color:white;
-font-weight:bold;
-display:block;
-}
-
-.cta.primary{
-background:#7b4dd6;
-}
-
-.cta.secondary{
-background:#44c2b0;
-}
-
-.cta.dark{
-background:#333;
-}
-
-.cta:hover{
-opacity:0.9;
-}
 nav a{
 transition:0.2s;
 }
