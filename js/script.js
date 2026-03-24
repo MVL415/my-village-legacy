@@ -601,8 +601,19 @@ if (backToTop) {
   });
 }
 
-document.querySelectorAll(".thumb").forEach(img => {
+const thumbs = document.querySelectorAll(".thumb");
+const heroImg = document.querySelector(".hero");
+
+thumbs.forEach(img => {
   img.addEventListener("click", () => {
-    document.querySelector(".hero").src = img.src;
+
+    heroImg.src = img.src;
+
+    // remove active from all
+    thumbs.forEach(t => t.classList.remove("active"));
+
+    // add active to clicked
+    img.classList.add("active");
+
   });
 });

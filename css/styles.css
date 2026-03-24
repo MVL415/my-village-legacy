@@ -152,6 +152,10 @@ font-size:36px;
   margin-right: 6px;
 }
 
+.main-nav a:hover {
+  transform: translateY(-2px);
+}
+
 .main-nav a,
 .nav-item > a {
   display: inline-flex;
@@ -335,7 +339,12 @@ margin-bottom:20px;
 .hero {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  transition: 0.3s;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hero:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.1);
 }
 
 .hero-block {
@@ -1108,8 +1117,13 @@ background:#333;
 }
 
 .btn-solid:hover {
-  background: var(--primary);
-  transform: translateY(-1px);
+  background: var(--accent);
+  box-shadow: 0 6px 20px rgba(13,71,93,0.3);
+}
+
+.btn-outline:hover {
+  background: var(--secondary);
+  color: white;
 }
 
 .btn-outline {
@@ -1118,10 +1132,6 @@ background:#333;
   color: var(--secondary);
 }
 
-.btn-outline:hover {
-  background: var(--secondary);
-  color: white;
-}
 
 .btn-solid i,
 .btn-outline i {
@@ -1357,12 +1367,16 @@ html {
   object-fit: cover;
   border-radius: var(--radius);
   cursor: pointer;
-  opacity: 0.8;
-  transition: 0.2s;
+  opacity: 0.6;
+  transition: 0.25s;
+  border: 2px solid transparent;
 }
 
+
+.thumb.active,
 .thumb:hover {
   opacity: 1;
+  border-color: var(--secondary);
   transform: scale(1.05);
 }
 
@@ -1398,12 +1412,56 @@ html {
   margin-bottom: var(--space-sm);
 }
 
-.pillar:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
-}
-
 /* CTA */
 .cta-block {
   text-align: center;
+}
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* HERO */
+.hero-section {
+  text-align: center;
+}
+
+/* FEATURES GRID (replaces asides) */
+.home-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+}
+
+.feature-card {
+  background: var(--white);
+  padding: var(--space-lg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: 0.2s;
+}
+
+.feature-card img {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: var(--space-sm);
+}
+
+.feature-card:hover,
+.pillar:hover {
+  box-shadow: 0 10px 30px rgba(64,147,140,0.2);
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
 }
