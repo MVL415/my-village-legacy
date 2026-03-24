@@ -600,3 +600,9 @@ if (backToTop) {
     });
   });
 }
+
+document.querySelectorAll(".thumb").forEach(img => {
+  img.addEventListener("click", () => {
+    document.querySelector(".hero").src = img.src;
+  });
+});
