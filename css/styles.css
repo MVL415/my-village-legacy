@@ -1098,6 +1098,13 @@ background:#333;
   margin-right: 8px;
 }
 
+.btn-ghost {
+  background: transparent;
+  border: none;
+  color: #555;
+  cursor: pointer;
+}
+
 /* USER STATE */
 .auth-user {
   display: flex;
