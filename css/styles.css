@@ -30,11 +30,17 @@
 }
 
 body {
-  background: var(--bg);
   color: var(--text-dark);
   font-size: var(--text-md);
   font-family: 'Inter', sans-serif;
+  background: linear-gradient(
+    to bottom,
+    #f5f7f6 0%,
+    #f5f7f6 60%,
+    #ffffff 100%
+  );
 }
+
 
 h1, .logo {
   font-family: 'Pacifico', cursive;
@@ -330,12 +336,6 @@ grid-column:span 6;
 text-align:center;
 }
 
-.season{
-font-family:"Pacifico";
-font-size:42px;
-margin-bottom:20px;
-}
-
 .hero {
   width: 100%;
   max-width: 600px;   /* 👈 THIS fixes the oversized look */
@@ -356,14 +356,13 @@ margin-bottom:20px;
   margin-bottom: var(--space-md);
 }
 
-.hero-title {
-  font-size: clamp(28px, 4vw, 42px);
-  line-height: 1.2;
-}
-
-.hero-sub {
-  max-width: 500px;
-  margin-top: 6px;
+.hero-block::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--secondary);
+  margin-top: 16px;
 }
 
 .painting-wrapper {
@@ -1423,6 +1422,33 @@ html {
 /* CTA */
 .cta-block {
   text-align: center;
+  padding: 40px;
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    var(--secondary),
+    var(--accent)
+  );
+
+  color: white;
+}
+
+.cta-block .btn-solid {
+  margin-top: 16px;
+
+  background: white;
+  color: var(--accent);
+
+  font-weight: 600;
+  border-radius: 999px; /* 👈 pill button = premium */
+
+  padding: 12px 24px;
+}
+
+.cta-block .btn-solid:hover {
+  background: #f1f1f1;
+  transform: translateY(-2px);
 }
 
 .homepage {
@@ -1431,15 +1457,33 @@ html {
   gap: var(--space-xl);
 }
 
+.homepage > section {
+  margin-bottom: 40px;
+}
+
 /* HERO */
 .hero-section {
   display: grid;
-  grid-template-columns: 1fr 1.2fr; /* text | image */
-  gap: 60px;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
   align-items: center;
+}
 
-  max-width: 1200px;
-  margin: 0 auto;
+.hero-title {
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.1;
+}
+
+.season {
+  color: var(--secondary);
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.hero-sub {
+  font-size: 16px;
+  opacity: 0.8;
+  max-width: 420px;
 }
 
 /* FEATURES GRID (replaces asides) */
@@ -1453,13 +1497,18 @@ html {
 }
 
 .feature-card {
-  background: var(--white);
+  background: white;
   padding: 20px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+
   text-align: left;
-  height: auto;   
-  transition: 0.2s;
+  transition: 0.25s;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
 .feature-card img {
@@ -1467,14 +1516,19 @@ html {
   object-fit: cover;
 }
 
-.feature-card:hover,
 .pillar:hover {
   box-shadow: 0 10px 30px rgba(64,147,140,0.2);
+}
+
+.feature-card h3 {
+  margin-top: 10px;
+  margin-bottom: 6px;
 }
 
 .feature-card p {
   font-size: 14px;
   line-height: 1.5;
+  opacity: 0.8;
 }
 
 .fade-in {
@@ -1498,4 +1552,19 @@ html {
   .painting-wrapper {
     text-align: center;
   }
+}
+
+.section-light {
+  background: var(--bg);
+  padding: 80px 0;
+}
+
+.section-soft {
+  background: #eef4f3; /* 👈 subtle tint using your palette */
+  padding: 80px 0;
+}
+
+.section-white {
+  background: white;
+  padding: 80px 0;
 }
