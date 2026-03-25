@@ -582,24 +582,24 @@ window.addEventListener("load", () => {
   }
 });
 
-const backToTop = document.getElementById("backToTop");
+const backToTop = document.getElementById('backToTop');
 
-if (backToTop) {
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 100) {
-      backToTop.classList.add("show");
-    } else {
-      backToTop.classList.remove("show");
-    }
-  });
+/* SHOW / HIDE ON SCROLL */
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    backToTop.classList.add('show');
+  } else {
+    backToTop.classList.remove('show');
+  }
+});
 
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+/* SMOOTH SCROLL TO TOP */
+backToTop.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
   });
-}
+});
 
 const thumbs = document.querySelectorAll(".thumb");
 const heroImg = document.querySelector(".hero");
