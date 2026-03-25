@@ -1416,14 +1416,12 @@ html {
   background: var(--accent);
   transform: translateY(-2px);
 }
-
 .thumbnail-strip {
+  display: flex;
+  gap: 10px;
   justify-content: flex-start;
-  max-width: 600px;
-  margin: var(--space-md) auto;
   overflow-x: auto;
 }
-
 
 .thumb {
   width: 80px;
