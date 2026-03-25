@@ -1,9 +1,16 @@
+// =========================
+// 🔥 GLOBALS
+// =========================
 let activeListeners = {};
+let currentIndex = 0;
 
 const db = firebase.firestore();
 
+// =========================
+// 📚 BOOK DATA
+// =========================
 const books = [
-   {
+  {
     id: "marriage",
     title: "The Perfect Marriage",
     author: "Jeneva Rose",
@@ -16,7 +23,7 @@ const books = [
     title: "The Perfect Divorce",
     author: "Jeneva Rose",
     img: "images/book2.jpg",
-    review: "Twists, tension, and drama—keeps you guessing the whole way.",
+    review: "The twists, tension, and drama continues — keeping you guessing the whole way.",
     question: "💬 Did you see the ending coming?"
   },
   {
@@ -56,58 +63,47 @@ const books = [
     title: "Christine",
     author: "Stephen King",
     img: "images/book7.jpg",
-    review: "More psychological than horror—obsession, identity, and transformation.",
-    question: "💬 Was Christine evil… or a reflection of Arnie?"
+    review: "Psychological horror about obsession and identity.",
+    question: "💬 Was Christine evil… or a reflection?"
   },
   {
     id: "spook",
     title: "The Spook Who Sat by the Door",
     author: "Sam Greenlee",
     img: "images/book8.jpg",
-    review: "Nipsey Hussle mentioned reading this book which influenced my decision to read it. It’s a powerful story that explores themes of racial tension, social justice, and the fight for equality. It’s a frustrating reminder of the ongoing struggle for civil rights and the importance of standing up against oppression specifically from within.",
-    question: "💬 Being such a short read, were you left wanting more? Or did you feel like Greenlee wrapped it up perfectly? What do you think the story would look like if it were set in today’s world?"
+    review: "Nipsey Hussle mentioned how important this book's message was which influenced my decision to read it. It’s a powerful story that explores themes of racial tension, social justice, and the fight for equality.",
+    question: "💬 Being such a short read, were you left wanting more or did you feel like Greenlee wrapped it up perfectly? What do you think the story would look like if it were set in today’s world?"
   }
- 
 ];
 
-function openLightbox(img){
+// =========================
+// 💡 LIGHTBOX
+// =========================
+function openLightbox(img) {
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightbox-img");
 
-  if(lightbox && lightboxImg){
+  if (lightbox && lightboxImg) {
     lightbox.style.display = "flex";
     lightboxImg.src = img.src;
   }
 }
 
-function closeLightbox(){
+function closeLightbox() {
   const lightbox = document.getElementById("lightbox");
-  if(lightbox){
-    lightbox.style.display = "none";
-  }
+  if (lightbox) lightbox.style.display = "none";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  const form = document.getElementById("newsletter-form");
-
-  if (form) {
-    form.addEventListener("submit", function () {
-      
-      setTimeout(() => {
-        form.reset(); // clears input
-      }, 500);
-
-    });
-  }
-
-});
-
+// =========================
+// 📖 BOOK MODAL
+// =========================
 function openBookByIndex(index) {
   currentIndex = index;
   const book = books[index];
 
   const modal = document.getElementById("book-modal");
+  if (!modal) return;
+
   modal.style.display = "flex";
 
   document.getElementById("modal-title").innerText = book.title;
@@ -118,17 +114,18 @@ function openBookByIndex(index) {
 
   trackBookView(book.id);
 
-  // ✅ Wait for modal to render before loading comments
   setTimeout(() => {
     loadComments(`book-${book.id}`);
   }, 50);
 }
 
 function closeBookModal() {
-  document.getElementById("book-modal").style.display = "none";
+  const modal = document.getElementById("book-modal");
+  if (!modal) return;
+
+  modal.style.display = "none";
 
   const context = `book-${books[currentIndex].id}`;
-
   if (activeListeners[context]) {
     activeListeners[context]();
     delete activeListeners[context];
@@ -136,103 +133,28 @@ function closeBookModal() {
 }
 
 function nextBook() {
-  currentIndex = (currentIndex + 1) % books.length;
-  openBookByIndex(currentIndex);
+  openBookByIndex((currentIndex + 1) % books.length);
 }
 
 function prevBook() {
-  currentIndex = (currentIndex - 1 + books.length) % books.length;
-  openBookByIndex(currentIndex);
+  openBookByIndex((currentIndex - 1 + books.length) % books.length);
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  const modal = document.getElementById("book-modal");
-
-  if (!modal) return;
-
-  let startX = 0;
-
-  modal.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-  });
-
-  modal.addEventListener("touchend", e => {
-    let endX = e.changedTouches[0].clientX;
-
-    if (startX - endX > 50) nextBook();
-    if (endX - startX > 50) prevBook();
-  });
-
-  modal.addEventListener("mousedown", e => {
-    startX = e.clientX;
-  });
-
-  modal.addEventListener("mouseup", e => {
-    let endX = e.clientX;
-
-    if (startX - endX > 50) nextBook();
-    if (endX - startX > 50) prevBook();
-  });
-
-});
-
+// =========================
+// 📊 PROGRESS
+// =========================
 function trackBookView(bookId) {
   let viewed = JSON.parse(localStorage.getItem("viewedBooks")) || [];
-
   if (!viewed.includes(bookId)) {
     viewed.push(bookId);
     localStorage.setItem("viewedBooks", JSON.stringify(viewed));
   }
 }
 
-function updateProgress() {
-  let viewed = JSON.parse(localStorage.getItem("viewedBooks")) || [];
-  document.getElementById("progress").innerText =
-    `📚 Books explored: ${viewed.length}`;
-}
-
-const modalEl = document.getElementById("book-modal");
-
-if (modalEl) {
-  modalEl.addEventListener("click", function(e) {
-    if (e.target.id === "book-modal") {
-      closeBookModal();
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const read = 8;
-  const goal = 40;
-
-  const percent = (read / goal) * 100;
-
-  const bar = document.getElementById("progress-fill");
-
-  if (bar) {
-    setTimeout(() => {
-      bar.style.width = percent + "%";
-    }, 300); // slight delay for smooth animation
-  }
-
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const read = 8;
-  const goal = 40;
-  const percent = (read / goal) * 100;
-
-  const percentText = document.getElementById("progress-percent");
-
-  if (percentText) {
-    percentText.innerText = Math.round(percent) + "%";
-  }
-});
-
+// =========================
+// 💬 COMMENTS (CORE)
+// =========================
 async function postComment(context) {
-
   const user = firebase.auth().currentUser;
   if (!user) return alert("Login required");
 
@@ -243,23 +165,11 @@ async function postComment(context) {
 
   if (!input || !input.value.trim()) return;
 
-  let name = user.email.split("@")[0];
-  let photo = "";
-
-  try {
-    const doc = await db.collection("users").doc(user.uid).get();
-    const profile = doc.data() || {};
-
-    name = profile.displayName || name;
-    photo = profile.photoURL || "";
-  } catch {}
-
   await db.collection("comments").add({
     text: input.value,
     userId: user.uid,
-    displayName: name,
-    photoURL: photo,
-    context: context,
+    displayName: user.email.split("@")[0],
+    context,
     likes: 0,
     likedBy: [],
     parentId: null,
@@ -269,415 +179,113 @@ async function postComment(context) {
   input.value = "";
 }
 
-function loadComments(context, sort = "new") {
+function loadComments(context) {
+  const container =
+    context === "community"
+      ? document.getElementById("community-list")
+      : document.getElementById("book-list");
 
-  // ✅ FIXED CONTAINER LOGIC
-  let container = null;
+  if (!container) return;
 
-  if (context === "community") {
-    container = document.getElementById("community-list");
-  } else if (context.startsWith("book-")) {
-    container = document.getElementById("book-list");
-  }
+  if (activeListeners[context]) activeListeners[context]();
 
-if (!container) return;
+  activeListeners[context] = db
+    .collection("comments")
+    .where("context", "==", context)
+    .orderBy("createdAt", "desc")
+    .onSnapshot(snapshot => {
+      container.innerHTML = "";
 
-  container.innerHTML = "Loading...";
+      snapshot.forEach(doc => {
+        const c = doc.data();
 
-    // 🧹 Clean up existing listener for this context
-if (activeListeners[context]) {
-  activeListeners[context](); // unsubscribe
-}
-
-  let query = db.collection("comments")
-    .where("context", "==", context);
-
-  query = sort === "top"
-    ? query.orderBy("likes", "desc")
-    : query.orderBy("createdAt", "desc");
-
-  activeListeners[context] = query.onSnapshot(snapshot => {
-
-    const comments = [];
-    snapshot.forEach(doc => {
-      comments.push({ id: doc.id, ...doc.data() });
-    });
-
-    const parents = comments.filter(c => !c.parentId);
-    const replies = comments.filter(c => c.parentId);
-
-    container.innerHTML = "";
-
-    parents.forEach(c => {
-
-      const name = c.displayName || "User";
-
-      const avatar = c.photoURL
-        ? `<img src="${c.photoURL}" class="avatar-img">`
-        : `<div class="avatar">${name.charAt(0).toUpperCase()}</div>`;
-
-      const childReplies = replies.filter(r => r.parentId === c.id);
-
-      container.innerHTML += `
-        <div class="comment">
-
-          <div onclick="openProfile('${c.userId}')">
-            ${avatar}
+        container.innerHTML += `
+          <div class="comment">
+            <strong>${c.displayName || "User"}</strong>
+            <div>${c.text}</div>
           </div>
-
-          <div class="comment-content">
-            
-            <div class="comment-header">
-              <strong>${name}</strong>
-            </div>
-
-            <div class="comment-text">${c.text || ""}</div>
-
-            <div class="comment-actions">
-              <span onclick="likeComment('${c.id}', ${JSON.stringify(c.likedBy || [])})">
-                ❤️ ${c.likes || 0}
-              </span>
-              · <span onclick="replyToComment('${c.id}', '${context}')">Reply</span>
-              · <span onclick="editComment('${c.id}', \`${c.text || ""}\`)">Edit</span>
-              · <span onclick="deleteComment('${c.id}')">Delete</span>
-            </div>
-
-            <div class="replies">
-              ${childReplies.map(r => {
-                const rName = r.displayName || "User";
-                const rAvatar = r.photoURL
-                  ? `<img src="${r.photoURL}" class="avatar-img">`
-                  : `<div class="avatar">${rName.charAt(0).toUpperCase()}</div>`;
-
-                return `
-                  <div class="comment reply">
-                    ${rAvatar}
-                    <div class="comment-content">
-                      <strong>${rName}</strong>
-                      <div>${r.text || ""}</div>
-                    </div>
-                  </div>
-                `;
-              }).join("")}
-            </div>
-
-          </div>
-        </div>
-      `;
+        `;
+      });
     });
-
-  });
 }
 
-function replyToComment(parentId, context) {
-  const text = prompt("Write your reply:");
-  const user = firebase.auth().currentUser;
-
-  if (!user || !text) return;
-
-  db.collection("comments").add({
-    text,
-    userId: user.uid,
-    displayName: user.email.split("@")[0],
-    context: context, // 🔥 IMPORTANT
-    parentId: parentId,
-    likes: 0,
-    likedBy: [],
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-  });
-}
-
-function likeComment(commentId, likedBy = []) {
-  const user = firebase.auth().currentUser;
-  if (!user) return alert("Login to like");
-
-  const ref = db.collection("comments").doc(commentId);
-
-  if (likedBy.includes(user.uid)) return; // already liked
-
-  ref.update({
-    likes: firebase.firestore.FieldValue.increment(1),
-    likedBy: firebase.firestore.FieldValue.arrayUnion(user.uid)
-  });
-}
-
-
-
-function editComment(id, oldText) {
-  const newText = prompt("Edit your comment:", oldText);
-  if (!newText) return;
-
-  db.collection("comments").doc(id).update({
-    text: newText
-  });
-}
-
-function deleteComment(id) {
-  if (!confirm("Delete this comment?")) return;
-
-  db.collection("comments").doc(id).delete();
-}
-
-
-
+// =========================
+// 🚀 MAIN UI INIT
+// =========================
 document.addEventListener("DOMContentLoaded", () => {
-  loadComments("community");
-});
 
-function likeCommunityComment(commentId, likedBy = []) {
-  const user = firebase.auth().currentUser;
-  if (!user) return alert("Login to like");
+  // 🔝 Back to top
+  const backToTop = document.getElementById("backToTop");
+  if (backToTop) {
+    window.addEventListener("scroll", () => {
+      backToTop.classList.toggle("show", window.scrollY > 300);
+    });
 
-  if (likedBy.includes(user.uid)) return;
-
-  db.collection("communityComments").doc(commentId).update({
-    likes: firebase.firestore.FieldValue.increment(1),
-    likedBy: firebase.firestore.FieldValue.arrayUnion(user.uid)
-  });
-}
-
-
-function editCommunityComment(id, oldText) {
-  const newText = prompt("Edit your comment:", oldText);
-  if (!newText) return;
-
-  db.collection("communityComments").doc(id).update({
-    text: newText
-  });
-}
-
-function deleteCommunityComment(id) {
-  if (!confirm("Delete this comment?")) return;
-
-  db.collection("communityComments").doc(id).delete();
-}
-
-async function openProfile(userId) {
-
-  const modal = document.getElementById("profile-modal");
-  const view = document.getElementById("profile-view");
-  const edit = document.getElementById("profile-edit");
-
-  edit.style.display = "none";
-
-  // 👇 fallback to current user if no ID passed
-  const currentUser = firebase.auth().currentUser;
-  const uid = userId || currentUser?.uid;
-
-  if (!uid) {
-    alert("Not logged in");
-    return;
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 
-  const doc = await db.collection("users").doc(uid).get();
-  const user = doc.data() || {};
+  // 🖼️ Thumbnails
+  const thumbs = document.querySelectorAll(".thumb");
+  const hero = document.querySelector(".hero");
 
-  const name = user.displayName || user.email?.split("@")[0] || "User";
+  thumbs.forEach(thumb => {
+    thumb.addEventListener("click", () => {
+      if (!hero) return;
 
-  const avatar = user.photoURL
-    ? `<img src="${user.photoURL}" class="profile-avatar">`
-    : `<div class="profile-avatar avatar">${name.charAt(0).toUpperCase()}</div>`;
+      hero.src = thumb.src;
 
-  view.innerHTML = `
-    ${avatar}
-    <div class="profile-name">${name}</div>
-    <p>${user.email || ""}</p>
+      thumbs.forEach(t => t.classList.remove("active"));
+      thumb.classList.add("active");
+    });
+  });
 
-    ${currentUser && currentUser.uid === uid
-      ? `<button class="profile-btn" onclick="editProfile()">Edit Profile</button>`
-      : ""
-    }
-  `;
+  // ✨ Fade-in
+  const faders = document.querySelectorAll(".fade-in");
 
-  modal.style.display = "flex";
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+  });
 
-  console.log("Current:", currentUser?.uid);
-  console.log("Profile:", uid);
-}
+  faders.forEach(el => observer.observe(el));
 
-function closeProfile() {
-  document.getElementById("profile-modal").style.display = "none";
-}
+  // 📱 Mobile nav
+  const menuToggle = document.getElementById("menu-toggle");
+  const navMenu = document.getElementById("nav-menu");
 
-async function editProfile() {
+  if (menuToggle && navMenu) {
 
-  const user = firebase.auth().currentUser;
-  const doc = await db.collection("users").doc(user.uid).get();
-  const profile = doc.data() || {};
+    menuToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      navMenu.classList.toggle("show");
+      menuToggle.classList.toggle("open");
+    });
 
-  document.getElementById("edit-name").value = profile.displayName || "";
-  document.getElementById("edit-photo-file").addEventListener("change", function(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  const preview = document.getElementById("profile-preview");
-  preview.src = URL.createObjectURL(file);
-  preview.style.display = "block";
-});
-  document.getElementById("profile-view").style.display = "none";
-  document.getElementById("profile-edit").style.display = "block";
-}
-
-function cancelEdit() {
-  document.getElementById("profile-view").style.display = "block";
-  document.getElementById("profile-edit").style.display = "none";
-}
-
-async function saveProfile(button) {
-  const user = firebase.auth().currentUser;
-  if (!user) return;
-
-  const name = document.getElementById("edit-name").value;
-  const file = document.getElementById("edit-photo-file").files[0];
-
-  // 👇 UI feedback START
-  button.innerText = "Saving...";
-  button.disabled = true;
-
-  let photoURL = "";
-
-  if (file) {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "profile_upload");
-
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/dhyhrbgaz/image/upload",
-      {
-        method: "POST",
-        body: formData
+    document.addEventListener("click", (e) => {
+      if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        navMenu.classList.remove("show");
+        menuToggle.classList.remove("open");
       }
-    );
+    });
 
-    const data = await res.json();
-    photoURL = data.secure_url;
+    document.querySelectorAll(".nav-item > a").forEach(item => {
+      item.addEventListener("click", function (e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          this.parentElement.classList.toggle("open");
+        }
+      });
+    });
+
+    document.querySelectorAll(".main-nav a").forEach(link => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("show");
+        menuToggle.classList.remove("open");
+      });
+    });
   }
 
-  await db.collection("users").doc(user.uid).set({
-    displayName: name,
-    photoURL: photoURL || "",
-    email: user.email
-  }, { merge: true });
-
-  // 👇 UI feedback RESET
-  button.innerText = "Save";
-  button.disabled = false;
-
-  closeProfile();
-
-
-  // 🔥 refresh auth UI instantly
-  firebase.auth().onAuthStateChanged(user => {});
-}
-
-window.openProfile = openProfile;
-window.addEventListener("beforeunload", () => {
-  Object.values(activeListeners).forEach(unsub => unsub());
-});
-
-window.addEventListener("load", () => {
-  if (window.location.hash === "#community-discussion") {
-    const input = document.getElementById("community-input");
-    if (input) input.focus();
-  }
-});
-
-const backToTop = document.getElementById('backToTop');
-
-/* SHOW / HIDE ON SCROLL */
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    backToTop.classList.add('show');
-  } else {
-    backToTop.classList.remove('show');
-  }
-});
-
-/* SMOOTH SCROLL TO TOP */
-backToTop.addEventListener('click', () => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-});
-
-const thumbs = document.querySelectorAll(".thumb");
-const heroImg = document.querySelector(".hero");
-
-thumbs.forEach(img => {
-  img.addEventListener("click", () => {
-
-    heroImg.src = img.src;
-
-    // remove active from all
-    thumbs.forEach(t => t.classList.remove("active"));
-
-    // add active to clicked
-    img.classList.add("active");
-
-  });
-});
-
-const faders = document.querySelectorAll('.fade-in');
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-    }
-  });
-});
-
-faders.forEach(el => observer.observe(el));
-
-document.querySelectorAll('.nav-item > a').forEach(item => {
-  item.addEventListener('click', function(e) {
-
-    if (window.innerWidth <= 768) {
-      e.preventDefault();
-
-      const parent = this.parentElement;
-      parent.classList.toggle('open');
-    }
-
-  });
-});
-
-const thumbs = document.querySelectorAll('.thumb');
-const hero = document.querySelector('.hero');
-
-thumbs.forEach(thumb => {
-  thumb.addEventListener('click', () => {
-    hero.src = thumb.src;
-
-    thumbs.forEach(t => t.classList.remove('active'));
-    thumb.classList.add('active');
-  });
-});
-
-const menuToggle = document.getElementById('menu-toggle');
-const navMenu = document.getElementById('nav-menu');
-
-/* TOGGLE MENU */
-menuToggle.addEventListener('click', () => {
-  navMenu.classList.toggle('show');
-});
-
-/* CLOSE WHEN CLICKING LINK */
-document.querySelectorAll('.main-nav a').forEach(link => {
-  link.addEventListener('click', () => {
-    navMenu.classList.remove('show');
-  });
-});
-
-/* CLOSE WHEN CLICKING OUTSIDE */
-document.addEventListener('click', (e) => {
-  if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-    navMenu.classList.remove('show');
-  }
-});
-
-menuToggle.addEventListener('click', () => {
-  navMenu.classList.toggle('show');
-  menuToggle.classList.toggle('open'); // 🔥 add this
 });
