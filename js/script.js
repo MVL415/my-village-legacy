@@ -642,3 +642,15 @@ document.querySelectorAll('.nav-item > a').forEach(item => {
 
   });
 });
+
+const thumbs = document.querySelectorAll('.thumb');
+const hero = document.querySelector('.hero');
+
+thumbs.forEach(thumb => {
+  thumb.addEventListener('click', () => {
+    hero.src = thumb.src;
+
+    thumbs.forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+  });
+});

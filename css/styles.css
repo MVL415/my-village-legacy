@@ -145,6 +145,47 @@ img {
   max-width: 480px;
 }
 
+/* =========================
+   🖼️ THUMBNAILS
+========================= */
+.thumbnail-strip {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+
+  overflow-x: auto;
+  padding-bottom: 6px;
+
+  scrollbar-width: none; /* Firefox */
+}
+
+.thumbnail-strip::-webkit-scrollbar {
+  display: none; /* Chrome */
+}
+
+.thumb {
+  width: 80px;
+  height: 80px;
+
+  object-fit: cover;
+  border-radius: var(--radius);
+
+  cursor: pointer;
+
+  opacity: 0.6;
+  transition: 0.25s;
+
+  border: 2px solid transparent;
+  flex-shrink: 0;
+}
+
+.thumb:hover,
+.thumb.active {
+  opacity: 1;
+  border-color: var(--secondary);
+  transform: scale(1.05);
+}
+
 /* PILLARS */
 .pillars {
   display: grid;
@@ -273,6 +314,16 @@ img {
   .poem-block {
     max-width: 100%;
   }
+
+  .thumbnail-strip {
+    justify-content: flex-start;
+  }
+
+  .thumb {
+    width: 65px;
+    height: 65px;
+  }
+
 
   /* PILLARS */
   .pillars {
