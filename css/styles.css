@@ -184,9 +184,6 @@ font-size:36px;
   background: var(--primary);
 }
 
-.main-nav a:last-child {
-  background: var(--primary); /* stronger than others */
-}
 
 .nav-item {
   position: relative;
@@ -234,11 +231,7 @@ cursor:pointer;
 }
 
 .nav-cta {
-  background: linear-gradient(
-    135deg,
-    var(--secondary),
-    var(--accent)
-  );
+  background: linear-gradient(135deg, var(--secondary), var(--accent)) !important;
   color: white;
 
   display: inline-flex;
@@ -306,10 +299,9 @@ cursor:pointer;
     gap: 30px;
   }
 
- .hero-block,
+.hero-block,
 .poem-block {
-  max-width: 500px;
-  margin: 0; /* 🔥 remove auto centering */
+  max-width: 480px;   /* tighten slightly */
 }
 
   .painting-wrapper {
@@ -350,6 +342,8 @@ cursor:pointer;
     background: white;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    width: 90%;
+  right: 5%;
   }
 
   .main-nav.show {
@@ -362,16 +356,24 @@ cursor:pointer;
   }
 
   /* HERO */
-  .hero-section {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
+ .hero-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
- .hero-block,
+.hero-left {
+  align-items: center;
+  text-align: center;
+}
+
+.hero-block,
 .poem-block {
-  max-width: 500px;
-  margin: 0; /* 🔥 remove auto centering */
+  max-width: 100%;
+}
+
+.painting-wrapper {
+  text-align: center;
 }
 
   .hero-title {
@@ -414,8 +416,9 @@ cursor:pointer;
 
   /* PILLARS */
   .pillars {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
 
   .pillar {
     padding: 16px;
@@ -469,8 +472,7 @@ text-align:center;
 
 .hero-block,
 .poem-block {
-  max-width: 500px;
-  margin: 0; /* 🔥 remove auto centering */
+  max-width: 480px;   /* tighten slightly */
 }
 
 .hero-block::after {
@@ -479,7 +481,7 @@ text-align:center;
   width: 60px;
   height: 3px;
   background: var(--secondary);
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .poem-block {
@@ -1399,6 +1401,9 @@ html {
 
 .homepage-flow {
   margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg); /* 🔥 adds spacing between intro, pillars, CTA */
 }
 
 /* Intro */
@@ -1484,7 +1489,10 @@ html {
 }
 
 .hero-left {
-  align-items: flex-start; /* 🔥 forces clean left edge */
+  display: flex;           /* 🔥 THIS was missing */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .hero-right {
