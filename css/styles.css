@@ -1,341 +1,380 @@
 /* =========================
-🎨 ROOT VARIABLES
+   🎨 ROOT VARIABLES
 ========================= */
 :root {
---primary: #3C7027;
---secondary: #40938C;
---accent: #0D475D;
---bg: #F5F7F6;
+  --primary: #3C7027;
+  --secondary: #40938C;
+  --accent: #0D475D;
+  --bg: #F5F7F6;
 
---text-dark: #1f2933;
---text-light: #6b7280;
+  --text-dark: #1f2933;
+  --text-light: #6b7280;
 
---radius: 14px;
---shadow: 0 8px 24px rgba(0,0,0,0.06);
+  --radius: 14px;
+  --shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 
 /* =========================
-🔄 RESET
+   🔄 RESET
 ========================= */
-	•	{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* =========================
-🧱 BASE
+   🧱 BASE
 ========================= */
 body {
-font-family: ‘Inter’, sans-serif;
-color: var(–text-dark);
-background: var(–bg);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  background: var(--bg);
 }
 
 h1, .logo {
-font-family: ‘Pacifico’, cursive;
-font-size: 42px;
+  font-family: 'Pacifico', cursive;
+  font-size: 42px;
 }
 
 /* =========================
-📦 LAYOUT
+   📦 LAYOUT
 ========================= */
 .container {
-max-width: 1200px;
-margin: auto;
-padding: 0 20px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
 }
 
 /* =========================
-🔝 NAVIGATION
+   🔝 NAVIGATION
 ========================= */
 .site-header {
-background: white;
-position: sticky;
-top: 0;
-z-index: 1000;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-container {
-display: flex;
-justify-content: space-between;
-align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .main-nav {
-display: flex;
-gap: 10px;
-align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .main-nav a,
 .nav-item > a {
-display: inline-flex;
-align-items: center;
-padding: 10px 14px;
-border-radius: 999px;
-background: var(–secondary);
-color: white;
-text-decoration: none;
-white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--secondary);
+  color: white;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .main-nav a.active {
-background: var(–primary);
+  background: var(--primary);
+}
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
 }
 
 /* DROPDOWN */
-.nav-item { position: relative; }
+.nav-item {
+  position: relative;
+}
 
 .dropdown {
-position: absolute;
-top: 120%;
-left: 0;
-display: none;
-flex-direction: column;
-background: white;
-padding: 10px;
-border-radius: 10px;
-box-shadow: var(–shadow);
+  position: absolute;
+  top: 120%;
+  left: 0;
+  display: none;
+  flex-direction: column;
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
 }
 
 @media (min-width: 769px) {
-.nav-item:hover .dropdown { display: flex; }
+  .nav-item:hover .dropdown {
+    display: flex;
+  }
 }
 
 .dropdown a {
-color: var(–text-dark);
-padding: 6px 10px;
-text-decoration: none;
+  color: var(--text-dark);
+  padding: 6px 10px;
+  text-decoration: none;
 }
 
 .dropdown a:hover {
-background: #f0f0f0;
+  background: #f0f0f0;
 }
 
-/* HAMBURGER */
+/* =========================
+   🍔 HAMBURGER
+========================= */
 .menu-toggle {
-display: none;
-width: 40px;
-height: 40px;
-border: none;
-background: rgba(0,0,0,0.05);
-border-radius: 8px;
-cursor: pointer;
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(0,0,0,0.05);
+  border-radius: 8px;
+  cursor: pointer;
 
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 4px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 
 .menu-toggle span {
-width: 18px;
-height: 2px;
-background: var(–accent);
-}
-
-/* MOBILE NAV */
-@media (max-width: 768px) {
-
-.menu-toggle { display: flex; }
-
-.main-nav {
-display: none;
-flex-direction: column;
-position: absolute;
-top: 70px;
-right: 5%;
-width: 90%;
-background: white;
-padding: 20px;
-border-radius: 14px;
-box-shadow: var(–shadow);
-}
-
-.main-nav.show { display: flex; }
-
-.main-nav a,
-.nav-item > a {
-width: 100%;
-justify-content: flex-start;
-}
-
-.dropdown {
-position: static;
-display: none;
-margin-top: 8px;
-}
-
-.nav-item.open .dropdown {
-display: flex;
-}
+  width: 18px;
+  height: 2px;
+  background: var(--accent);
 }
 
 /* =========================
-🔘 BUTTONS
+   📱 MOBILE NAV
+========================= */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .main-nav {
+    display: none;
+    flex-direction: column;
+
+    position: absolute;
+    top: 70px;
+    right: 5%;
+    width: 90%;
+
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+  }
+
+  .main-nav.show {
+    display: flex;
+  }
+
+  .main-nav a,
+  .nav-item > a {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .dropdown {
+    position: static;
+    display: none;
+    margin-top: 8px;
+  }
+
+  .nav-item.open .dropdown {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* =========================
+   🔘 BUTTONS
 ========================= */
 .btn {
-display: inline-block;
-padding: 10px 16px;
-border-radius: 999px;
-text-decoration: none;
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
 }
 
 .btn-outline {
-border: 2px solid var(–secondary);
-color: var(–secondary);
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
 }
 
 .btn-secondary {
-background: var(–secondary);
-color: white;
+  background: var(--secondary);
+  color: white;
 }
 
 /* =========================
-⬆️ BACK TO TOP
+   ⬆️ BACK TO TOP
 ========================= */
 .back-to-top {
-position: fixed;
-bottom: 20px;
-right: 20px;
-width: 45px;
-height: 45px;
-border-radius: 50%;
-background: var(–accent);
-color: white;
-display: flex;
-align-items: center;
-justify-content: center;
-opacity: 0;
-transform: translateY(20px);
-transition: 0.3s;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  width: 45px;
+  height: 45px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: var(--accent);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.3s;
 }
 
 .back-to-top.show {
-opacity: 1;
-transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* =========================
-🏠 HOMEPAGE
+   🏠 HOMEPAGE
 ========================= */
 .homepage {
-display: flex;
-flex-direction: column;
-gap: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
 }
 
 .hero-section {
-display: grid;
-grid-template-columns: 1fr 1.1fr;
-gap: 40px;
-padding: 40px 0;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 40px;
+  padding: 40px 0;
 }
 
 .hero-left {
-display: flex;
-flex-direction: column;
-gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.hero-title { font-size: 36px; }
+.hero-title {
+  font-size: 36px;
+}
 
-.hero-sub { color: var(–text-light); }
+.hero-sub {
+  color: var(--text-light);
+}
 
 .hero-right {
-display: flex;
-flex-direction: column;
-gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .hero {
-width: 100%;
-border-radius: var(–radius);
-box-shadow: var(–shadow);
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 .thumbnail-strip {
-display: flex;
-gap: 10px;
-overflow-x: auto;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
 }
 
 .thumb {
-width: 70px;
-height: 70px;
-object-fit: cover;
-border-radius: var(–radius);
-opacity: 0.7;
-cursor: pointer;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  opacity: 0.7;
+  cursor: pointer;
 }
 
-.thumb:hover { opacity: 1; }
+.thumb:hover {
+  opacity: 1;
+}
 
 /* =========================
-📚 LIT ROOTS
+   📚 LIT ROOTS
 ========================= */
 .journey-scroll {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
 }
 
 .book-card {
-cursor: pointer;
-text-align: center;
+  cursor: pointer;
+  text-align: center;
 }
 
 .book-card img {
-width: 100%;
-border-radius: var(–radius);
-box-shadow: var(–shadow);
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
 /* =========================
-🎬 MODAL (NETFLIX STYLE)
+   🎬 MODAL
 ========================= */
 .book-modal {
-display: none;
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.75);
-z-index: 3000;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 3000;
 }
 
 .modal-content {
-max-width: 900px;
-margin: 60px auto;
-background: #111;
-color: white;
-border-radius: var(–radius);
-overflow: hidden;
+  max-width: 900px;
+  margin: 60px auto;
+  background: #111;
+  color: white;
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .modal-body {
-display: grid;
-grid-template-columns: 1fr 1.2fr;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
 }
 
 .modal-text {
-padding: 24px;
+  padding: 24px;
 }
 
 /* =========================
-⭐ FEATURE CARD
+   ⭐ FEATURE CARD
 ========================= */
 .grid-2 {
-display: grid;
-grid-template-columns: 1fr 1.2fr;
-gap: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 30px;
 }
 
+/* =========================
+   📱 MOBILE FIXES
+========================= */
 @media (max-width: 768px) {
 
-.hero-section { grid-template-columns: 1fr; }
+  .hero-section {
+    grid-template-columns: 1fr;
+  }
 
-.grid-2 { grid-template-columns: 1fr; }
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
 
-.modal-body { grid-template-columns: 1fr; }
-
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
 }
