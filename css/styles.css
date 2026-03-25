@@ -202,3 +202,182 @@ h1, .logo {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* =========================
+   🏠 HOMEPAGE RESTORE
+========================= */
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+/* HERO */
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 40px;
+  padding: 40px 0;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero-title {
+  font-size: 36px;
+}
+
+.hero-sub {
+  color: var(--text-light);
+}
+
+.poem-block {
+  max-width: 500px;
+}
+
+/* RIGHT SIDE */
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* THUMBNAILS */
+.thumbnail-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.thumb {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.thumb:hover {
+  opacity: 1;
+}
+
+/* =========================
+   🧱 SECTIONS
+========================= */
+
+.section {
+  padding: 60px 0;
+}
+
+.section-light {
+  background: #f5f7f6;
+}
+
+.section-white {
+  background: white;
+}
+
+.section-soft {
+  background: linear-gradient(
+    135deg,
+    rgba(64,147,140,0.08),
+    rgba(60,112,39,0.08)
+  );
+}
+
+/* =========================
+   📦 CARDS
+========================= */
+
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.cta-block {
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  color: white;
+}
+
+/* =========================
+   🧱 PILLARS
+========================= */
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.pillar {
+  text-align: center;
+}
+
+/* =========================
+   📦 FEATURES
+========================= */
+
+.home-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.feature-card img {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+/* =========================
+   🔘 BUTTONS
+========================= */
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.btn-outline {
+  border: 2px solid var(--secondary);
+  color: var(--secondary);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: white;
+}
+
+/* =========================
+   📱 MOBILE FIXES
+========================= */
+
+@media (max-width: 768px) {
+
+  .hero-section {
+    grid-template-columns: 1fr;
+  }
+
+  .pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .home-features {
+    grid-template-columns: 1fr;
+  }
+
+}
