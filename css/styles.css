@@ -197,12 +197,9 @@ img {
   .container {
     padding: 0 16px;
   }
+@media (max-width: 768px) {
 
-  /* NAV */
-  .menu-toggle {
-    display: block;
-  }
-
+  /* NAV CONTAINER */
   .main-nav {
     display: none;
     flex-direction: column;
@@ -212,11 +209,54 @@ img {
     width: 90%;
     background: white;
     padding: 20px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    gap: 12px;
   }
 
   .main-nav.show {
     display: flex;
   }
+
+   /* NAV */
+  .menu-toggle {
+    display: block;
+  }
+
+  /* NAV LINKS (FULL WIDTH) */
+  .main-nav a,
+  .nav-item > a {
+    width: 100%;
+    min-width: unset;
+    justify-content: flex-start;
+  }
+
+  /* 🔥 CRITICAL: FIX DROPDOWN */
+  .dropdown {
+    position: static;   /* 🔥 remove absolute */
+    display: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 6px;
+  }
+
+  /* SHOW dropdown when parent active */
+  .nav-item.open .dropdown {
+    display: block;
+  }
+
+  .nav-item.open > a {
+  background: var(--primary);
+}
+
+  .dropdown a {
+    padding: 8px 12px;
+    background: #f5f7f6;
+    border-radius: 8px;
+    margin-top: 6px;
+  }
+
+}
 
   /* HERO */
   .hero-section {

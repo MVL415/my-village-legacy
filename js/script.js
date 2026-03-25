@@ -629,3 +629,16 @@ const observer = new IntersectionObserver(entries => {
 });
 
 faders.forEach(el => observer.observe(el));
+
+document.querySelectorAll('.nav-item > a').forEach(item => {
+  item.addEventListener('click', function(e) {
+
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+
+      const parent = this.parentElement;
+      parent.classList.toggle('open');
+    }
+
+  });
+});
