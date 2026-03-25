@@ -2,16 +2,16 @@
 🎨 ROOT VARIABLES
 ========================= */
 :root {
-–primary: #3C7027;
-–secondary: #40938C;
-–accent: #0D475D;
-–bg: #F5F7F6;
+--primary: #3C7027;
+--secondary: #40938C;
+--accent: #0D475D;
+--bg: #F5F7F6;
 
-–text-dark: #1f2933;
-–text-light: #6b7280;
+--text-dark: #1f2933;
+--text-light: #6b7280;
 
-–radius: 14px;
-–shadow: 0 8px 24px rgba(0,0,0,0.06);
+--radius: 14px;
+--shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 
 /* =========================
