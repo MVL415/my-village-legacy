@@ -289,7 +289,7 @@ text-align:center;
 
 .hero {
   width: 100%;
-  max-width: 600px;   /* 👈 THIS fixes the oversized look */
+  max-width: 520px;   /* 👈 THIS fixes the oversized look */
   margin: 0 auto;
   display: block;
    border-radius: var(--radius);
@@ -1138,13 +1138,23 @@ background:#333;
   }
 
   /* HERO */
+  
+  @media (max-width: 768px) {
+
   .hero-section {
     display: flex;
     flex-direction: column;
-    gap: 20px;
   }
 
-  .hero-block,
+  .hero-left,
+  .hero-right {
+    width: 100%;
+  }
+
+  .hero-block {
+    text-align: center;
+  }
+
   .painting-wrapper {
     text-align: center;
   }
@@ -1177,6 +1187,7 @@ background:#333;
   .poem-block {
     font-size: 14px;
     line-height: 1.6;
+    text-align: left;
   }
 
   /* FEATURES */
