@@ -234,7 +234,11 @@ cursor:pointer;
 }
 
 .nav-cta {
-  background: var(--primary);
+  background: linear-gradient(
+    135deg,
+    var(--secondary),
+    var(--accent)
+  );
   color: white;
 
   display: inline-flex;
@@ -302,14 +306,11 @@ cursor:pointer;
     gap: 30px;
   }
 
-  .hero-block {
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  .poem-block {
-    margin: 0 auto;
-  }
+ .hero-block,
+.poem-block {
+  max-width: 500px;
+  margin: 0; /* 🔥 remove auto centering */
+}
 
   .painting-wrapper {
     text-align: center;
@@ -367,9 +368,11 @@ cursor:pointer;
     gap: 20px;
   }
 
-  .hero-block {
-    text-align: center;
-  }
+ .hero-block,
+.poem-block {
+  max-width: 500px;
+  margin: 0; /* 🔥 remove auto centering */
+}
 
   .hero-title {
     font-size: 28px;
@@ -464,10 +467,10 @@ text-align:center;
   box-shadow: 0 12px 40px rgba(0,0,0,0.1);
 }
 
-.hero-block {
-  text-align: left;
-  margin-bottom: var(--space-md);
+.hero-block,
+.poem-block {
   max-width: 500px;
+  margin: 0; /* 🔥 remove auto centering */
 }
 
 .hero-block::after {
@@ -477,6 +480,10 @@ text-align:center;
   height: 3px;
   background: var(--secondary);
   margin-top: 16px;
+}
+
+.poem-block {
+  margin-top: 10px; /* instead of 20+ */
 }
 
 .painting-wrapper {
@@ -493,13 +500,6 @@ text-align:center;
   opacity: 0.8;
 }
 
-.poem-block {
-  margin: var(--space-md) auto 0;
-  line-height: 1.7;
-  text-align: left;
-  max-width: 500px;
-  margin-top: 20px;
-}
 
 /* CARD */
 .card {
@@ -1431,17 +1431,21 @@ html {
 
 /* CTA */
 .cta-block {
-  text-align: center;
-  padding: 40px;
-  border-radius: 16px;
-
-  background: linear-gradient(
-    135deg,
-    var(--secondary),
-    var(--accent)
-  );
-
+  position: relative;
   color: white;
+}
+
+.cta-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25); /* 🔥 subtle dark overlay */
+  border-radius: inherit;
+}
+
+.cta-block * {
+  position: relative;
+  z-index: 1;
 }
 
 .cta-block .btn-solid {
@@ -1480,9 +1484,7 @@ html {
 }
 
 .hero-left {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  align-items: flex-start; /* 🔥 forces clean left edge */
 }
 
 .hero-right {
