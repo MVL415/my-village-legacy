@@ -289,7 +289,7 @@ text-align:center;
 
 .hero {
   width: 100%;
-  max-width: 520px;   /* 👈 THIS fixes the oversized look */
+  max-width: 500px;   /* 👈 THIS fixes the oversized look */
   margin: 0 auto;
   display: block;
    border-radius: var(--radius);
@@ -305,6 +305,7 @@ text-align:center;
 .hero-block {
   text-align: left;
   margin-bottom: var(--space-md);
+  max-width: 500px;
 }
 
 .hero-block::after {
@@ -317,8 +318,7 @@ text-align:center;
 }
 
 .painting-wrapper {
-  text-align: left;
-  margin: var(--space-md) 0;
+  text-align: center;
 }
 
 .hero-caption {
@@ -335,7 +335,8 @@ text-align:center;
   margin: var(--space-md) auto 0;
   line-height: 1.7;
   text-align: left;
-  max-width: 600px;
+  max-width: 500px;
+  margin-top: 20px;
 }
 
 /* CARD */
@@ -1205,10 +1206,11 @@ background:#333;
   }
 
   /* PILLARS */
+@media (max-width: 768px) {
   .pillars {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
+}
 
   .pillar {
     padding: 16px;
@@ -1261,6 +1263,7 @@ background:#333;
 
 button:hover {
   opacity: 0.85;
+}
 }
 
 @media (max-width: 600px) {
@@ -1430,9 +1433,11 @@ html {
 .thumbnail-strip {
   display: flex;
   gap: 10px;
-  justify-content: flex-start;
+  justify-content: center;
+  margin-top: 10px;
   overflow-x: auto;
 }
+ 
 
 .thumb {
   width: 80px;
@@ -1465,9 +1470,9 @@ html {
 /* Pillars */
 .pillars {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-lg);
-  margin: var(--space-lg) 0;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 30px;
 }
 
 .pillar {
@@ -1531,8 +1536,8 @@ html {
 .hero-section {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
-  gap: 60px;
-  align-items: center;
+  gap: 40px;
+  align-items: start;
 }
 
 .hero-left {
@@ -1570,7 +1575,7 @@ html {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 24px;
 
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
