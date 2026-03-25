@@ -101,56 +101,56 @@ img {
   align-items: center;
 }
 
+/* DESKTOP NAV */
 .main-nav {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap; /* 🔥 THIS FIXES OVERFLOW */
+  gap: 10px;
   align-items: center;
+  flex-wrap: nowrap;
 }
 
 .main-nav a,
 .nav-item > a {
-  white-space: nowrap; /* prevents weird wrapping */
   padding: 10px 14px;
-}
-
-.main-nav a {
-  padding: 10px 16px;
   border-radius: var(--radius);
   background: var(--secondary);
   color: white;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .main-nav a.active {
   background: var(--primary);
 }
 
-/* CTA button */
+/* CTA */
 .nav-cta {
   background: linear-gradient(135deg, var(--secondary), var(--accent));
 }
 
 /* =========================
-   🍔 HAMBURGER BUTTON
+   🍔 HAMBURGER
 ========================= */
 .menu-toggle {
   display: none;
 
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
 
-  border-radius: 12px;
+  border-radius: 10px;
   border: none;
 
-  background: rgba(0,0,0,0.05);
+  background: rgba(0,0,0,0.06);
 
   cursor: pointer;
 
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   gap: 4px;
+
+  z-index: 2000; /* 🔥 FIX CLICK ISSUE */
 }
 
 /* lines */
@@ -162,28 +162,15 @@ img {
   transition: 0.3s;
 }
 
-/* OPEN ANIMATION */
+/* animation */
 .menu-toggle.open span:nth-child(1) {
   transform: rotate(45deg) translate(4px, 4px);
 }
-
 .menu-toggle.open span:nth-child(2) {
   opacity: 0;
 }
-
 .menu-toggle.open span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
-}
-
-.menu-toggle:hover {
-  background: var(--secondary);
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow);
-}
-
-.menu-toggle:active {
-  transform: scale(0.95);
 }
 
 
@@ -299,16 +286,13 @@ img {
 
 }
 
-/* =========================
-   📱 MOBILE
-========================= */
-/* =========================
-   📱 MOBILE
+  /* =========================
+   📱 MOBILE NAV
 ========================= */
 @media (max-width: 768px) {
 
   .container {
-    padding: 0 16px;
+    padding: 0 14px;
   }
 
   .logo {
@@ -332,25 +316,25 @@ img {
     border-radius: 16px;
     box-shadow: var(--shadow);
     gap: 12px;
+    z-index: 1500;
   }
 
   .main-nav.show {
     display: flex;
   }
 
-  /* NAV LINKS */
   .main-nav a,
   .nav-item > a {
     width: 100%;
-    padding: 12px 16px;
     border-radius: 999px;
-    justify-content: flex-start;
+    padding: 12px 16px;
   }
 
   /* DROPDOWN */
   .dropdown {
     position: static;
     display: none;
+    margin-top: 6px;
   }
 
   .nav-item.open .dropdown {
@@ -373,6 +357,7 @@ img {
     max-width: 100%;
   }
 
+  /* THUMBNAILS */
   .thumbnail-strip {
     justify-content: flex-start;
   }
@@ -381,7 +366,6 @@ img {
     width: 65px;
     height: 65px;
   }
-
 
   /* PILLARS */
   .pillars {
@@ -401,6 +385,7 @@ img {
   }
 
 }
+
 
 /* =========================
    🔘 BUTTON SYSTEM
