@@ -104,7 +104,7 @@ function openBookByIndex(index) {
   const modal = document.getElementById("book-modal");
   if (!modal) return;
 
-  modal.style.display = "flex";
+  modal.style.display = "block";
 
   document.getElementById("modal-title").innerText = book.title;
   document.getElementById("modal-author").innerText = book.author;
