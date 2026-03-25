@@ -654,3 +654,30 @@ thumbs.forEach(thumb => {
     thumb.classList.add('active');
   });
 });
+
+const menuToggle = document.getElementById('menu-toggle');
+const navMenu = document.getElementById('nav-menu');
+
+/* TOGGLE MENU */
+menuToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('show');
+});
+
+/* CLOSE WHEN CLICKING LINK */
+document.querySelectorAll('.main-nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('show');
+  });
+});
+
+/* CLOSE WHEN CLICKING OUTSIDE */
+document.addEventListener('click', (e) => {
+  if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+    navMenu.classList.remove('show');
+  }
+});
+
+menuToggle.addEventListener('click', () => {
+  navMenu.classList.toggle('show');
+  menuToggle.classList.toggle('open'); // 🔥 add this
+});

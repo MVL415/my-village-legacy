@@ -99,7 +99,7 @@ img {
 
 .main-nav {
   display: flex;
-  gap: var(--space-md);
+  gap: 14px;
 }
 
 .main-nav a {
@@ -116,6 +116,69 @@ img {
 /* CTA button */
 .nav-cta {
   background: linear-gradient(135deg, var(--secondary), var(--accent));
+}
+
+/* =========================
+   🍔 HAMBURGER BUTTON
+========================= */
+.menu-toggle {
+  display: none;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 12px;
+  border: none;
+
+  background: linear-gradient(
+    135deg,
+    rgba(64,147,140,0.15),
+    rgba(60,112,39,0.15)
+  );
+
+  color: var(--accent);
+
+  font-size: 20px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.25s;
+}
+
+.menu-toggle:hover {
+  background: var(--secondary);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.menu-toggle:active {
+  transform: scale(0.95);
+}
+
+.menu-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--accent);
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+/* OPEN STATE */
+.menu-toggle.open span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* =========================
@@ -261,16 +324,23 @@ img {
 
    /* NAV */
   .menu-toggle {
-    display: block;
+    display: flex;
   }
 
   /* NAV LINKS (FULL WIDTH) */
-  .main-nav a,
-  .nav-item > a {
-    width: 100%;
-    min-width: unset;
-    justify-content: flex-start;
-  }
+ .main-nav a,
+.nav-item > a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 12px 16px;
+  border-radius: 999px;
+
+  background: var(--secondary);
+  color: white;
+}
 
   /* 🔥 CRITICAL: FIX DROPDOWN */
   .dropdown {
