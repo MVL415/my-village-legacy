@@ -110,19 +110,25 @@ function openBookByIndex(index) {
   const modal = document.getElementById("book-modal");
   modal.style.display = "flex";
 
-  document.getElementById("modal-title").innerText = book.title;
-  document.getElementById("modal-author").innerText = book.author;
-  document.getElementById("modal-img").src = book.img;
-  document.getElementById("modal-review").innerText = book.review;
-  document.getElementById("modal-question").innerText = book.question;
+  // ✅ NEW CORRECT TARGETS
+  document.getElementById("modalTitle").innerText = book.title;
+  document.getElementById("modalAuthor").innerText = book.author;
+  document.getElementById("modalImage").src = book.img;
+
+  // ✅ THIS is the fix you asked about
+  document.getElementById("modalText").innerHTML = `
+    <p>${book.review}</p>
+    <p class="question">${book.question}</p>
+  `;
 
   trackBookView(book.id);
 
-  // ✅ Wait for modal to render before loading comments
   setTimeout(() => {
     loadComments(`book-${book.id}`);
   }, 50);
 }
+
+
 
 function closeBookModal() {
   document.getElementById("book-modal").style.display = "none";
