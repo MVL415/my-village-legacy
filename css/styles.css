@@ -269,3 +269,48 @@ img {
   }
 
 }
+
+/* =========================
+   🔧 RESTORE BROKEN COMPONENTS
+========================= */
+
+/* NAV FIX (restore original behavior) */
+.main-nav {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.main-nav a,
+.nav-item > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+}
+
+/* THUMBNAIL STRIP FIX */
+.thumbnail-strip {
+  display: flex !important;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+.thumb {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+/* PILLARS FIX (restore 3-column layout) */
+.pillars {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.pillar {
+  width: 100%;
+}
