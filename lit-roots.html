@@ -260,27 +260,34 @@
 </div>
 
 <div id="book-modal" class="book-modal">
+<div class="modal-content">
 
-  <div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title">
+      <img id="modalImage" src="" alt="">
+      <div>
+        <h2 id="modalTitle"></h2>
+        <p id="modalAuthor"></p>
+      </div>
+    </div>
 
-    <span class="close-btn" onclick="closeBookModal()">×</span>
+    <span class="close-btn">&times;</span>
+  </div>
 
-    <!-- NAV BUTTONS -->
+      <!-- NAV BUTTONS -->
     <button class="nav-btn prev" onclick="prevBook()">❮</button>
     <button class="nav-btn next" onclick="nextBook()">❯</button>
 
-    <!-- 👇 COMBINED LAYOUT -->
-    <div class="modal-body">
+  
 
-      <img id="modal-img" src="">
+  <div class="modal-body">
+    <div class="modal-text">
+      <!-- description + question -->
+    </div>
+  </div>
 
-      <div class="modal-text">
-        <h2 id="modal-title"></h2>
-        <p id="modal-author"></p>
-        <p id="modal-review"></p>
-        <p id="modal-question"></p>
-      </div>
-
+</div>
+  
     </div>
    
 <div class="comments-box">

@@ -901,6 +901,8 @@ background:#333;
   overflow-y: auto;   /* 👈 enables scrolling */
   border-radius: 12px;
   text-align: center;
+  scroll-behavior: smooth;
+
 }
 
 .modal-content {
@@ -908,8 +910,14 @@ background:#333;
 }
 
 @keyframes fadeIn {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(30px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 
 .modal-content img {
@@ -1949,4 +1957,73 @@ html {
 /* OPTIONAL: constrain long text width for readability */
 .modal-text {
   max-width: 500px;
+}
+
+/* =========================
+   🎬 STICKY HEADER
+========================= */
+
+.modal-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+
+  border-bottom: 1px solid #eee;
+}
+
+/* Title area */
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.modal-title img {
+  width: 50px;
+  border-radius: 6px;
+}
+
+.modal-title h2 {
+  font-size: 22px;
+  margin: 0;
+}
+
+/* =========================
+   🎯 MODAL NAV BUTTONS
+========================= */
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(0,0,0,0.6);
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* HOVER = premium feel */
+.nav-btn:hover {
+  background: rgba(0,0,0,0.85);
+  transform: translateY(-50%) scale(1.1);
 }
