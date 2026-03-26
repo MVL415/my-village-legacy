@@ -448,10 +448,6 @@ cursor:pointer;
     width: 100%;
   }
 
-  .auth-actions button {
-    width: 100%;
-  }
-
 .auth-input-group {
   flex-direction: column;
   width: 100%;
@@ -1173,13 +1169,16 @@ background:#333;
 /* CARD */
 .auth-card {
   display: flex;
-  align-items: center;
+  align-items: stretch; /* 🔥 FIX */
   gap: 10px;
-  padding: 10px 14px;
+
+  padding: 12px 16px; /* slightly more breathing room */
   border-radius: 999px;
+
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
+
   max-width: 500px;
   width: 100%;
 }
@@ -2045,11 +2044,13 @@ html {
 ========================= */
 @media (max-width: 768px) {
 
-  /* tighten the card */
   .auth-card {
-    max-width: 320px;
+    flex-direction: column;     /* 🔥 stack content */
+    align-items: stretch;       /* 🔥 full width */
+    gap: 12px;
+
     padding: 16px;
-    margin: 0 auto;
+    border-radius: 20px;        /* less pill, more card */
   }
 
   /* stack inputs cleanly */
