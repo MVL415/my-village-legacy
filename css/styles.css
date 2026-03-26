@@ -1202,11 +1202,16 @@ background:#333;
   background: #e8e8e8;
 }
 
+.auth-input-group input:last-child {
+  margin-bottom: 8px; /* 👈 creates space under password */
+}
+
 /* BUTTONS */
 .auth-actions {
   display: flex;
   gap: 10px;
   width: 100%;
+  margin-top: 4px;
 }
 
  .auth-actions button {
