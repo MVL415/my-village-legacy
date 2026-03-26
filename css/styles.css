@@ -441,6 +441,7 @@ cursor:pointer;
   .auth-card {
     flex-direction: column;
     border-radius: 16px;
+    padding: 16px;
   }
 
   .auth-actions {
@@ -450,6 +451,17 @@ cursor:pointer;
   .auth-actions button {
     width: 100%;
   }
+
+.auth-input-group {
+  flex-direction: column;
+  width: 100%;
+}
+
+.auth-input-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+}
 
 }
 
