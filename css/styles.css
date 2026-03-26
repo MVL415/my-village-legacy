@@ -1803,13 +1803,62 @@ html {
 }
 
 /* =========================
-   ✅ FEATURE IMAGE FIX
+   ✨ PREMIUM FEATURE CARDS
 ========================= */
 
+/* CARD BASE */
+.feature-card {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+
+  border-radius: 18px;
+  padding: 20px;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+
+  transition: all 0.25s ease;
+}
+
+/* IMAGE — CLEAN + CONSISTENT */
 .feature-card img {
-  height: auto !important;     /* 🔥 allow natural height */
-  max-height: 200px;           /* 🔥 keeps cards consistent */
-  object-fit: contain;         /* 🔥 NO cropping */
-  background: #f5f5f5;
-  padding: 8px;
+  height: auto !important;
+  max-height: 200px;
+  object-fit: contain;
+
+  background: #f8faf9;
+  padding: 10px;
+  border-radius: 12px;
+
+  margin-bottom: 14px;
+}
+
+/* TITLE */
+.feature-card h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+/* TEXT */
+.feature-card p {
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.85;
+}
+
+/* BUTTON SPACING */
+.feature-card .btn-outline {
+  margin-top: 10px;
+}
+
+/* HOVER — SUBTLE LIFT */
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+}
+
+/* OPTIONAL: slight scale feel */
+.feature-card:hover img {
+  transform: scale(1.02);
+  transition: 0.3s ease;
 }
