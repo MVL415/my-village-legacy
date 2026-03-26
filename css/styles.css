@@ -2039,3 +2039,46 @@ html {
   background: rgba(0,0,0,0.85);
   transform: translateY(-50%) scale(1.1);
 }
+
+/* =========================
+   🔧 AUTH BAR MOBILE FIX (SAFE)
+========================= */
+@media (max-width: 768px) {
+
+  /* tighten the card */
+  .auth-card {
+    max-width: 320px;
+    padding: 16px;
+    margin: 0 auto;
+  }
+
+  /* stack inputs cleanly */
+  .auth-input-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .auth-input-group input {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  /* fix button layout */
+  .auth-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .auth-actions button {
+    flex: 1;
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  /* make buttons feel balanced */
+  .btn-outline {
+    border-width: 2px;
+  }
+
+}
