@@ -447,6 +447,18 @@ cursor:pointer;
   font-size: 16px;
 }
 
+  .hero {
+    margin-bottom: 6px;
+  }
+
+  .hero-caption {
+    margin-top: 4px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+     font-style: italic;
+     opacity: 0.75;
+  }
+
 }
 
 /* CENTER SECTION */
@@ -463,6 +475,7 @@ text-align:center;
    border-radius: var(--radius);
   box-shadow: var(--shadow);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  margin-bottom: 8px;
 }
 
 .hero:hover {
@@ -496,10 +509,11 @@ text-align:center;
   font-size: var(--text-sm);
   color: var(--text-light);
   text-align: center;
-  margin-top: var(--space-sm);
+  margin-top: 6px;
+  margin-bottom: 8px;
   letter-spacing: 0.5px;
   font-style: italic;
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 
@@ -2055,7 +2069,7 @@ html {
   justify-content: flex-start; /* 🔥 FIX: was center */
 
   padding: 10px 0;
-  margin-top: 10px;
+  margin-top: 6px;
 
   max-width: 100%;
   box-sizing: border-box;
@@ -2104,7 +2118,7 @@ html {
 
     padding: 10px 16px;
     margin: 0 -16px; /* 🔥 keeps it inside screen */
-
+    margin-top: 4px;
   }
 
   .thumb {
