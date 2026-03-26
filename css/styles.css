@@ -1707,10 +1707,6 @@ html {
     max-width: 100%;
   }
 
-  /* THUMBNAILS CENTER */
-  .thumbnail-strip {
-    justify-content: center;
-  }
 
   /* CARD GRID FIX */
   .pillars {
@@ -1769,19 +1765,6 @@ html {
 
   .hero {
     max-width: 100%;
-  }
-
-  /* 🔥 THUMBNAILS — FIX ALIGNMENT */
-  .thumbnail-strip {
-    display: flex;
-    justify-content: center !important;
-    gap: 10px;
-    overflow-x: auto;
-  }
-
-  .thumb {
-    width: 65px;
-    height: 65px;
   }
 
   /* 🔥 PILLARS — FORCE STACK */
