@@ -64,7 +64,7 @@ const books = [
     title: "The Spook Who Sat by the Door",
     author: "Sam Greenlee",
     img: "images/book8.jpg",
-    review: "Nipsey Hussle mentioned reading this book which influenced my decision to read it. It’s a powerful story that explores themes of racial tension, social justice, and the fight for equality. It’s a frustrating reminder of the ongoing struggle for civil rights and the importance of standing up against oppression specifically from within.",
+    review: "Nipsey Hussle mentioned reading this book which influenced my decision to read it. It’s a powerful story that explores themes of racial tension, social justice, and the fight for equality.",
     question: "💬 Being such a short read, were you left wanting more? Or did you feel like Greenlee wrapped it up perfectly? What do you think the story would look like if it were set in today’s world?"
   }
  
