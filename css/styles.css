@@ -1486,6 +1486,11 @@ html {
   z-index: 1;
 }
 
+.btn-solid.active {
+  background: var(--primary);
+  box-shadow: 0 6px 18px rgba(60,112,39,0.3);
+}
+
 .cta-block .btn-solid {
   margin-top: 16px;
 
