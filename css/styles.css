@@ -440,6 +440,10 @@ cursor:pointer;
 
   .auth-card {
     flex-direction: column;
+    border-radius: 16px;
+  }
+
+  .auth-actions {
     width: 100%;
   }
 
@@ -889,13 +893,13 @@ background:#333;
 .modal-content {
   position: relative;
   background: #fff;
-  margin: 5vh auto;
+  margin: 40px auto;
   padding: 20px;
   width: 90%;
-  max-width: 500px;
-  max-height: 85vh;   /* 👈 limits height */
+  max-width: 520px;
+  max-height: 80vh;   /* 👈 limits height */
   overflow-y: auto;   /* 👈 enables scrolling */
-  border-radius: 10px;
+  border-radius: 12px;
   text-align: center;
 }
 
@@ -997,21 +1001,20 @@ background:#333;
 
 .modal-body {
   display: flex;
-  gap: 15px;
+  gap: 16px;
   align-items: flex-start;
 }
 
 .modal-body img {
-  width: 100px;
+  width: 90px;
   flex-shrink: 0;
-  border-radius: 8px;
 }
 
 .modal-text {
   text-align: left;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .modal-body {
     flex-direction: column;
     align-items: center;
@@ -1020,6 +1023,17 @@ background:#333;
 
   .modal-text {
     text-align: center;
+  }
+
+  .modal-content {
+    width: 92%;
+    max-width: 400px;
+    max-height: 85vh;
+  }
+
+
+  .modal-body img {
+    width: 120px;
   }
 }
 
@@ -1131,36 +1145,37 @@ background:#333;
 
 .auth-bar {
   display: flex;
-  justify-content: flex-end;
-  margin: 20px 0;
+  justify-content: center;
+  margin: 30px 0;
 }
 
 /* CARD */
 .auth-card {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   padding: 10px 14px;
   border-radius: 999px;
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow);
+  max-width: 500px;
+  width: 100%;
 }
 
 /* INPUTS */
 .auth-input-group {
   display: flex;
   gap: 8px;
+  flex: 1;
 }
 
 .auth-input-group input {
-  border: none;
-  outline: none;
-  padding: 6px 10px;
+  flex: 1;
+  padding: 8px 10px;
   border-radius: 999px;
-  background: #f3f3f3;
+  border: 1px solid #ddd;
   font-size: 14px;
-  transition: 0.2s;
 }
 
 .auth-input-group input:focus {
@@ -1571,3 +1586,15 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* =========================
+   📱 FEATURE STACK FIX
+========================= */
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+}
+
