@@ -1677,3 +1677,55 @@ html {
   }
 
 }
+
+/* =========================
+   ✅ FINAL MOBILE FIX PATCH (SAFE)
+========================= */
+
+@media (max-width: 768px) {
+
+  /* 🔥 HERO — FORCE CLEAN STACK */
+  .hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px;
+  }
+
+  .hero-left,
+  .hero-right {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero {
+    max-width: 100%;
+  }
+
+  /* 🔥 THUMBNAILS — FIX ALIGNMENT */
+  .thumbnail-strip {
+    display: flex;
+    justify-content: center !important;
+    gap: 10px;
+    overflow-x: auto;
+  }
+
+  .thumb {
+    width: 65px;
+    height: 65px;
+  }
+
+  /* 🔥 PILLARS — FORCE STACK */
+  .pillars {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .pillar {
+    width: 100%;
+  }
+
+}
