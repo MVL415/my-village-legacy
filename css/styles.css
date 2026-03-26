@@ -1598,3 +1598,82 @@ html {
   }
 }
 
+/* =========================
+   🔧 MOBILE ALIGNMENT FIXES
+========================= */
+
+@media (max-width: 768px) {
+
+  /* HEADER FIX */
+  .nav-container {
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  /* HERO FIX */
+  .hero-left {
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .hero-sub {
+    margin: 0 auto;
+  }
+
+  .hero-block::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* IMAGE ALIGNMENT */
+  .hero-right {
+    align-items: center;
+  }
+
+  .hero {
+    max-width: 100%;
+  }
+
+  /* THUMBNAILS CENTER */
+  .thumbnail-strip {
+    justify-content: center;
+  }
+
+  /* CARD GRID FIX */
+  .pillars {
+    grid-template-columns: 1fr !important;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .pillar {
+    width: 100%;
+  }
+
+  /* FEATURE CARDS CENTER */
+  .home-features {
+    grid-template-columns: 1fr !important;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    text-align: center;
+  }
+
+  .feature-card img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* BACK TO TOP (avoid overlap feel) */
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+  }
+
+}
