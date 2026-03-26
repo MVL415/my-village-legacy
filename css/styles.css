@@ -11,11 +11,13 @@
   --text-dark: #1f2933;
   --text-light: #6b7280;
 
-  /* 🧱 SPACING */
-  --space-sm: 10px;
+  /* 🧱 SPACING SYSTEM (8pt rhythm) */
+  --space-xs: 8px;
+  --space-sm: 12px;
   --space-md: 20px;
-  --space-lg: 40px;
-  --space-xl: 80px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-xxl: 64px;
 
   /* 🔤 TYPE */
   --text-sm: 14px;
@@ -72,8 +74,11 @@ p {
   margin-bottom: var(--space-md);
 }
 
-section{
-margin-bottom:var(--space-lg);
+/* =========================
+   🔥 GLOBAL SECTION SPACING (SYSTEM CONTROL)
+========================= */
+section {
+  margin: 0; /* 🔥 prevent stacking conflicts */
 }
 
 img{
@@ -319,10 +324,8 @@ cursor:pointer;
 
 }
 
-
 /* MOBILE */
 @media (max-width: 768px) {
-
   /* CONTAINER */
   .container {
     padding: 0 16px;
@@ -353,6 +356,10 @@ cursor:pointer;
   .main-nav a {
     min-width: auto;
     width: 100%;
+  }
+
+  .homepage {
+    gap: var(--space-lg); /* 🔥 tighter vertical rhythm */
   }
 
   /* HERO */
@@ -415,14 +422,13 @@ cursor:pointer;
   /* CTA */
 
   .cta-block {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    padding: 20px; /* slightly tighter */
-  }
+  margin: 0; /* 🔥 let homepage gap handle spacing */
+  padding: 20px;
+}
 
   .homepage > section {
-    margin-bottom: 24px;
-  }
+  margin: 0;
+}
 
   .cta-block .btn-solid {
     width: 100%;
@@ -825,7 +831,7 @@ background:#333;
 }
 
 .reading-journey {
-  margin: 60px 0;
+  margin: 0; /* let .homepage handle spacing */
 }
 
 .section-sub {
@@ -1426,10 +1432,10 @@ html {
 }
 
 .homepage-flow {
-  margin-top: var(--space-xl);
+  margin-top: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg); /* 🔥 adds spacing between intro, pillars, CTA */
+  gap: var(--space-xl); /* 🔥 adds spacing between intro, pillars, CTA */
 }
 
 /* Intro */
@@ -1464,8 +1470,7 @@ html {
 .cta-block {
   position: relative;
   color: white;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 0;
 }
 
 .cta-block::before {
@@ -1501,11 +1506,14 @@ html {
 .homepage {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
+  gap: var(--space-xl); /* 🔥 adds consistent spacing between sections */
 }
 
-.homepage > section {
-  margin-bottom: 30px;
+/* =========================
+   🔥 GLOBAL SECTION SPACING (SYSTEM CONTROL)
+========================= */
+section {
+  margin: 0; /* 🔥 prevent stacking conflicts */
 }
 
 /* HERO */
