@@ -629,3 +629,19 @@ const observer = new IntersectionObserver(entries => {
 });
 
 faders.forEach(el => observer.observe(el));
+
+const scrollContainer = document.getElementById("journeyScroll");
+
+document.querySelector(".scroll-btn.left").addEventListener("click", () => {
+  scrollContainer.scrollBy({
+    left: -300,
+    behavior: "smooth"
+  });
+});
+
+document.querySelector(".scroll-btn.right").addEventListener("click", () => {
+  scrollContainer.scrollBy({
+    left: 300,
+    behavior: "smooth"
+  });
+});
