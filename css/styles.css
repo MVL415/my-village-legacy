@@ -1008,6 +1008,7 @@ background:#333;
 .modal-body img {
   width: 90px;
   flex-shrink: 0;
+  margin-top: 4px;
 }
 
 .modal-text {
@@ -1915,4 +1916,37 @@ html {
   .scroll-btn {
     display: none;
   }
+}
+
+/* =========================
+   ✅ MODAL CONSISTENCY FIX
+========================= */
+
+/* LIMIT OVERALL MODAL HEIGHT */
+.modal-content {
+  max-height: 85vh !important;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* SPACE CONTENT PROPERLY */
+.modal-text {
+  line-height: 1.6;
+}
+
+/* ADD BREATHING ROOM BETWEEN SECTIONS */
+.modal-text p {
+  margin-bottom: 14px;
+}
+
+/* KEEP HEADER AREA TIGHT */
+.modal-body {
+  align-items: flex-start;
+}
+
+/* OPTIONAL: constrain long text width for readability */
+.modal-text {
+  max-width: 500px;
 }
