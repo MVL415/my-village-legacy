@@ -1205,8 +1205,14 @@ background:#333;
 /* BUTTONS */
 .auth-actions {
   display: flex;
-  gap: 8px;
+  gap: 10px;
+  width: 100%;
 }
+
+ .auth-actions button {
+    flex: 1;
+    padding: 10px 0;
+ }
 
 .btn-solid,
 .btn-outline {
@@ -2069,7 +2075,12 @@ html {
     display: flex;
     gap: 10px;
     width: 100%;
+    margin-top: 4px;
   }
+
+.auth-input-group input:last-child {
+  margin-bottom: 8px; /* 👈 creates space under password */
+}
 
   .auth-actions button {
     flex: 1;
