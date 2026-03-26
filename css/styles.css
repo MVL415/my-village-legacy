@@ -1801,3 +1801,15 @@ html {
 .nav-cta {
   box-shadow: 0 6px 20px rgba(13,71,93,0.25);
 }
+
+/* =========================
+   ✅ FEATURE IMAGE FIX
+========================= */
+
+.feature-card img {
+  height: auto !important;     /* 🔥 allow natural height */
+  max-height: 200px;           /* 🔥 keeps cards consistent */
+  object-fit: contain;         /* 🔥 NO cropping */
+  background: #f5f5f5;
+  padding: 8px;
+}
