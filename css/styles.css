@@ -1742,4 +1742,10 @@ html {
     gap: 30px;           /* balanced spacing */
   }
 
+   .logo {
+    font-size: 32px;       /* 🔥 slightly smaller */
+    line-height: 1.1;      /* 🔥 tighter stacking */
+    max-width: 220px;      /* 🔥 controls wrap */
+  }
+
 }
