@@ -775,8 +775,6 @@ background:#333;
 .btn {
   display: inline-block;
   padding: 10px 18px;
-  background: black;
-  color: white;
   text-decoration: none;
   border-radius: 6px;
 }

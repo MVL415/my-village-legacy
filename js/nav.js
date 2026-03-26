@@ -9,16 +9,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-});
+  // 🔥 SAFE DROPDOWN HANDLING
+  document.querySelectorAll(".nav-item > a").forEach(item => {
+    item.addEventListener("click", function (e) {
 
-document.querySelectorAll(".nav-item > a").forEach(item => {
-  item.addEventListener("click", function (e) {
-    const dropdown = this.nextElementSibling;
+      if (window.innerWidth <= 768) {
+        const dropdown = this.nextElementSibling;
 
-    if (dropdown && dropdown.classList.contains("dropdown")) {
-      e.preventDefault();
-      dropdown.style.display =
-        dropdown.style.display === "block" ? "none" : "block";
-    }
+        if (dropdown && dropdown.classList.contains("dropdown")) {
+          e.preventDefault();
+
+          dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+        }
+      }
+
+    });
   });
+
 });
