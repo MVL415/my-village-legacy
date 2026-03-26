@@ -389,17 +389,55 @@ cursor:pointer;
     line-height: 1.6;
   }
 
-  /* THUMBNAILS */
-  .thumbnail-strip {
-    justify-content: flex-start;
-    overflow-x: auto;
-  }
+  /* =========================
+   🎞️ PREMIUM THUMBNAIL STRIP
+========================= */
 
-  .thumb {
-    width: 70px;
-    height: 70px;
-    flex-shrink: 0;
-  }
+.thumbnail-strip {
+  display: flex;
+  gap: 10px;
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* 🔥 smooth iOS scroll */
+
+  scroll-snap-type: x mandatory; /* 🔥 snap behavior */
+
+  padding: 10px 16px; /* 👈 keeps inside screen */
+  margin: 0 -16px;    /* 👈 cancels container padding perfectly */
+
+  box-sizing: border-box;
+}
+
+/* HIDE SCROLLBAR (clean look) */
+.thumbnail-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* THUMBNAILS */
+.thumb {
+  flex: 0 0 auto;
+
+  width: 70px;
+  height: 70px;
+
+  object-fit: cover;
+  border-radius: var(--radius);
+
+  scroll-snap-align: start; /* 🔥 snap each item */
+
+  opacity: 0.6;
+  transition: 0.25s;
+
+  border: 2px solid transparent;
+}
+
+/* ACTIVE / HOVER */
+.thumb.active,
+.thumb:hover {
+  opacity: 1;
+  border-color: var(--secondary);
+  transform: scale(1.05);
+}
 
   /* FEATURES */
   .home-features {
