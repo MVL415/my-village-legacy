@@ -2137,3 +2137,40 @@ html {
   }
 
 }
+
+/* =========================
+   📱 MOBILE THUMBNAIL UPGRADE
+========================= */
+@media (max-width: 768px) {
+
+  .thumbnail-strip {
+    display: flex;
+    gap: 10px;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    scroll-snap-type: x mandatory;
+
+    padding: 10px 16px;
+    margin: 0 -16px; /* 👈 cancels container padding */
+
+    box-sizing: border-box;
+  }
+
+  .thumbnail-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .thumb {
+    flex: 0 0 auto;
+
+    width: 65px;
+    height: 65px;
+
+    scroll-snap-align: start;
+
+    border-radius: var(--radius);
+  }
+
+}
