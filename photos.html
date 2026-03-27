@@ -142,5 +142,23 @@ Best viewed in landscape. Double tap to zoom.
   <img id="lightbox-img" src="">
 </div>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const gallery = document.querySelector(".gallery");
+  if (!gallery) return;
+
+  const items = Array.from(gallery.children);
+
+  // Shuffle function
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+
+  // Re-append shuffled items
+  items.forEach(item => gallery.appendChild(item));
+});
+</script>
+
 </body>
 </html>

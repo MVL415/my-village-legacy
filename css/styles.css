@@ -710,6 +710,7 @@ margin-top:var(--space-sm);
 .gallery{
 column-count:3;
 column-gap:var(--space-sm);
+min-height: 300px;
 }
 
 @media(max-width:900px){
@@ -2151,4 +2152,6 @@ section {
   }
 
 }
+
+
 
