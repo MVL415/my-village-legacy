@@ -75,15 +75,16 @@ function openLightbox(img){
   const lightboxImg = document.getElementById("lightbox-img");
 
   if(lightbox && lightboxImg){
-    lightbox.style.display = "flex";
+    lightbox.classList.add("show"); // ✅ changed
     lightboxImg.src = img.src;
   }
 }
 
 function closeLightbox(){
   const lightbox = document.getElementById("lightbox");
+
   if(lightbox){
-    lightbox.style.display = "none";
+    lightbox.classList.remove("show"); // ✅ changed
   }
 }
 
@@ -649,5 +650,15 @@ document.querySelector(".scroll-btn.right").addEventListener("click", () => {
   scrollContainer.scrollBy({
     left: 300,
     behavior: "smooth"
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const lightbox = document.getElementById("lightbox");
+
+  if (!lightbox) return;
+
+  lightbox.addEventListener("click", () => {
+    lightbox.classList.remove("show");
   });
 });
