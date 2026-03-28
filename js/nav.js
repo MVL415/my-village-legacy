@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!nav || !toggle || !overlay) return;
 
-  let activeDropdown = null;
-
   // 🔘 TOGGLE MENU
   toggle.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -25,8 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     nav.querySelectorAll(".dropdown").forEach(d => {
       d.classList.remove("open");
     });
-
-    activeDropdown = null;
   }
 
   // 🔽 DROPDOWN TOGGLE (MOBILE ONLY)
@@ -36,25 +32,22 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.innerWidth <= 768) {
         const dropdown = this.nextElementSibling;
 
-        if (dropdown && dropdown.classList.contains("dropdown")) {
-          e.preventDefault();
-          e.stopPropagation();
+        // ONLY handle items WITH dropdown
+        if (!dropdown || !dropdown.classList.contains("dropdown")) return;
 
-          // SAME DROPDOWN → CLOSE
-          if (activeDropdown === dropdown) {
-            dropdown.classList.remove("open");
-            activeDropdown = null;
-            return;
-          }
+        e.preventDefault();
+        e.stopPropagation();
 
-          // CLOSE OTHERS
-          nav.querySelectorAll(".dropdown").forEach(d => {
-            d.classList.remove("open");
-          });
+        const isOpen = dropdown.classList.contains("open");
 
-          // OPEN CURRENT
+        // CLOSE ALL FIRST
+        nav.querySelectorAll(".dropdown").forEach(d => {
+          d.classList.remove("open");
+        });
+
+        // TOGGLE CURRENT
+        if (!isOpen) {
           dropdown.classList.add("open");
-          activeDropdown = dropdown;
         }
       }
 
@@ -77,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
       nav.querySelectorAll(".dropdown").forEach(d => {
         d.classList.remove("open");
       });
-      activeDropdown = null;
     }
 
   });
