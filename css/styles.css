@@ -336,22 +336,40 @@ cursor:pointer;
     display: block;
   }
 
+  @media (max-width: 768px) {
+
   .main-nav {
-    display: none;
+    display: flex;
     flex-direction: column;
+
     position: absolute;
     top: 70px;
-    right: 20px;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    right: 5%;
+
     width: 90%;
-  right: 5%;
+    padding: 20px;
+
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+
+    /* 🔥 ANIMATION SETUP */
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+    pointer-events: none;
+
+    transition: all 0.25s ease;
   }
 
   .main-nav.show {
-    display: flex;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
   }
+
+}
 
   .main-nav a {
     min-width: auto;
