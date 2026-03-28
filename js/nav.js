@@ -39,18 +39,20 @@ document.addEventListener("DOMContentLoaded", () => {
     item.addEventListener("click", function (e) {
 
       if (window.innerWidth <= 768) {
-        const dropdown = this.nextElementSibling;
+  const dropdown = this.nextElementSibling;
 
-        if (dropdown && dropdown.classList.contains("dropdown")) {
-          e.preventDefault();
+  if (dropdown && dropdown.classList.contains("dropdown")) {
+    e.preventDefault();
 
-          nav.querySelectorAll(".dropdown").forEach(d => {
-            if (d !== dropdown) d.classList.remove("open");
-          });
+    // 🔥 CLOSE OTHER DROPDOWNS FIRST
+    document.querySelectorAll(".dropdown").forEach(d => {
+      if (d !== dropdown) d.classList.remove("open");
+    });
 
-          dropdown.classList.toggle("open");
-        }
-      }
+    // 🔥 TOGGLE CURRENT
+    dropdown.classList.toggle("open");
+  }
+}
 
     });
   });
