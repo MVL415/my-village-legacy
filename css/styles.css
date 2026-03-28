@@ -316,6 +316,7 @@ cursor:pointer;
   }
 
   .hero {
+    width: 100%;
     max-width: 100%;
   }
 
@@ -478,6 +479,8 @@ cursor:pointer;
 }
 
   .hero {
+    width: 100%;
+    max-width: 100%;
     margin-bottom: 6px;
   }
 
@@ -2257,4 +2260,20 @@ section {
     height: 48px;
     font-size: 26px;
   }
+}
+
+@media (max-width: 768px) {
+
+  .hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px;
+  }
+
+  .hero-left,
+  .hero-right {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
 }
