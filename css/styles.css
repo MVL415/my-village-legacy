@@ -2129,7 +2129,7 @@ section {
 }
 
 /* =========================
-   📱 THUMBNAILS (MOBILE)
+   📱 THUMBNAILS DROPDOWN (MOBILE)
 ========================= */
 @media (max-width: 768px) {
 
@@ -2152,5 +2152,25 @@ section {
 
     scroll-snap-align: start;
   }
+  
+  .dropdown {
+  display: block;
+
+  max-height: 0;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(-6px);
+
+  transition: max-height 0.3s ease,
+              opacity 0.2s ease,
+              transform 0.2s ease;
+}
+
+.dropdown.open {
+  max-height: 300px;
+  opacity: 1;
+  transform: translateY(0);
+}
 
 }
