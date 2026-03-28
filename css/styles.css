@@ -336,40 +336,22 @@ cursor:pointer;
     display: block;
   }
 
-  @media (max-width: 768px) {
-
   .main-nav {
-    display: flex;
+    display: none;
     flex-direction: column;
-
     position: absolute;
     top: 70px;
-    right: 5%;
-
-    width: 90%;
+    right: 20px;
+    background: white;
     padding: 20px;
-
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(12px);
-
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-
-    /* 🔥 ANIMATION SETUP */
-    opacity: 0;
-    transform: translateY(-10px) scale(0.98);
-    pointer-events: none;
-
-    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    width: 90%;
+  right: 5%;
   }
 
   .main-nav.show {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
+    display: flex;
   }
-
-}
 
   .main-nav a {
     min-width: auto;
@@ -489,6 +471,24 @@ cursor:pointer;
      font-style: italic;
      opacity: 0.75;
   }
+
+/* MOBILE DROPDOWN */
+@media (max-width: 768px) {
+
+  .dropdown {
+    display: block;
+
+    max-height: 0;
+    overflow: hidden;
+
+    transition: max-height 0.25s ease;
+  }
+
+  .dropdown.open {
+    max-height: 300px; /* enough for content */
+  }
+
+}
 
 }
 
@@ -2170,6 +2170,3 @@ section {
   }
 
 }
-
-
-
