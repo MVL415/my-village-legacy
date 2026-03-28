@@ -755,10 +755,14 @@ align-items:center;
 z-index:1000;
 }
 
-#lightbox img{
-max-width:90%;
-max-height:90%;
-border-radius:var(--radius);
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
 }
 /* SECTION COLORS */
 .section-earn{
