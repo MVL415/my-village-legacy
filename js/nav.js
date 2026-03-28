@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+const overlay = document.querySelector(".nav-overlay");
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const toggle = document.getElementById("menu-toggle");
@@ -35,38 +37,47 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!nav || !toggle) return;
 
   // 🔘 TOGGLE MENU
-  toggle.addEventListener("click", (e) => {
-    e.stopPropagation();
-    nav.classList.toggle("show");
-  });
+ toggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  nav.classList.toggle("show");
+  overlay.classList.toggle("show");
+});
 
   // 🖱️ CLICK OUTSIDE → CLOSE NAV
-  document.addEventListener("click", (e) => {
-    if (!nav.classList.contains("show")) return;
+document.addEventListener("click", (e) => {
+  if (!nav.classList.contains("show")) return;
 
-    // 🔥 IMPORTANT: use closest instead of contains
-    if (!e.target.closest("#nav-menu") && !e.target.closest("#menu-toggle")) {
-      nav.classList.remove("show");
+  if (!e.target.closest("#nav-menu") && !e.target.closest("#menu-toggle")) {
+    nav.classList.remove("show");
+    overlay.classList.remove("show");
 
-      // close all dropdowns
-      nav.querySelectorAll(".dropdown").forEach(d => {
-        d.classList.remove("open");
-      });
-    }
+    nav.querySelectorAll(".dropdown").forEach(d => {
+      d.classList.remove("open");
+    });
+  }
+});
+
+overlay.addEventListener("click", () => {
+  nav.classList.remove("show");
+  overlay.classList.remove("show");
+
+  nav.querySelectorAll(".dropdown").forEach(d => {
+    d.classList.remove("open");
   });
+});
 
   // 🔗 LINK CLICK → CLOSE NAV (ONLY real links)
   nav.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", (e) => {
+  link.addEventListener("click", (e) => {
 
-      const hasDropdown = link.nextElementSibling?.classList.contains("dropdown");
+    const hasDropdown = link.nextElementSibling?.classList.contains("dropdown");
 
-      // 🔥 Don't close nav if it's a dropdown toggle
-      if (hasDropdown && window.innerWidth <= 768) return;
+    if (hasDropdown && window.innerWidth <= 768) return;
 
-      nav.classList.remove("show");
-    });
+    nav.classList.remove("show");
+    overlay.classList.remove("show");
   });
+});
 
   // 🔽 DROPDOWN TOGGLE
   nav.querySelectorAll(".nav-item > a").forEach(item => {
