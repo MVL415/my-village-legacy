@@ -2207,3 +2207,46 @@ section {
 }
 
 }
+
+/* LIGHTBOX BUTTONS */
+.lightbox-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(0,0,0,0.5);
+  color: white;
+
+  border: none;
+  border-radius: 50%;
+
+  width: 44px;
+  height: 44px;
+
+  font-size: 24px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 10;
+  transition: 0.2s;
+}
+
+.lightbox-btn:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+/* POSITION */
+.lightbox-btn.prev { left: 20px; }
+.lightbox-btn.next { right: 20px; }
+
+/* MOBILE — slightly bigger tap target */
+@media (max-width: 768px) {
+  .lightbox-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 26px;
+  }
+}

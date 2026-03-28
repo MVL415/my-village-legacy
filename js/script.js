@@ -70,23 +70,6 @@ const books = [
  
 ];
 
-function openLightbox(img){
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-
-  if(lightbox && lightboxImg){
-    lightbox.classList.add("show"); // ✅ changed
-    lightboxImg.src = img.src;
-  }
-}
-
-function closeLightbox(){
-  const lightbox = document.getElementById("lightbox");
-
-  if(lightbox){
-    lightbox.classList.remove("show"); // ✅ changed
-  }
-}
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -653,12 +636,90 @@ document.querySelector(".scroll-btn.right").addEventListener("click", () => {
   });
 });
 
+let currentIndex = 0;
+let galleryImages = [];
+
 document.addEventListener("DOMContentLoaded", () => {
+  galleryImages = Array.from(document.querySelectorAll(".gallery img"));
+
   const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
 
-  if (!lightbox) return;
+  const prevBtn = document.querySelector(".lightbox-btn.prev");
+  const nextBtn = document.querySelector(".lightbox-btn.next");
 
-  lightbox.addEventListener("click", () => {
+  if (!lightbox || !lightboxImg) return;
+
+  // 🔓 OPEN
+  window.openLightbox = function(img){
+    currentIndex = galleryImages.indexOf(img);
+    lightbox.classList.add("show");
+    updateImage();
+  }
+
+  // 🔒 CLOSE
+  window.closeLightbox = function(){
     lightbox.classList.remove("show");
+  }
+
+  function updateImage(){
+    lightboxImg.src = galleryImages[currentIndex].src;
+  }
+
+  // ⬅️ PREV
+  function showPrev(){
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    updateImage();
+  }
+
+  // ➡️ NEXT
+  function showNext(){
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    updateImage();
+  }
+
+  prevBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showPrev();
   });
+
+  nextBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showNext();
+  });
+
+  // 🖱️ CLICK OUTSIDE CLOSE
+  lightbox.addEventListener("click", () => {
+    closeLightbox();
+  });
+
+  // ⌨️ KEYBOARD (desktop bonus)
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("show")) return;
+
+    if (e.key === "ArrowRight") showNext();
+    if (e.key === "ArrowLeft") showPrev();
+    if (e.key === "Escape") closeLightbox();
+  });
+
+  // 👆 SWIPE (mobile)
+  let startX = 0;
+
+  lightbox.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  lightbox.addEventListener("touchend", (e) => {
+    let endX = e.changedTouches[0].clientX;
+    let diff = startX - endX;
+
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        showNext(); // swipe left
+      } else {
+        showPrev(); // swipe right
+      }
+    }
+  });
+
 });
