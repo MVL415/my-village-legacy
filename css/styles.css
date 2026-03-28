@@ -2173,21 +2173,18 @@ section {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 
-    scroll-snap-type: x mandatory;
-
-    padding: 10px 0;
-    margin-top: 4px;
-    padding-left: 16px;
+    padding: 10px 16px; /* 👈 balanced padding */
+    margin: 0;
 
     max-width: 100%;
-    box-sizing: border-box;
+
+    scroll-snap-type: x mandatory;
   }
 
   .thumb {
     flex: 0 0 auto;
+    scroll-snap-align: start;
   }
-
-}
   
   .dropdown {
   display: block;
