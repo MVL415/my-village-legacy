@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!nav || !toggle || !overlay) return;
 
+  let activeDropdown = null;
+
   // 🔘 TOGGLE MENU
   toggle.addEventListener("click", (e) => {
     e.stopPropagation();
@@ -13,27 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.classList.toggle("show");
   });
 
-  document.addEventListener("click", (e) => {
-
-  // 🔻 CLOSE NAV IF CLICK OUTSIDE
-  if (nav.classList.contains("show")) {
-    if (!e.target.closest("#nav-menu") && !e.target.closest("#menu-toggle")) {
-      closeNav();
-      return;
-    }
-  }
-
-  // 🔻 CLOSE DROPDOWNS IF CLICK OUTSIDE NAV ITEMS
-  if (!e.target.closest(".nav-item")) {
-  nav.querySelectorAll(".dropdown").forEach(d => {
-    d.classList.remove("open");
-  });
-  activeDropdown = null; // 🔥 keep state in sync
-}
-
-});
-
-  // 🔳 OVERLAY CLICK
+  // 🔳 OVERLAY CLICK → CLOSE NAV
   overlay.addEventListener("click", closeNav);
 
   function closeNav() {
@@ -43,60 +25,61 @@ document.addEventListener("DOMContentLoaded", () => {
     nav.querySelectorAll(".dropdown").forEach(d => {
       d.classList.remove("open");
     });
+
+    activeDropdown = null;
   }
 
   // 🔽 DROPDOWN TOGGLE (MOBILE ONLY)
-  let activeDropdown = null;
+  nav.querySelectorAll(".nav-item > a").forEach(item => {
+    item.addEventListener("click", function (e) {
 
-nav.querySelectorAll(".nav-item > a").forEach(item => {
-  item.addEventListener("click", function (e) {
+      if (window.innerWidth <= 768) {
+        const dropdown = this.nextElementSibling;
 
-    if (window.innerWidth <= 768) {
-      const dropdown = this.nextElementSibling;
+        if (dropdown && dropdown.classList.contains("dropdown")) {
+          e.preventDefault();
+          e.stopPropagation();
 
-      if (dropdown && dropdown.classList.contains("dropdown")) {
-        e.preventDefault();
-        e.stopPropagation();
+          // SAME DROPDOWN → CLOSE
+          if (activeDropdown === dropdown) {
+            dropdown.classList.remove("open");
+            activeDropdown = null;
+            return;
+          }
 
-        // 🔥 IF SAME DROPDOWN → CLOSE IT
-        if (activeDropdown === dropdown) {
-          dropdown.classList.remove("open");
-          activeDropdown = null;
-          return;
+          // CLOSE OTHERS
+          nav.querySelectorAll(".dropdown").forEach(d => {
+            d.classList.remove("open");
+          });
+
+          // OPEN CURRENT
+          dropdown.classList.add("open");
+          activeDropdown = dropdown;
         }
+      }
 
-        // 🔥 CLOSE ANY OPEN ONE
-        nav.querySelectorAll(".dropdown").forEach(d => {
-          d.classList.remove("open");
-        });
+    });
+  });
 
-        // 🔥 OPEN NEW ONE
-        dropdown.classList.add("open");
-        activeDropdown = dropdown;
+  // 🖱️ CLICK OUTSIDE
+  document.addEventListener("click", (e) => {
+
+    // CLOSE NAV
+    if (nav.classList.contains("show")) {
+      if (!e.target.closest("#nav-menu") && !e.target.closest("#menu-toggle")) {
+        closeNav();
+        return;
       }
     }
 
-  });
-});
-  item.addEventListener("click", function (e) {
-
-    if (window.innerWidth <= 768) {
-      const dropdown = this.nextElementSibling;
-
-      if (dropdown && dropdown.classList.contains("dropdown")) {
-        e.preventDefault();
-        e.stopPropagation(); // 🔥 THIS IS THE FIX
-
-        // close others
-        nav.querySelectorAll(".dropdown").forEach(d => {
-          if (d !== dropdown) d.classList.remove("open");
-        });
-
-        // toggle current
-        dropdown.classList.toggle("open");
-      }
+    // CLOSE DROPDOWNS ONLY
+    if (!e.target.closest(".nav-item")) {
+      nav.querySelectorAll(".dropdown").forEach(d => {
+        d.classList.remove("open");
+      });
+      activeDropdown = null;
     }
 
   });
-});
+
 });
