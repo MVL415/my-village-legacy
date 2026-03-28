@@ -46,25 +46,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🔽 DROPDOWN TOGGLE (MOBILE ONLY)
   nav.querySelectorAll(".nav-item > a").forEach(item => {
-    item.addEventListener("click", function (e) {
+  item.addEventListener("click", function (e) {
 
-      if (window.innerWidth <= 768) {
-  const dropdown = this.nextElementSibling;
+    if (window.innerWidth <= 768) {
+      const dropdown = this.nextElementSibling;
 
-  if (dropdown && dropdown.classList.contains("dropdown")) {
-    e.preventDefault();
+      if (dropdown && dropdown.classList.contains("dropdown")) {
+        e.preventDefault();
+        e.stopPropagation(); // 🔥 THIS IS THE FIX
 
-    // 🔥 CLOSE OTHER DROPDOWNS FIRST
-    document.querySelectorAll(".dropdown").forEach(d => {
-      if (d !== dropdown) d.classList.remove("open");
-    });
+        // close others
+        nav.querySelectorAll(".dropdown").forEach(d => {
+          if (d !== dropdown) d.classList.remove("open");
+        });
 
-    // 🔥 TOGGLE CURRENT
-    dropdown.classList.toggle("open");
-  }
-}
+        // toggle current
+        dropdown.classList.toggle("open");
+      }
+    }
 
-    });
   });
-
+});
 });
