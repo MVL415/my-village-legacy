@@ -78,7 +78,7 @@ p {
    🔥 GLOBAL SECTION SPACING (SYSTEM CONTROL)
 ========================= */
 section {
-  margin: 0; /* 🔥 prevent stacking conflicts */
+  padding: 32px 0;
 }
 
 img{
@@ -166,6 +166,8 @@ font-size:36px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  
+  white-space: nowrap;
 
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius);
