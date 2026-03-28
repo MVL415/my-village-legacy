@@ -2180,10 +2180,10 @@ section {
    📱 THUMBNAILS DROPDOWN (MOBILE)
 ========================= */
 @media (max-width: 768px) {
-
   .thumbnail-strip {
     display: flex;
     gap: 10px;
+    position: relative;
 
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -2191,6 +2191,7 @@ section {
 
     padding: 10px 0; /* 👈 balanced padding */
     margin: 0;
+    padding-right: 40px; /* 👈 space for fade */
 
     width: 100%;
     max-width: 100%;
@@ -2198,13 +2199,33 @@ section {
     scroll-snap-type: x mandatory;
 
     box-sizing: border-box;
+    
   }
 
   .thumb {
     flex: 0 0 auto;
     scroll-snap-align: start;
   }
-  
+
+  .thumb:first-child {
+  animation: scrollHint 1.2s ease;
+}
+
+/* RIGHT FADE */
+.thumbnail-strip::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 40px;
+  height: 100%;
+
+  background: linear-gradient(to right, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 2;
+}
+
   .dropdown {
   display: block;
 
@@ -2284,4 +2305,12 @@ section {
     max-width: 100%;
   }
 
+}
+
+/* KEYFRAME (GLOBAL) */
+
+ @keyframes scrollHint {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
 }
