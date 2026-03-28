@@ -13,14 +13,24 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.classList.toggle("show");
   });
 
-  // 🖱️ CLICK OUTSIDE → CLOSE NAV
   document.addEventListener("click", (e) => {
-    if (!nav.classList.contains("show")) return;
 
+  // 🔻 CLOSE NAV IF CLICK OUTSIDE
+  if (nav.classList.contains("show")) {
     if (!e.target.closest("#nav-menu") && !e.target.closest("#menu-toggle")) {
       closeNav();
+      return;
     }
-  });
+  }
+
+  // 🔻 CLOSE DROPDOWNS IF CLICK OUTSIDE NAV ITEMS
+  if (!e.target.closest(".nav-item")) {
+    nav.querySelectorAll(".dropdown").forEach(d => {
+      d.classList.remove("open");
+    });
+  }
+
+});
 
   // 🔳 OVERLAY CLICK
   overlay.addEventListener("click", closeNav);
