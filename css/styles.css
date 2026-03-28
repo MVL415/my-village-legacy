@@ -366,8 +366,9 @@ cursor:pointer;
     display: none; /* ✅ hidden by default */
 
     flex-direction: column;
-    position: absolute;
+    align-items: stretch;
 
+    position: absolute;
     top: 70px;
     right: 5%;
     width: 90%;
@@ -389,6 +390,12 @@ cursor:pointer;
     min-width: auto;
     width: 100%;
   }
+
+  .main-nav a,
+.nav-item > a {
+  width: 100%;
+  min-width: unset; /* 🔥 important */
+}
 
   .homepage {
     gap: var(--space-lg); /* 🔥 tighter vertical rhythm */
@@ -1836,9 +1843,11 @@ section {
 
 /* NAV GROUP */
 .main-nav {
-  z-index: 1000;
-  position: absolute;
-  gap: 14px; /* tighter + more intentional */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  position: static; /* ✅ CRITICAL FIX */
 }
 
 /* NAV BUTTONS */
