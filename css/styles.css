@@ -122,6 +122,7 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 
   padding: 10px 18px;
   border-radius: 999px;
@@ -316,21 +317,54 @@ p {
   transform: translateY(-6px);
 }
 
-/* =========================================================
-   🎞️ THUMBNAILS
-========================================================= */
+/* =========================
+   🎞️ THUMBNAILS (CLEAN)
+========================= */
 
 .thumbnail-strip {
   display: flex;
   gap: 10px;
+
   overflow-x: auto;
+  justify-content: flex-start;
+
+  padding: 10px 0;
+  margin-top: 6px;
+
+  max-width: 100%;
+  box-sizing: border-box;
+
+  scroll-behavior: smooth;
+}
+
+/* hide scrollbar */
+.thumbnail-strip::-webkit-scrollbar {
+  display: none;
 }
 
 .thumb {
+  flex: 0 0 auto;
+
   width: 80px;
   height: 80px;
+
   object-fit: cover;
+  border-radius: var(--radius);
+
+  cursor: pointer;
+  opacity: 0.6;
+
+  transition: 0.25s;
+  border: 2px solid transparent;
 }
+
+.thumb:hover,
+.thumb.active {
+  opacity: 1;
+  border-color: var(--secondary);
+  transform: scale(1.05);
+}
+
 
 /* =========================================================
    📚 MODAL + COMMENTS
@@ -350,26 +384,93 @@ p {
   margin: auto;
 }
 
-/* =========================================================
-   🔐 AUTH
-========================================================= */
+/* =========================
+   🔐 AUTH SYSTEM (CLEAN)
+========================= */
 
-.auth-card {
+.auth-bar {
   display: flex;
-  gap: 10px;
-  padding: 12px;
-  border-radius: 999px;
+  justify-content: center;
+  margin: 30px 0;
 }
 
+/* CARD */
+.auth-card {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+
+  padding: 12px 16px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+
+  max-width: 500px;
+  width: 100%;
+}
+
+/* INPUT GROUP */
 .auth-input-group {
   display: flex;
   gap: 8px;
+  flex: 1;
 }
 
+.auth-input-group input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.auth-input-group input:focus {
+  background: #f3f4f6;
+}
+
+/* spacing under password ONLY */
+.auth-input-group input:last-child {
+  margin-bottom: 6px;
+}
+
+/* ACTIONS */
 .auth-actions {
   display: flex;
   gap: 10px;
+  width: 100%;
+  margin-top: 4px;
 }
+
+.auth-actions button {
+  flex: 1;
+  padding: 10px 0;
+}
+
+/* USER STATE */
+.auth-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,0,0,0.05);
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.user-pill:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+
 
 /* =========================================================
    🔧 UTILITIES
@@ -407,13 +508,56 @@ p {
     text-align: center;
   }
 
-  .auth-card {
-    flex-direction: column;
-  }
+ /* =========================
+   📱 THUMBNAILS MOBILE
+========================= */
 
   .thumbnail-strip {
-    margin: 0 -16px;
     padding: 10px 16px;
+    margin: 0 -16px; /* keeps full-width scroll clean */
+
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
   }
+
+  .thumb {
+    width: 65px;
+    height: 65px;
+    scroll-snap-align: start;
+  }
+
+  /* =========================
+   📱 AUTH MOBILE
+========================= */
+
+  .auth-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .auth-input-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .auth-input-group input {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .auth-actions {
+    gap: 10px;
+  }
+
+  .auth-actions button {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  
 
 }
