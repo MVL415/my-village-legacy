@@ -594,19 +594,18 @@ if (backToTop) {
 const thumbs = document.querySelectorAll(".thumb");
 const heroImg = document.querySelector(".hero");
 
-thumbs.forEach(img => {
-  img.addEventListener("click", () => {
+if (thumbs.length && heroImg) {
+  thumbs.forEach(img => {
+    img.addEventListener("click", () => {
 
-    heroImg.src = img.src;
+      heroImg.src = img.src;
 
-    // remove active from all
-    thumbs.forEach(t => t.classList.remove("active"));
+      thumbs.forEach(t => t.classList.remove("active"));
+      img.classList.add("active");
 
-    // add active to clicked
-    img.classList.add("active");
-
+    });
   });
-});
+}
 
 const faders = document.querySelectorAll('.fade-in');
 
@@ -622,19 +621,24 @@ faders.forEach(el => observer.observe(el));
 
 const scrollContainer = document.getElementById("journeyScroll");
 
-document.querySelector(".scroll-btn.left").addEventListener("click", () => {
-  scrollContainer.scrollBy({
-    left: -300,
-    behavior: "smooth"
-  });
-});
+const leftBtn = document.querySelector(".scroll-btn.left");
+const rightBtn = document.querySelector(".scroll-btn.right");
 
-document.querySelector(".scroll-btn.right").addEventListener("click", () => {
-  scrollContainer.scrollBy({
-    left: 300,
-    behavior: "smooth"
+if (scrollContainer && leftBtn && rightBtn) {
+  leftBtn.addEventListener("click", () => {
+    scrollContainer.scrollBy({
+      left: -300,
+      behavior: "smooth"
+    });
   });
-});
+
+  rightBtn.addEventListener("click", () => {
+    scrollContainer.scrollBy({
+      left: 300,
+      behavior: "smooth"
+    });
+  });
+}
 
 let currentIndex = 0;
 let galleryImages = [];
@@ -648,7 +652,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevBtn = document.querySelector(".lightbox-btn.prev");
   const nextBtn = document.querySelector(".lightbox-btn.next");
 
-  if (!lightbox || !lightboxImg) return;
+  if (!lightbox || !lightboxImg || !prevBtn || !nextBtn) return;
 
   // 🔓 OPEN
   window.openLightbox = function(img){
