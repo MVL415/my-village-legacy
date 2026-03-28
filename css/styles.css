@@ -1,3 +1,7 @@
+* {
+  max-width: 100%;
+}
+
 :root {
 
   /* 🎨 COLORS */
@@ -41,6 +45,7 @@ body {
     #f5f7f6 60%,
     #ffffff 100%
   );
+  overflow-x: hidden;
 }
 
 
@@ -373,6 +378,7 @@ cursor:pointer;
 
   width: 100%;
   max-width: 100%;
+  overflow-x: hidden;
 }
 
 .hero-left {
@@ -1594,6 +1600,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
 }
 
 .hero-title {
@@ -1715,6 +1722,7 @@ section {
   .hero-right {
     align-items: center;
     overflow: hidden;
+    min-width: 0;
   }
 
   .hero {
