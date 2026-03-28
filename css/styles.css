@@ -369,12 +369,21 @@ cursor:pointer;
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  width: 100%;
+  max-width: 100%;
 }
 
 .hero-left {
   align-items: center;
   text-align: center;
 }
+
+  .hero-left,
+  .hero-right {
+    width: 100%;
+    max-width: 100%;
+  }
 
 .hero-block,
 .poem-block {
@@ -384,6 +393,12 @@ cursor:pointer;
 .painting-wrapper {
   text-align: center;
 }
+
+.painting-wrapper,
+  .thumbnail-strip {
+    width: 100%;
+    max-width: 100%;
+  }
 
   .hero-title {
     font-size: 28px;
@@ -1696,6 +1711,7 @@ section {
   /* IMAGE ALIGNMENT */
   .hero-right {
     align-items: center;
+    overflow: hidden;
   }
 
   .hero {
@@ -1745,19 +1761,7 @@ section {
 @media (max-width: 768px) {
 
   /* 🔥 HERO — FORCE CLEAN STACK */
-  .hero-section {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 20px;
-  }
-
-  .hero-left,
-  .hero-right {
-    width: 100%;
-    align-items: center;
-    text-align: center;
-  }
-
+ 
   .hero {
     max-width: 100%;
   }
@@ -2172,13 +2176,17 @@ section {
 
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    overflow-y: hidden;
 
-    padding: 10px 16px; /* 👈 balanced padding */
+    padding: 10px 0; /* 👈 balanced padding */
     margin: 0;
 
+    width: 100%;
     max-width: 100%;
 
     scroll-snap-type: x mandatory;
+
+    box-sizing: border-box;
   }
 
   .thumb {
