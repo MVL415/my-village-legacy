@@ -66,7 +66,16 @@ const books = [
     img: "images/book8.jpg",
     review: "Nipsey Hussle mentioned reading this book which influenced my decision to read it. It’s a powerful story that explores themes of racial tension, social justice, and the fight for equality.",
     question: "💬 Being such a short read, were you left wanting more? Or did you feel like Greenlee wrapped it up perfectly? What do you think the story would look like if it were set in today’s world?"
+  },
+  {
+    id: "blue",
+    title: "Blue Sisters",
+    author: "Coco Mellors",
+    img: "images/book9.jpg",
+    review: "This one was a tough read for me. It's a raw and emotional story about family, addiction, and the complexities of relationships. Ultimately, it fell a little flat for me, but I can see how it would resonate with others who have experienced similar struggles.",
+    question: "💬 Is it difficult for you to get into a book if you don't really relate to the main characters?"
   }
+  
  
 ];
 
