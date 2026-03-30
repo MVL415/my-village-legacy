@@ -74,6 +74,14 @@ const books = [
     img: "images/book9.jpg",
     review: "This one was a tough read for me. It's a raw and emotional story about family, addiction, and the complexities of relationships. Ultimately, it fell a little flat for me, but I can see how it would resonate with others who have experienced similar struggles.",
     question: "💬 Is it difficult for you to get into a book if you don't really relate to the main characters?"
+  },
+  {
+    id: "genius",
+    title: "Black Genius: Essays on an American Legacy",
+    author: "Tre Johnson",
+    img: "images/book10.jpg",
+    review: "In progress read...",
+    question: "💬 Who or what comes to mind when you hear the term 'Black Genius'?"
   }
   
  

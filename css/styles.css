@@ -12,7 +12,7 @@
   --highlight: #E97A5A;
 
   --white: #ffffff;
-  --text-dark: #1f2933;
+  --text-dark: #0f3e6d;
   --text-light: #6b7280;
 
   /* 🧱 SPACING SYSTEM (8pt rhythm) */
@@ -918,6 +918,7 @@ background:#333;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   scroll-snap-align: start;
   text-align: center;
+  position: relative;
 }
 
 .book-card img {
@@ -960,6 +961,26 @@ background:#333;
 .book-card:hover {
   transform: translateY(-5px);
   transition: 0.2s;
+}
+
+/* 🔥 BADGE */
+.currently-reading::before {
+  content: "Currently Reading";
+
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  background: var(--primary);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  padding: 4px 10px;
+  border-radius: 999px;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .book-modal {
@@ -2313,4 +2334,14 @@ section {
   0% { transform: translateX(0); }
   50% { transform: translateX(-10px); }
   100% { transform: translateX(0); }
+}
+
+@keyframes pulseReading {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.currently-reading::before {
+  animation: pulseReading 2s infinite;
 }
