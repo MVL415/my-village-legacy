@@ -1828,8 +1828,10 @@ section {
    .logo {
     font-size: 32px;       /* 🔥 slightly smaller */
     line-height: 1.1;      /* 🔥 tighter stacking */
-    max-width: 220px;      /* 🔥 controls wrap */
+    white-space: nowrap;   /* 🔥 prevents stacking */
+    max-width: none;      /* 🔥 controls wrap */
   }
+
 
 }
 
