@@ -140,10 +140,12 @@ z-index:1000;
 border-bottom:1px solid #ddd;
 }
 
-.nav-container{
-display:flex;
-align-items:center;
-justify-content:space-between;
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px; /* 🔥 prevents crowding */
 }
 
 .logo{
@@ -155,7 +157,10 @@ font-size:36px;
 
 .main-nav {
   display: flex;
-  gap: var(--space-md);
+  gap: 12px;
+  justify-content: flex-end;
+
+  flex-wrap: wrap; /* 🔥 allows clean wrapping instead of overlap */
 }
 
 .main-nav a i {
@@ -174,14 +179,14 @@ font-size:36px;
   
   white-space: nowrap;
 
-  padding: var(--space-sm) var(--space-md);
+  padding: 10px 16px;
   border-radius: var(--radius);
 
   background: var(--secondary);
   color: white;
 
   font-weight: 600;
-  min-width: 140px; /* 🔥 THIS fixes uneven size */
+  min-width: 120px; /* 🔥 THIS fixes uneven size */
   transition: 0.2s;
 }
 
@@ -364,6 +369,7 @@ cursor:pointer;
   .main-nav a {
     min-width: auto;
     width: 100%;
+    white-space: nowrap;
   }
 
   .homepage {
@@ -1826,7 +1832,7 @@ section {
   }
 
    .logo {
-    font-size: 32px;       /* 🔥 slightly smaller */
+    font-size: 30px;       /* 🔥 slightly smaller */
     line-height: 1.1;      /* 🔥 tighter stacking */
     white-space: nowrap;   /* 🔥 prevents stacking */
     max-width: none;      /* 🔥 controls wrap */
@@ -1844,17 +1850,6 @@ section {
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-/* CONTAINER SPACING */
-.nav-container {
-  padding: 14px 0; /* 🔥 gives breathing room */
-}
-
-
-/* NAV GROUP */
-.main-nav {
-  gap: 14px; /* tighter + more intentional */
 }
 
 /* NAV BUTTONS */
