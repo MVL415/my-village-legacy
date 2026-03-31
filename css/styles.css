@@ -294,8 +294,8 @@ cursor:pointer;
 }
 
 .magazine {
-  max-width: 1000px;   /* 🔥 controls overall size */
-  margin: 0 auto;      /* centers it */
+  max-width: 820px;   /* 🔥 controls overall size */
+  margin: 40px auto;      /* centers it */
   padding: 0 16px;     /* breathing room on mobile */
 
   display: flex;
@@ -308,11 +308,11 @@ cursor:pointer;
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  gap: 12px;
+  gap: 8px;
 
   align-items: center;
   background: white;
-  padding: 12px;
+  padding: 8px;
   border-radius: 12px;
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
