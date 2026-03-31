@@ -293,6 +293,31 @@ cursor:pointer;
   margin-right: 6px;
 }
 
+.magazine {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* DESKTOP → 2 PAGE SPREAD */
+.spread {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* SINGLE PAGE (cover/back) */
+.spread img:only-child {
+  grid-column: span 2;
+}
+
+/* MOBILE → 1 PAGE */
+@media (max-width: 768px) {
+  .spread {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* =========================
    📱 RESPONSIVE SYSTEM
 ========================= */
