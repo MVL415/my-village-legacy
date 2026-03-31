@@ -294,6 +294,10 @@ cursor:pointer;
 }
 
 .magazine {
+  max-width: 1000px;   /* 🔥 controls overall size */
+  margin: 0 auto;      /* centers it */
+  padding: 0 16px;     /* breathing room on mobile */
+
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -303,7 +307,23 @@ cursor:pointer;
 .spread {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+
+  gap: 12px;
+
+  align-items: center;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.spread img {
+  width: 100%;
+  height: auto;
+
+  border-radius: 10px;
+  box-shadow: var(--shadow);
 }
 
 /* SINGLE PAGE (cover/back) */
@@ -313,9 +333,16 @@ cursor:pointer;
 
 /* MOBILE → 1 PAGE */
 @media (max-width: 768px) {
+
+  .magazine {
+    max-width: 100%;
+    padding: 0 12px;
+  }
+
   .spread {
     grid-template-columns: 1fr;
   }
+
 }
 
 /* =========================
