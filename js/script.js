@@ -796,21 +796,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updatedSpreads = Array.from(scroll.querySelectorAll(".spread"));
 
-    updatedSpreads.forEach(spread => {
-      const pages = spread.querySelectorAll(".zoom-wrapper");
+  updatedSpreads.forEach(spread => {
+  const pages = Array.from(spread.querySelectorAll(".zoom-wrapper"));
 
-      if (pages.length > 1) {
+  if (pages.length > 1) {
 
-        pages.forEach(page => {
-          const newSlide = document.createElement("div");
-          newSlide.className = "spread";
-          newSlide.appendChild(page.cloneNode(true));
-          scroll.appendChild(newSlide);
-        });
+    const fragment = document.createDocumentFragment();
 
-        spread.remove();
-      }
+    pages.forEach(page => {
+      const newSlide = document.createElement("div");
+      newSlide.className = "spread";
+      newSlide.appendChild(page.cloneNode(true));
+      fragment.appendChild(newSlide);
     });
+
+    // 🔥 REPLACE instead of append
+    spread.replaceWith(fragment);
+  }
+});
 
   }
 
