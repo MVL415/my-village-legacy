@@ -367,15 +367,16 @@ cursor:pointer;
   }
 
   .spread {
-    flex: 0 0 100%;
+    flex: 0 0 100%;   /* 👈 each slide = full width */
     scroll-snap-align: center;
 
-    display: block; /* 🔥 no side-by-side */
-    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .zoom-wrapper {
-    width: 100%;   /* 🔥 full width page */
+    width: 100%;
   }
 
   .spread img {

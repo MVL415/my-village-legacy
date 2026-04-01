@@ -753,80 +753,85 @@ document.addEventListener("DOMContentLoaded", () => {
 
   scroll.addEventListener("scroll", () => {
     const index = Math.round(scroll.scrollLeft / scroll.clientWidth) + 1;
-    indicator.textContent = `${index} / 8`;
+    const total = document.querySelectorAll(".magazine-scroll .spread").length;
+
+    indicator.textContent = `${index} / ${total}`;
   });
 });
 
-document.querySelectorAll(".zoom-wrapper img").forEach(img => {
-  let scale = 1;
-  let isDragging = false;
-  let startX, startY, translateX = 0, translateY = 0;
-
-  // TAP TO ZOOM
-  img.addEventListener("click", (e) => {
-    if (scale === 1) {
-      scale = 2;
-      img.style.transform = `scale(${scale})`;
-    } else {
-      scale = 1;
-      translateX = 0;
-      translateY = 0;
-      img.style.transform = `scale(1) translate(0,0)`;
-    }
-  });
-
-  // TOUCH START
-  img.addEventListener("touchstart", (e) => {
-    if (scale === 1) return;
-
-    isDragging = true;
-    startX = e.touches[0].clientX - translateX;
-    startY = e.touches[0].clientY - translateY;
-  });
-
-  // TOUCH MOVE (PAN)
-  img.addEventListener("touchmove", (e) => {
-    if (!isDragging) return;
-
-    e.preventDefault();
-
-    translateX = e.touches[0].clientX - startX;
-    translateY = e.touches[0].clientY - startY;
-
-    img.style.transform =
-      `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
-
-      if (scale > 1) {
-  e.stopPropagation();
-}
-  });
-
-  // TOUCH END
-  img.addEventListener("touchend", () => {
-    isDragging = false;
-  });
-});
-
-img.classList.toggle("zoomed");
 
 document.addEventListener("DOMContentLoaded", () => {
+
   if (window.innerWidth > 768) return;
 
   const scroll = document.querySelector(".magazine-scroll");
-  const spreads = document.querySelectorAll(".spread");
+  if (!scroll) return;
+
+  const spreads = document.querySelectorAll(".magazine-scroll .spread");
 
   spreads.forEach(spread => {
     const pages = spread.querySelectorAll(".zoom-wrapper");
 
     if (pages.length > 1) {
       pages.forEach(page => {
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("spread");
-        wrapper.appendChild(page.cloneNode(true));
-        scroll.appendChild(wrapper);
+        const newSlide = document.createElement("div");
+        newSlide.className = "spread";
+        newSlide.appendChild(page.cloneNode(true));
+        scroll.appendChild(newSlide);
       });
 
-      spread.remove(); // remove original 2-page spread
+      spread.remove();
     }
   });
+
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".zoom-wrapper img").forEach(img => {
+
+    let scale = 1;
+    let isDragging = false;
+    let startX, startY, translateX = 0, translateY = 0;
+
+    img.addEventListener("click", () => {
+      if (scale === 1) {
+        scale = 2;
+        img.style.transform = `scale(${scale})`;
+      } else {
+        scale = 1;
+        translateX = 0;
+        translateY = 0;
+        img.style.transform = `scale(1) translate(0,0)`;
+      }
+    });
+
+    img.addEventListener("touchstart", (e) => {
+      if (scale === 1) return;
+
+      isDragging = true;
+      startX = e.touches[0].clientX - translateX;
+      startY = e.touches[0].clientY - translateY;
+    });
+
+    img.addEventListener("touchmove", (e) => {
+      if (!isDragging) return;
+
+      e.preventDefault();
+
+      translateX = e.touches[0].clientX - startX;
+      translateY = e.touches[0].clientY - startY;
+
+      img.style.transform =
+        `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+
+      if (scale > 1) e.stopPropagation();
+    });
+
+    img.addEventListener("touchend", () => {
+      isDragging = false;
+    });
+
+  });
+});
+
+
