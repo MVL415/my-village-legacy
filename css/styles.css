@@ -334,15 +334,12 @@ cursor:pointer;
 
 .zoom-wrapper {
   flex: 1;
-  display: flex;
-  justify-content: center;
 }
 
 .zoom-wrapper img {
   width: 100%;
-  max-width: 480px; /* 🔥 controls each page size */
   height: auto;
-  object-fit: contain;
+  display: block;
 }
 
 .zoom-wrapper img.zoomed {
@@ -1993,21 +1990,20 @@ section {
 }
 
   .spread {
-  flex: 0 0 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center; /* center the FULL spread */
+    align-items: center;
+    gap: 0; /* 🔥 removes space between pages */
 
-  scroll-snap-align: center;
-  gap: 0;
-}
+    flex: 0 0 100%;
+  }
 
   .spread img {
     width: 50%;
   }
 
   .spread .zoom-wrapper {
-    max-width: 500px;
+    max-width: 50%;
   }
 
 
