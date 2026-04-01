@@ -814,6 +814,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
+  // ✅ FORCE START AT FIRST PAGE
+setTimeout(() => {
+  scroll.scrollLeft = 0;
+}, 0);
+
 });
 
 document.addEventListener("DOMContentLoaded", () => {
