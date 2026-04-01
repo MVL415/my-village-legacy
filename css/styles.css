@@ -294,13 +294,11 @@ cursor:pointer;
 }
 
 .magazine {
-  max-width: 820px;   /* 🔥 controls overall size */
-  margin: 40px auto;      /* centers it */
-  padding: 0 16px;     /* breathing room on mobile */
-
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+  max-width: 1000px;   /* 🔥 controls overall size */
+  margin: 0 auto;      /* centers it */
+  background: #f8f8f8;
+  padding: 40px 20px;
+  border-radius: 20px;
 }
 
 .magazine-section {
@@ -334,8 +332,17 @@ cursor:pointer;
   box-shadow: var(--shadow);
 }
 
+.zoom-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
 .zoom-wrapper img {
-  cursor: zoom-in;
+  width: 100%;
+  max-width: 480px; /* 🔥 controls each page size */
+  height: auto;
+  object-fit: contain;
 }
 
 .zoom-wrapper img.zoomed {
@@ -362,7 +369,7 @@ cursor:pointer;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
 
-    gap: 12px;               /* 🔥 tighter spacing */
+    gap: 0;               /* 🔥 tighter spacing */
     padding: 0 16px;         /* 🔥 edge breathing only */
   }
 
@@ -1979,18 +1986,28 @@ section {
   }
 
   .magazine-scroll {
-    display: block;   /* 🔥 normal layout */
-    overflow: visible;
-  }
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 0; /* 🔥 IMPORTANT — removes space between pages */
+}
 
   .spread {
-    display: flex;
-    gap: 0;
-    margin-bottom: 20px;
-  }
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  scroll-snap-align: center;
+  gap: 0;
+}
 
   .spread img {
     width: 50%;
+  }
+
+  .spread .zoom-wrapper {
+    max-width: 500px;
   }
 
 
