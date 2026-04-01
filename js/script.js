@@ -752,7 +752,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!scroll || !indicator) return;
 
   scroll.addEventListener("scroll", () => {
-    const index = Math.round(scroll.scrollLeft / scroll.clientWidth) + 1;
+    const index = Math.floor(scroll.scrollLeft / scroll.clientWidth) + 1;
     const total = document.querySelectorAll(".magazine-scroll .spread").length;
 
     indicator.textContent = `${index} / ${total}`;
