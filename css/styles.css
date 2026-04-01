@@ -415,6 +415,14 @@ cursor:pointer;
   box-shadow: inset 6px 0 10px rgba(0,0,0,0.05);
 }
 
+.last-page::after {
+  content: "End";
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0.6;
+}
+
 }
 
 /* =========================

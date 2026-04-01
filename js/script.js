@@ -759,6 +759,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+
+  const scroll = document.querySelector(".magazine-scroll");
+  if (!scroll) return;
+
+  const pages = Array.from(scroll.querySelectorAll(".zoom-wrapper"));
+
+  let front = null;
+  let back = null;
+  const middle = [];
+
+  pages.forEach(page => {
+    if (page.querySelector(".cover-front")) {
+      front = page;
+    } else if (page.querySelector(".cover-back")) {
+      back = page;
+    } else {
+      middle.push(page);
+    }
+  });
+
+  // 🧹 Clear container
+  scroll.innerHTML = "";
+
+  // 🧱 Rebuild in correct order
+  if (front) scroll.appendChild(front);
+
+  middle.forEach(p => scroll.appendChild(p));
+
+  if (back) scroll.appendChild(back);
+  
+  if (back) {
+  back.classList.add("last-page");
+}
+
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
