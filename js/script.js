@@ -808,3 +808,25 @@ document.querySelectorAll(".zoom-wrapper img").forEach(img => {
 });
 
 img.classList.toggle("zoomed");
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.innerWidth > 768) return;
+
+  const scroll = document.querySelector(".magazine-scroll");
+  const spreads = document.querySelectorAll(".spread");
+
+  spreads.forEach(spread => {
+    const pages = spread.querySelectorAll(".zoom-wrapper");
+
+    if (pages.length > 1) {
+      pages.forEach(page => {
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("spread");
+        wrapper.appendChild(page.cloneNode(true));
+        scroll.appendChild(wrapper);
+      });
+
+      spread.remove(); // remove original 2-page spread
+    }
+  });
+});

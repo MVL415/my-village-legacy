@@ -366,26 +366,24 @@ cursor:pointer;
     padding: 0 16px;         /* 🔥 edge breathing only */
   }
 
-
   .spread {
-    flex: 0 0 90%;           /* 🔥 bigger pages */
+    flex: 0 0 100%;
     scroll-snap-align: center;
 
-    display: flex;
-    gap: 0px;
+    display: block; /* 🔥 no side-by-side */
+    padding: 0;
+  }
 
-    padding: 6px;            /* 🔥 reduce inner padding */
-    border-radius: 16px;
-    overflow: hidden;
-    background: white;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  .zoom-wrapper {
+    width: 100%;   /* 🔥 full width page */
   }
 
   .spread img {
-    width: 50%;
-    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
-
+  
   .magazine-scroll::after {
   content: "→ Swipe";
   position: absolute;
@@ -396,10 +394,7 @@ cursor:pointer;
 }
 
 .zoom-wrapper {
-  width: 50%;
-  overflow: hidden;
-  position: relative;
-  border-radius: 0;
+  width: 100%;
 }
 
 .zoom-wrapper img {
