@@ -365,23 +365,7 @@ cursor:pointer;
     gap: 12px;               /* 🔥 tighter spacing */
     padding: 0 16px;         /* 🔥 edge breathing only */
   }
-.spread::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 2px;
 
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.08),
-    rgba(0,0,0,0.15),
-    rgba(0,0,0,0.08)
-  );
-
-  z-index: 2;
-}
 
   .spread {
     flex: 0 0 90%;           /* 🔥 bigger pages */
