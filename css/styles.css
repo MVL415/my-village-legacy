@@ -304,11 +304,18 @@ cursor:pointer;
 }
 
 .magazine-section {
-  padding: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
 .magazine-section .magazine {
-  max-width: 100%;
+  width: 100%;
+  max-width: none;
 }
 
 /* DESKTOP → 2 PAGE SPREAD */
@@ -1957,6 +1964,12 @@ section {
     width: 100%;
   }
 
+}
+
+@media (min-width: 768px) {
+  .magazine-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* =========================
