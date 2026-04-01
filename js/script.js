@@ -912,3 +912,51 @@ document.addEventListener("DOMContentLoaded", () => {
 }, 2500);
 
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const spreads = document.querySelectorAll(".magazine-scroll .spread");
+  const prevBtn = document.querySelector(".mag-btn.prev");
+  const nextBtn = document.querySelector(".mag-btn.next");
+
+  // Only run on desktop + if elements exist
+  if (!spreads.length || !prevBtn || !nextBtn || window.innerWidth <= 768) return;
+
+  let current = 0;
+
+  function updateView() {
+    spreads.forEach((s, i) => {
+      s.classList.toggle("active", i === current);
+    });
+
+    // 🔥 button state
+    prevBtn.style.opacity = current === 0 ? 0.3 : 1;
+    nextBtn.style.opacity = current === spreads.length - 1 ? 0.3 : 1;
+  }
+
+  // INIT
+  updateView();
+
+  // ➡️ NEXT
+  nextBtn.addEventListener("click", () => {
+    if (current < spreads.length - 1) {
+      current++;
+      updateView();
+    }
+  });
+
+  // ⬅️ PREV
+  prevBtn.addEventListener("click", () => {
+    if (current > 0) {
+      current--;
+      updateView();
+    }
+  });
+
+  // ⌨️ KEYBOARD SUPPORT
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") nextBtn.click();
+    if (e.key === "ArrowLeft") prevBtn.click();
+  });
+
+});
