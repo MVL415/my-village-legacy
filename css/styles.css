@@ -369,16 +369,13 @@ cursor:pointer;
     scroll-snap-align: center;
 
     display: flex;
-    gap: 6px;
+    gap: 10px;
+    padding: 10px;
   }
 
   .spread img {
     width: 50%;
-    height: auto;
-    object-fit: cover;
-
-    border-radius: 8px;
-     box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    border-radius: 10px;
   }
 
 .zoom-wrapper {
@@ -391,7 +388,7 @@ cursor:pointer;
   width: 100%;
   height: auto;
   transition: transform 0.3s ease;
-  touch-action: none; /* 🔥 required for mobile gestures */
+  touch-action: pan-y; /* 🔥 required for mobile gestures */
 }
 
 }

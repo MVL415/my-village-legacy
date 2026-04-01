@@ -745,12 +745,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-const scroll = document.querySelector(".magazine-scroll");
-const indicator = document.querySelector(".mag-indicator");
+document.addEventListener("DOMContentLoaded", () => {
+  const scroll = document.querySelector(".magazine-scroll");
+  const indicator = document.querySelector(".mag-indicator");
 
-scroll.addEventListener("scroll", () => {
-  const index = Math.round(scroll.scrollLeft / scroll.clientWidth) + 1;
-  indicator.textContent = `${index} / 8`;
+  if (!scroll || !indicator) return;
+
+  scroll.addEventListener("scroll", () => {
+    const index = Math.round(scroll.scrollLeft / scroll.clientWidth) + 1;
+    indicator.textContent = `${index} / 8`;
+  });
 });
 
 document.querySelectorAll(".zoom-wrapper img").forEach(img => {
