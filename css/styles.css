@@ -373,6 +373,7 @@ cursor:pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
 
   .zoom-wrapper {
@@ -384,16 +385,31 @@ cursor:pointer;
     height: auto;
     object-fit: contain;
   }
-  
-  .magazine-scroll::after {
+
+/* Swipe hint */
+.spread::after {
   content: "→ Swipe";
   position: absolute;
-  right: 20px;
-  bottom: 10px;
+  right: 12px;
+  bottom: 12px;
+
   font-size: 12px;
   opacity: 0.6;
+
+  transition: opacity 0.4s ease;
 }
 
+/* Hide on last page */
+.spread:last-child::after {
+  content: "End";
+  opacity: 0.4;
+}
+
+/* Fade out state */
+.spread.hide-hint::after {
+  opacity: 0;
+}
+  
 .zoom-wrapper {
   width: 100%;
 }
@@ -413,14 +429,6 @@ cursor:pointer;
 
 .zoom-wrapper:last-child {
   box-shadow: inset 6px 0 10px rgba(0,0,0,0.05);
-}
-
-.last-page::after {
-  content: "End";
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  opacity: 0.6;
 }
 
 }

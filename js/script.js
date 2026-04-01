@@ -872,4 +872,43 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
 
+  const scroll = document.querySelector(".magazine-scroll");
+  if (!scroll) return;
+
+  const spreads = document.querySelectorAll(".spread");
+
+  // 👉 If user already interacted before, hide immediately
+  const hasSwiped = localStorage.getItem("magSwipeHint");
+
+  if (hasSwiped) {
+    spreads.forEach(s => s.classList.add("hide-hint"));
+    return;
+  }
+
+  let startX = 0;
+
+  scroll.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  scroll.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+
+    // 👉 Only trigger if it's an actual swipe
+    if (Math.abs(startX - endX) > 30) {
+
+      // Save so it never shows again
+      localStorage.setItem("magSwipeHint", "true");
+
+      // Fade out all hints
+      spreads.forEach(s => s.classList.add("hide-hint"));
+    }
+  });
+
+  setTimeout(() => {
+  spreads.forEach(s => s.classList.add("hide-hint"));
+}, 2500);
+
+});
