@@ -326,6 +326,14 @@ cursor:pointer;
   box-shadow: var(--shadow);
 }
 
+.zoom-wrapper img {
+  cursor: zoom-in;
+}
+
+.zoom-wrapper img.zoomed {
+  cursor: zoom-out;
+}
+
 /* SINGLE PAGE (cover/back) */
 .spread img:only-child {
   grid-column: span 2;
@@ -334,14 +342,57 @@ cursor:pointer;
 /* MOBILE → 1 PAGE */
 @media (max-width: 768px) {
 
-  .magazine {
-    max-width: 100%;
-    padding: 0 12px;
+  .magazine-scroll {
+    display: flex;
+    overflow-x: auto;
+
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    gap: 16px;
+    padding: 16px;
+
+    scroll-behavior: smooth;
   }
 
+  .magazine-scroll::after {
+  content: "→ Swipe";
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
   .spread {
-    grid-template-columns: 1fr;
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+
+    display: flex;
+    gap: 6px;
   }
+
+  .spread img {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+
+    border-radius: 8px;
+     box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  }
+
+.zoom-wrapper {
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+}
+
+.zoom-wrapper img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+  touch-action: none; /* 🔥 required for mobile gestures */
+}
 
 }
 
@@ -1888,6 +1939,21 @@ section {
     line-height: 1.1;      /* 🔥 tighter stacking */
     white-space: nowrap;   /* 🔥 prevents stacking */
     max-width: none;      /* 🔥 controls wrap */
+  }
+
+  .magazine-scroll {
+    display: block;   /* 🔥 normal layout */
+    overflow: visible;
+  }
+
+  .spread {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .spread img {
+    width: 50%;
   }
 
 
