@@ -764,62 +764,55 @@ document.addEventListener("DOMContentLoaded", () => {
   const scroll = document.querySelector(".magazine-scroll");
   if (!scroll) return;
 
-  const pages = Array.from(scroll.querySelectorAll(".zoom-wrapper"));
+  // STEP 1: Get spreads (correct structure)
+  let spreads = Array.from(scroll.querySelectorAll(".spread"));
 
   let front = null;
   let back = null;
   const middle = [];
 
-  pages.forEach(page => {
-    if (page.querySelector(".cover-front")) {
-      front = page;
-    } else if (page.querySelector(".cover-back")) {
-      back = page;
+  spreads.forEach(spread => {
+    if (spread.querySelector(".cover-front")) {
+      front = spread;
+    } else if (spread.querySelector(".cover-back")) {
+      back = spread;
     } else {
-      middle.push(page);
+      middle.push(spread);
     }
   });
 
-  // 🧹 Clear container
+  // STEP 2: Rebuild in correct order
   scroll.innerHTML = "";
 
-  // 🧱 Rebuild in correct order
   if (front) scroll.appendChild(front);
-
-  middle.forEach(p => scroll.appendChild(p));
-
-  if (back) scroll.appendChild(back);
-  
+  middle.forEach(s => scroll.appendChild(s));
   if (back) {
-  back.classList.add("last-page");
-}
+    scroll.appendChild(back);
+    back.classList.add("last-page");
+  }
 
-});
+  // STEP 3: MOBILE SPLIT (runs AFTER correct order)
+  if (window.innerWidth <= 768) {
 
+    const updatedSpreads = Array.from(scroll.querySelectorAll(".spread"));
 
-document.addEventListener("DOMContentLoaded", () => {
+    updatedSpreads.forEach(spread => {
+      const pages = spread.querySelectorAll(".zoom-wrapper");
 
-  if (window.innerWidth > 768) return;
+      if (pages.length > 1) {
 
-  const scroll = document.querySelector(".magazine-scroll");
-  if (!scroll) return;
+        pages.forEach(page => {
+          const newSlide = document.createElement("div");
+          newSlide.className = "spread";
+          newSlide.appendChild(page.cloneNode(true));
+          scroll.appendChild(newSlide);
+        });
 
-  const spreads = document.querySelectorAll(".magazine-scroll .spread");
+        spread.remove();
+      }
+    });
 
-  spreads.forEach(spread => {
-    const pages = spread.querySelectorAll(".zoom-wrapper");
-
-    if (pages.length > 1) {
-      pages.forEach(page => {
-        const newSlide = document.createElement("div");
-        newSlide.className = "spread";
-        newSlide.appendChild(page.cloneNode(true));
-        scroll.appendChild(newSlide);
-      });
-
-      spread.remove();
-    }
-  });
+  }
 
 });
 
