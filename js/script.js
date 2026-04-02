@@ -208,15 +208,17 @@ function updateProgress() {
     `📚 Books explored: ${viewed.length}`;
 }
 
-const modalEl = document.getElementById("book-modal");
+document.addEventListener("DOMContentLoaded", function () {
+  const modalEl = document.getElementById("book-modal");
 
-if (modalEl) {
-  modalEl.addEventListener("click", function(e) {
-    if (e.target.id === "book-modal") {
-      closeBookModal();
-    }
-  });
-}
+  if (modalEl) {
+    modalEl.addEventListener("click", function(e) {
+      if (e.target.id === "book-modal") {
+        closeBookModal();
+      }
+    });
+  }
+});
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -964,36 +966,6 @@ document.addEventListener("DOMContentLoaded", () => {
       current--;
       updateView();
     }
-  });
-
-});
-
-    prevBtn.style.opacity = current === 0 ? 0.3 : 1;
-    nextBtn.style.opacity = current === spreads.length - 1 ? 0.3 : 1;
-  }
-
-  // 🔥 FORCE FIRST ACTIVE (fix blank state)
-  spreads[0].classList.add("active");
-
-  updateView();
-
-  nextBtn.addEventListener("click", () => {
-    if (current < spreads.length - 1) {
-      current++;
-      updateView();
-    }
-  });
-
-  prevBtn.addEventListener("click", () => {
-    if (current > 0) {
-      current--;
-      updateView();
-    }
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") nextBtn.click();
-    if (e.key === "ArrowLeft") prevBtn.click();
   });
 
 });
