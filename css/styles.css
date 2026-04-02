@@ -1968,10 +1968,12 @@ section {
   }
 
   .magazine-scroll {
-    position: relative;
-    height: 600px; /* 🔥 lock height so nothing shifts */
-    overflow: hidden;
-  }
+  position: relative;
+  aspect-ratio: 16 / 10; /* 🔥 controls shape instead of hard height */
+  max-height: 80vh;      /* 🔥 prevents it from getting too tall */
+  width: 100%;
+  overflow: hidden;
+}
 
   /* 🔥 ALL spreads stack in same position */
   .spread {
@@ -1997,17 +1999,16 @@ section {
     transform: scale(1);
   }
 
-  /* keep pages side-by-side */
-  .zoom-wrapper {
-    flex: 0 0 50%;
-    max-width: 50%;
-  }
+ .zoom-wrapper {
+  display: flex;
+  align-items: stretch;
+}
 
-  .zoom-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
+.zoom-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔥 THIS is the alignment fix */
+}
 
  .spread .zoom-wrapper {
   flex: 0 0 50%;
@@ -2025,7 +2026,7 @@ section {
 }
 
 .zoom-wrapper:first-child {
-  margin-right: -2px; /* 🔥 pulls pages together slightly */
+  margin-right: -1px; /* 🔥 pulls pages together slightly */
 }
 
 .zoom-wrapper:first-child img {
@@ -2041,7 +2042,7 @@ section {
 }
 
 .zoom-wrapper:last-child {
-  margin-left: -2px;
+  margin-left: -1px;
 }
 
 }
