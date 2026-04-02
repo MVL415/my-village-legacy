@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const read = 8;
+  const read = 10;
   const goal = 40;
 
   const percent = (read / goal) * 100;
@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const read = 8;
+  const read = 10;
   const goal = 40;
   const percent = (read / goal) * 100;
 
