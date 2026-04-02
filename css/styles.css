@@ -1940,31 +1940,35 @@ section {
     max-width: none;      /* 🔥 controls wrap */
   }
 
+
   .magazine-scroll {
-    overflow: hidden;   /* ❌ kills scroll */
+    overflow: hidden;
+    position: relative;
   }
 
+  /* 🔥 DEFAULT: show first spread */
   .spread {
-    display: none;   /* hide all */
-    opacity: 0;
-    transform: scale(0.98);
-    transition: 0.3s ease;
-}
+    display: none;
+  }
 
-.spread.active {
-  opacity: 1;
-  transform: scale(1);
-  display: flex;   /* show current */
+  .spread:first-child {
+    display: flex;
+  }
+
+  /* JS will control this */
+  .spread.active {
+    display: flex;
   }
 
   .spread img {
-  margin-bottom: 0;  /* 🔥 CRITICAL FIX */
-}
+    margin-bottom: 0;
+  }
 
   .spread .zoom-wrapper {
     flex: 0 0 50%;
     max-width: 50%;
   }
+
 
   .zoom-wrapper {
   flex: 1;
