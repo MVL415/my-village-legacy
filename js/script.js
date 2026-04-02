@@ -915,12 +915,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  const spreads = document.querySelectorAll(".magazine-scroll .spread");
+  const scroll = document.querySelector(".magazine-scroll");
+  if (!scroll || window.innerWidth <= 768) return;
+
+  // 🔥 GET UPDATED SPREADS (after your reorder script runs)
+  const spreads = scroll.querySelectorAll(".spread");
+
   const prevBtn = document.querySelector(".mag-btn.prev");
   const nextBtn = document.querySelector(".mag-btn.next");
 
-  // Only run on desktop + if elements exist
-  if (!spreads.length || !prevBtn || !nextBtn || window.innerWidth <= 768) return;
+  if (!spreads.length || !prevBtn || !nextBtn) return;
 
   let current = 0;
 
@@ -929,15 +933,15 @@ document.addEventListener("DOMContentLoaded", () => {
       s.classList.toggle("active", i === current);
     });
 
-    // 🔥 button state
     prevBtn.style.opacity = current === 0 ? 0.3 : 1;
     nextBtn.style.opacity = current === spreads.length - 1 ? 0.3 : 1;
   }
 
-  // INIT
+  // 🔥 FORCE FIRST ACTIVE (fix blank state)
+  spreads[0].classList.add("active");
+
   updateView();
 
-  // ➡️ NEXT
   nextBtn.addEventListener("click", () => {
     if (current < spreads.length - 1) {
       current++;
@@ -945,7 +949,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ⬅️ PREV
   prevBtn.addEventListener("click", () => {
     if (current > 0) {
       current--;
@@ -953,7 +956,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ⌨️ KEYBOARD SUPPORT
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") nextBtn.click();
     if (e.key === "ArrowLeft") prevBtn.click();
