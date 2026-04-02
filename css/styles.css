@@ -1969,7 +1969,7 @@ section {
   aspect-ratio: 16 / 10; /* 🔥 controls shape instead of hard height */
   max-height: 80vh;      /* 🔥 prevents it from getting too tall */
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
   /* 🔥 ALL spreads stack in same position */
@@ -2568,7 +2568,7 @@ section {
   font-size: 22px;
   cursor: pointer;
 
-  z-index: 20;
+  z-index: 999;
   transition: 0.2s;
 }
 
