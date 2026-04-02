@@ -76,6 +76,15 @@ const books = [
     question: "💬 Is it difficult for you to get into a book if you don't really relate to the main characters?"
   },
   {
+    id: "creative",
+    title: "Your Creative Career: Turn Your Passion into a Fulfilling and Financially Rewarding Lifestyle",
+    author: "Anna Sabine",
+    img: "images/book11.jpg",
+    review: "Some parts of this book resonated with me more than others but overall I found it to be helpful and thought provoking. F.O.C.U.S. aka 'follow one course until successful' is a mantra I'll be taking with me.",
+    question: "💬 Do you consider yourself to be a creative and if so does your current career path align with your creativity?"
+  },
+  
+  {
     id: "genius",
     title: "Black Genius: Essays on an American Legacy",
     author: "Tre Johnson",
