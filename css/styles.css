@@ -358,6 +358,7 @@ cursor:pointer;
   transition: opacity 0.4s ease;
 }
 
+
 /* Hide on last page */
 .spread:last-child::after {
   content: "End";
@@ -1994,6 +1995,11 @@ section {
     pointer-events: auto;
     transform: scale(1);
   }
+
+  .spread:first-child {
+  opacity: 1;
+  pointer-events: auto;
+}
 
  .zoom-wrapper {
   display: flex;
