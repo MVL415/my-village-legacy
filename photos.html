@@ -103,76 +103,30 @@ Vol.1 of our creative magazine featuring photographer <a href=" https://www.inst
 
   <div class="magazine-scroll">
     <!-- COVER -->
-    <div class="spread">
-      <div class="zoom-wrapper">
-        <img src="images/cover-front.jpg" class="page cover-front">
-      </div>
-    </div>
-
-    <!-- SPREADS -->
-    <div class="spread">
-      <div class="zoom-wrapper">
-        <img src="images/spread1-left.jpg">
-      </div>
-      <div class="zoom-wrapper">
-        <img src="images/spread1-right.jpg">
-      </div>
-    </div>
 
     <div class="spread">
-      <div class="zoom-wrapper">
-        <img src="images/spread2-left.jpg">
-      </div>
-      <div class="zoom-wrapper">
-        <img src="images/spread2-right.jpg">
-      </div>
-    </div>
 
-    <div class="spread">
-      <div class="zoom-wrapper">
-        <img src="images/spread3-left.jpg">
-      </div>
-      <div class="zoom-wrapper">
-        <img src="images/spread3-right.jpg">
-      </div>
-    </div>
+  <!-- LEFT PAGE (mobile only) -->
+  <picture class="page mobile-only">
+    <source media="(max-width: 768px)" srcset="images/page1.jpg">
+    <img src="images/spread1.jpg">
+  </picture>
 
-    <div class="spread">
-      <div class="zoom-wrapper">
-        <img src="images/spread4-left.jpg">
-      </div>
-      <div class="zoom-wrapper">
-        <img src="images/spread4-right.jpg">
-      </div>
-    </div>
+  <!-- RIGHT PAGE (mobile only) -->
+  <picture class="page mobile-only">
+    <source media="(max-width: 768px)" srcset="images/page2.jpg">
+    <img src="images/spread1.jpg">
+  </picture>
 
-    <div class="spread">
-      <div class="zoom-wrapper">
-        <img src="images/spread5-left.jpg">
-      </div>
-      <div class="zoom-wrapper">
-        <img src="images/spread5-right.jpg">
-      </div>
-    </div>
+  <!-- FULL SPREAD (desktop only) -->
+  <picture class="spread-full">
+    <img src="images/spread1.jpg">
+  </picture>
 
-    <div class="spread">
-      <div class="zoom-wrapper">
-        <img src="images/spread6-left.jpg">
-      </div>
-      <div class="zoom-wrapper">
-        <img src="images/spread6-right.jpg">
-      </div>
     </div>
-
-    <div class="spread">
-      <div class="zoom-wrapper">
-        <img src="images/cover-back.jpg" class="page cover-back">
-      </div>
-    </div>
-
   </div>
-
 </div>
+
 
 </section>
 
