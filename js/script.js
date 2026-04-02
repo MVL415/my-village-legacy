@@ -877,7 +877,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const scroll = document.querySelector(".magazine-scroll");
   if (!scroll) return;
 
-  const spreads = document.querySelectorAll(".spread");
+  const spreads = scroll.querySelectorAll(".spread");
 
   // 👉 If user already interacted before, hide immediately
   const hasSwiped = localStorage.getItem("magSwipeHint");
@@ -918,7 +918,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const scroll = document.querySelector(".magazine-scroll");
   if (!scroll || window.innerWidth <= 768) return;
 
-  // 🔥 GET UPDATED SPREADS (after your reorder script runs)
+  // ✅ RE-QUERY AFTER DOM CHANGES
   const spreads = scroll.querySelectorAll(".spread");
 
   const prevBtn = document.querySelector(".mag-btn.prev");
@@ -932,6 +932,32 @@ document.addEventListener("DOMContentLoaded", () => {
     spreads.forEach((s, i) => {
       s.classList.toggle("active", i === current);
     });
+
+    prevBtn.style.opacity = current === 0 ? 0.3 : 1;
+    nextBtn.style.opacity = current === spreads.length - 1 ? 0.3 : 1;
+  }
+
+  // ✅ FORCE FIRST ACTIVE (IMPORTANT)
+  spreads.forEach(s => s.classList.remove("active"));
+  spreads[0].classList.add("active");
+
+  updateView();
+
+  nextBtn.addEventListener("click", () => {
+    if (current < spreads.length - 1) {
+      current++;
+      updateView();
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (current > 0) {
+      current--;
+      updateView();
+    }
+  });
+
+});
 
     prevBtn.style.opacity = current === 0 ? 0.3 : 1;
     nextBtn.style.opacity = current === spreads.length - 1 ? 0.3 : 1;
