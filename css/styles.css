@@ -329,6 +329,25 @@ cursor:pointer;
     padding: 0 16px;         /* 🔥 edge breathing only */
   }
 
+  .spread {
+    flex: 0 0 100%;   /* 👈 each slide = full width */
+    scroll-snap-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .zoom-wrapper {
+    width: 100%;
+  }
+
+  .spread img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
 
 /* Swipe hint */
 .spread::after {
@@ -354,6 +373,27 @@ cursor:pointer;
   opacity: 0;
 }
   
+.zoom-wrapper {
+  width: 100%;
+}
+
+.zoom-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+  touch-action: pan-y; /* 🔥 required for mobile gestures */
+}
+
+.zoom-wrapper:first-child {
+  box-shadow: inset -6px 0 10px rgba(0,0,0,0.05);
+}
+
+.zoom-wrapper:last-child {
+  box-shadow: inset 6px 0 10px rgba(0,0,0,0.05);
+}
+
 }
 
 /* =========================
@@ -565,20 +605,6 @@ cursor:pointer;
     letter-spacing: 0.5px;
      font-style: italic;
      opacity: 0.75;
-  }
-
-  .spread-full {
-    display: none;
-  }
-
-  .mobile-only {
-    display: block;
-    width: 100%;
-  }
-
-  .spread {
-    display: flex;
-    flex-direction: column;
   }
 
 }
@@ -1950,14 +1976,21 @@ section {
 }
 
   /* 🔥 ALL spreads stack in same position */
-  .mobile-only {
-    display: none;
-  }
+  .spread {
+    position: absolute;
+    inset: 0;
+    gap: 0;
 
-  .spread-full {
-    display: block;
-    width: 100%;
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+    transform: scale(0.98);
+}
 
   /* 🔥 ONLY active one shows */
   .spread.active {
@@ -1966,7 +1999,51 @@ section {
     transform: scale(1);
   }
 
+ .zoom-wrapper {
+  display: flex;
+  align-items: stretch;
+}
 
+.zoom-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 🔥 THIS is the alignment fix */
+}
+
+ .spread .zoom-wrapper {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.zoom-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0; /* 🔥 replaces your margin-bottom fix */
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.08),
+    inset 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+.zoom-wrapper:first-child {
+  margin-right: -1px; /* 🔥 pulls pages together slightly */
+}
+
+.zoom-wrapper:first-child img {
+  box-shadow:
+    inset -8px 0 10px rgba(0,0,0,0.08),
+    0 4px 12px rgba(0,0,0,0.06);
+}
+
+.zoom-wrapper:last-child img {
+  box-shadow:
+    inset 8px 0 10px rgba(0,0,0,0.08),
+    0 4px 12px rgba(0,0,0,0.06);
+}
+
+.zoom-wrapper:last-child {
+  margin-left: -1px;
+}
 
 }
 
@@ -2506,11 +2583,4 @@ section {
   .mag-btn {
     display: none;
   }
-}
-
-.spread img {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0;
 }
