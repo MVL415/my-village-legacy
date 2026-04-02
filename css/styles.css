@@ -1941,48 +1941,108 @@ section {
     max-width: none;      /* 🔥 controls wrap */
   }
 
+  .magazine::before {
+  content: "";
+  position: absolute;
 
-  .magazine-scroll {
-    overflow: hidden;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+
+  width: 6px;
+  transform: translateX(-50%);
+
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.08),
+    rgba(0,0,0,0.02),
+    rgba(0,0,0,0.08)
+  );
+
+  pointer-events: none;
+  z-index: 10;
+}
+
+  .magazine {
     position: relative;
   }
 
-  /* 🔥 DEFAULT: show first spread */
+  .magazine-scroll {
+    position: relative;
+    height: 600px; /* 🔥 lock height so nothing shifts */
+    overflow: hidden;
+  }
+
+  /* 🔥 ALL spreads stack in same position */
   .spread {
-    display: none;
-  }
+    position: absolute;
+    inset: 0;
+    gap: 0;
 
-  .spread:first-child {
     display: flex;
-  }
+    justify-content: center;
+    align-items: center;
 
-  /* JS will control this */
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.3s ease;
+    transform: scale(0.98);
+}
+
+  /* 🔥 ONLY active one shows */
   .spread.active {
-    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
   }
 
-  .spread img {
-    margin-bottom: 0;
-  }
-
-  .spread .zoom-wrapper {
+  /* keep pages side-by-side */
+  .zoom-wrapper {
     flex: 0 0 50%;
     max-width: 50%;
   }
 
+  .zoom-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 
-  .zoom-wrapper {
-  flex: 1;
-  display: block;   /* ❌ remove flex behavior */
+ .spread .zoom-wrapper {
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 
 .zoom-wrapper img {
   width: 100%;
   height: auto;
   display: block;
-  margin: 0; /* 🔥 removes extra spacing */
+  margin: 0; /* 🔥 replaces your margin-bottom fix */
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.08),
+    inset 0 0 0 1px rgba(0,0,0,0.04);
 }
 
+.zoom-wrapper:first-child {
+  margin-right: -2px; /* 🔥 pulls pages together slightly */
+}
+
+.zoom-wrapper:first-child img {
+  box-shadow:
+    inset -8px 0 10px rgba(0,0,0,0.08),
+    0 4px 12px rgba(0,0,0,0.06);
+}
+
+.zoom-wrapper:last-child img {
+  box-shadow:
+    inset 8px 0 10px rgba(0,0,0,0.08),
+    0 4px 12px rgba(0,0,0,0.06);
+}
+
+.zoom-wrapper:last-child {
+  margin-left: -2px;
+}
 
 }
 
