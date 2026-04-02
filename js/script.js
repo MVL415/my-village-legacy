@@ -78,7 +78,7 @@ const books = [
   {
     id: "creative",
     title: "Your Creative Career: Turn Your Passion into a Fulfilling and Financially Rewarding Lifestyle",
-    author: "Anna Sabine",
+    author: "Anna Sabino",
     img: "images/book11.jpg",
     review: "Some parts of this book resonated with me more than others but overall I found it to be helpful and thought provoking. F.O.C.U.S. aka 'follow one course until successful' is a mantra I'll be taking with me.",
     question: "💬 Do you consider yourself to be a creative and if so does your current career path align with your creativity?"
