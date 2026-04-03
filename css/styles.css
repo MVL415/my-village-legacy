@@ -305,7 +305,7 @@ cursor:pointer;
 }
 
 .magazine-section {
-  padding: 40px 0;
+  padding: 60px 0;
 }
 
 .magazine-section .magazine {
@@ -1975,7 +1975,7 @@ section {
   aspect-ratio: 16 / 10; /* 🔥 controls shape instead of hard height */
   max-height: 80vh;      /* 🔥 prevents it from getting too tall */
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
 }
 
   /* 🔥 ALL spreads stack in same position */
