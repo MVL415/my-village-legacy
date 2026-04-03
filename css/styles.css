@@ -298,6 +298,12 @@ cursor:pointer;
   position: relative;
 }
 
+.magazine img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .magazine-section {
   padding: 40px 0;
 }
