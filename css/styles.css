@@ -296,6 +296,7 @@ cursor:pointer;
   padding: 40px 20px;
   border-radius: 20px;
   position: relative;
+  z-index: 1;
 }
 
 .magazine img {
@@ -1972,10 +1973,12 @@ section {
 
   .magazine-scroll {
   position: relative;
-  aspect-ratio: 16 / 10; /* 🔥 controls shape instead of hard height */
-  max-height: 80vh;      /* 🔥 prevents it from getting too tall */
   width: 100%;
-  overflow: hidden;
+
+  aspect-ratio: auto;   /* 🔥 remove forced ratio */
+  max-height: none;     /* 🔥 remove cap */
+
+  overflow: hidden;     /* keep this */
 }
 
   /* 🔥 ALL spreads stack in same position */
@@ -2014,8 +2017,9 @@ section {
 
 .zoom-wrapper img {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* 🔥 THIS is the alignment fix */
+  height: auto;
+  object-fit: contain; /* 🔥 THIS is the alignment fix */
+  display: block;
 }
 
  .spread .zoom-wrapper {
