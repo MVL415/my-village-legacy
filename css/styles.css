@@ -1971,14 +1971,13 @@ section {
     position: relative;
   }
 
-  .magazine-scroll {
+.magazine-scroll {
   position: relative;
   width: 100%;
 
-  aspect-ratio: auto;   /* 🔥 remove forced ratio */
-  max-height: none;     /* 🔥 remove cap */
+  height: clamp(400px, 70vh, 900px); /* 🔥 responsive but stable */
 
-  overflow: hidden;     /* keep this */
+  overflow: hidden;
 }
 
   /* 🔥 ALL spreads stack in same position */
@@ -1989,7 +1988,7 @@ section {
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     opacity: 0;
     pointer-events: none;
@@ -2010,16 +2009,15 @@ section {
   pointer-events: auto;
 }
 
- .zoom-wrapper {
+.zoom-wrapper {
+  flex: 1;
   display: flex;
-  align-items: stretch;
 }
 
 .zoom-wrapper img {
   width: 100%;
-  height: auto;
-  object-fit: contain; /* 🔥 THIS is the alignment fix */
-  display: block;
+  height: 100%;
+  object-fit: contain; /* 🔥 no cropping */
 }
 
  .spread .zoom-wrapper {

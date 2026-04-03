@@ -792,47 +792,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // STEP 2: Rebuild in correct order
-  scroll.innerHTML = "";
-
-  if (front) scroll.appendChild(front);
-  middle.forEach(s => scroll.appendChild(s));
-  if (back) {
-    scroll.appendChild(back);
-    back.classList.add("last-page");
-  }
-
-  // STEP 3: MOBILE SPLIT (runs AFTER correct order)
-  if (window.innerWidth <= 768) {
-
-    const updatedSpreads = Array.from(scroll.querySelectorAll(".spread"));
-
-  updatedSpreads.forEach(spread => {
-  const pages = Array.from(spread.querySelectorAll(".zoom-wrapper"));
-
-  if (pages.length > 1) {
-
-    const fragment = document.createDocumentFragment();
-
-    pages.forEach(page => {
-      const newSlide = document.createElement("div");
-      newSlide.className = "spread";
-      newSlide.appendChild(page.cloneNode(true));
-      fragment.appendChild(newSlide);
-    });
-
-    // 🔥 REPLACE instead of append
-    spread.replaceWith(fragment);
-  }
-});
-
-  }
-
-  // ✅ FORCE START AT FIRST PAGE
-setTimeout(() => {
-  scroll.scrollLeft = 0;
-}, 0);
-
 });
 
 document.addEventListener("DOMContentLoaded", () => {
