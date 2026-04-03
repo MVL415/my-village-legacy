@@ -2569,3 +2569,39 @@ section {
 img, video {
   max-width: 100%;
 }
+
+/* 🔥 ANDROID OVERFLOW FIX (CRITICAL) */
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* allow flex/grid children to shrink */
+* {
+  min-width: 0;
+}
+
+/* fix container overflow */
+.container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 16px;
+}
+
+/* 🔥 HERO FIX */
+.hero-section {
+  grid-template-columns: 1fr; /* force safe stacking */
+}
+
+/* keep 2 columns on desktop only */
+@media (min-width: 900px) {
+  .hero-section {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 🔥 NAV FIX */
+.main-nav a {
+  min-width: unset;
+}
