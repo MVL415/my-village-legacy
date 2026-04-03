@@ -296,17 +296,10 @@ cursor:pointer;
   padding: 40px 20px;
   border-radius: 20px;
   position: relative;
-  z-index: 1;
-}
-
-.magazine img {
-  width: 100%;
-  height: auto;
-  display: block;
 }
 
 .magazine-section {
-  padding: 60px 0;
+  padding: 40px 0;
 }
 
 .magazine-section .magazine {
@@ -1972,25 +1965,22 @@ section {
   }
 
   .magazine-scroll {
-    position: relative;
-    width: 100%;
-
-    height: auto;        /* 🔥 key fix */
-    min-height: 600px;   /* 🔥 gives it structure */
-
-    overflow: visible;   /* 🔥 allows full content */
-  }
+  position: relative;
+  aspect-ratio: 16 / 10; /* 🔥 controls shape instead of hard height */
+  max-height: 80vh;      /* 🔥 prevents it from getting too tall */
+  width: 100%;
+  overflow: visible;
+}
 
   /* 🔥 ALL spreads stack in same position */
   .spread {
-    position: relative;
+    position: absolute;
     inset: 0;
     gap: 0;
-    margin-bottom: 20px;
 
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 
     opacity: 0;
     pointer-events: none;
@@ -2011,16 +2001,15 @@ section {
   pointer-events: auto;
 }
 
-.zoom-wrapper {
-  flex: 1;
+ .zoom-wrapper {
   display: flex;
+  align-items: stretch;
 }
 
 .zoom-wrapper img {
   width: 100%;
-  height: auto;
-  object-fit: contain; /* 🔥 no cropping */
-  display: block;
+  height: 100%;
+  object-fit: cover; /* 🔥 THIS is the alignment fix */
 }
 
  .spread .zoom-wrapper {
