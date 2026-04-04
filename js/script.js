@@ -759,97 +759,74 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
 
   const scroll = document.querySelector(".magazine-scroll");
-  if (!scroll) return;
+  const spreads = document.querySelectorAll(".magazine .spread");
 
-  // STEP 1: Get spreads (correct structure)
-  let spreads = Array.from(scroll.querySelectorAll(".spread"));
+  const prevDesktop = document.querySelector(".mag-btn.prev");
+  const nextDesktop = document.querySelector(".mag-btn.next");
 
-  let front = null;
-  let back = null;
-  const middle = [];
+  const prevMobile = document.querySelector(".mag-mobile-btn.prev");
+  const nextMobile = document.querySelector(".mag-mobile-btn.next");
 
-  spreads.forEach(spread => {
-    if (spread.querySelector(".cover-front")) {
-      front = spread;
-    } else if (spread.querySelector(".cover-back")) {
-      back = spread;
-    } else {
-      middle.push(spread);
+  if (!scroll || !spreads.length) return;
+
+  let current = 0;
+
+  const isMobile = window.innerWidth <= 768;
+
+  // ======================
+  // 📱 MOBILE (SCROLL BASED)
+  // ======================
+  if (isMobile) {
+
+    function goTo(index) {
+      if (index < 0 || index >= spreads.length) return;
+
+      current = index;
+
+      scroll.scrollTo({
+        left: index * scroll.clientWidth,
+        behavior: "smooth"
+      });
     }
-  });
 
-  // STEP 2: Rebuild in correct order
-  scroll.innerHTML = "";
+    nextMobile?.addEventListener("click", () => goTo(current + 1));
+    prevMobile?.addEventListener("click", () => goTo(current - 1));
 
-  if (front) scroll.appendChild(front);
-  middle.forEach(s => scroll.appendChild(s));
-  if (back) {
-    scroll.appendChild(back);
-    back.classList.add("last-page");
-  }
-
-  // STEP 3: MOBILE SPLIT (runs AFTER correct order)
-  if (window.innerWidth <= 768) {
-
-    const updatedSpreads = Array.from(scroll.querySelectorAll(".spread"));
-
-    updatedSpreads.forEach(spread => {
-      const pages = Array.from(spread.querySelectorAll(".zoom-wrapper"));
-
-      if (pages.length > 1) {
-
-        const fragment = document.createDocumentFragment();
-
-        pages.forEach(page => {
-          const newSlide = document.createElement("div");
-          newSlide.className = "spread";
-          newSlide.appendChild(page.cloneNode(true));
-          fragment.appendChild(newSlide);
-        });
-
-        // 🔥 REPLACE instead of append
-        spread.replaceWith(fragment);
-      }
+    scroll.addEventListener("scroll", () => {
+      current = Math.round(scroll.scrollLeft / scroll.clientWidth);
     });
 
   }
 
-let spreads = () => scroll.querySelectorAll(".spread");
+  // ======================
+  // 💻 DESKTOP (CLASS BASED)
+  // ======================
+  else {
 
-let currentIndex = 0;
+    function update() {
+      spreads.forEach((s, i) => {
+        s.classList.toggle("active", i === current);
+      });
+    }
 
-function goToPage(index) {
-  const allSpreads = spreads();
+    nextDesktop?.addEventListener("click", () => {
+      if (current < spreads.length - 1) {
+        current++;
+        update();
+      }
+    });
 
-  if (index < 0 || index >= allSpreads.length) return;
+    prevDesktop?.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        update();
+      }
+    });
 
-  currentIndex = index;
-
-  scroll.scrollTo({
-    left: index * scroll.clientWidth,
-    behavior: "smooth"
-  });
-}
-
-document.querySelector(".mag-mobile-btn.next")
-  .addEventListener("click", () => goToPage(currentIndex + 1));
-
-document.querySelector(".mag-mobile-btn.prev")
-  .addEventListener("click", () => goToPage(currentIndex - 1));
-
-scroll.addEventListener("scroll", () => {
-  const allSpreads = spreads();
-  currentIndex = Math.round(scroll.scrollLeft / scroll.clientWidth);
-});
-
-
-  // ✅ FORCE START AT FIRST PAGE
-  setTimeout(() => {
-    scroll.scrollLeft = 0;
-  }, 0);
+    update();
+  }
 
 });
-    
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".zoom-wrapper img").forEach(img => {
