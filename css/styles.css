@@ -328,8 +328,8 @@ cursor:pointer;
 }
 
 .magazine-scroll .spread {
-  flex: 0 0 calc(100% - 32px);  /* 👈 match container padding */
-  scroll-snap-align: center;
+  flex: 0 0 100%; /* 👈 match container padding */
+  scroll-snap-align: start;
 }
 
 .mag-tap-zone {
