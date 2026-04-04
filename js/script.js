@@ -862,19 +862,17 @@ document.addEventListener("DOMContentLoaded", () => {
       startY = e.touches[0].clientY - translateY;
     });
 
-    img.addEventListener("touchmove", (e) => {
-  if (scale === 1) return; 
+   img.addEventListener("touchmove", (e) => {
+  if (scale === 1) return; // ✅ allow normal swipe
 
-  e.preventDefault();
+  e.preventDefault(); // only block when zoomed
 
-      translateX = e.touches[0].clientX - startX;
-      translateY = e.touches[0].clientY - startY;
+  translateX = e.touches[0].clientX - startX;
+  translateY = e.touches[0].clientY - startY;
 
-      img.style.transform =
-        `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
-
-      if (scale > 1) e.stopPropagation();
-    });
+  img.style.transform =
+    `scale(${scale}) translate(${translateX}px, ${translateY}px)`;
+});
 
     img.addEventListener("touchend", () => {
       isDragging = false;
