@@ -814,53 +814,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
-  // ✅ TAP NAVIGATION (FIXED — ONLY RUNS ONCE)
-  let isScrolling = false;
+  const scroll = document.querySelector(".magazine-scroll");
+const spreads = document.querySelectorAll(".spread");
 
-// 🔄 SNAP AFTER SCROLL
+let currentIndex = 0;
+
+function goToPage(index) {
+  if (index < 0 || index >= spreads.length) return;
+
+  currentIndex = index;
+
+  scroll.scrollTo({
+    left: index * scroll.clientWidth,
+    behavior: "smooth"
+  });
+}
+
+document.querySelector(".mag-mobile-btn.next")
+  .addEventListener("click", () => goToPage(currentIndex + 1));
+
+document.querySelector(".mag-mobile-btn.prev")
+  .addEventListener("click", () => goToPage(currentIndex - 1));
+
 scroll.addEventListener("scroll", () => {
-  isScrolling = true;
-
-  clearTimeout(scroll.snapTimeout);
-  scroll.snapTimeout = setTimeout(() => {
-    isScrolling = false;
-
-    const spreads = scroll.querySelectorAll(".spread");
-    const index = Math.round(scroll.scrollLeft / scroll.clientWidth);
-
-    scroll.scrollTo({
-      left: spreads[index].offsetLeft,
-      behavior: "smooth"
-    });
-
-  }, 150);
+  currentIndex = Math.round(scroll.scrollLeft / scroll.clientWidth);
 });
 
-// 👆 TAP NAVIGATION (SAFE)
-scroll.addEventListener("click", (e) => {
-  if (isScrolling) return;
-  if (e.target.closest(".zoom-wrapper")) return;
-
-  const rect = scroll.getBoundingClientRect();
-  const clickX = e.clientX - rect.left;
-
-  const spreads = scroll.querySelectorAll(".spread");
-  const index = Math.round(scroll.scrollLeft / scroll.clientWidth);
-
-  if (clickX < rect.width * 0.4) {
-    const prev = Math.max(0, index - 1);
-    scroll.scrollTo({
-      left: spreads[prev].offsetLeft,
-      behavior: "smooth"
-    });
-  } else if (clickX > rect.width * 0.6) {
-    const next = Math.min(spreads.length - 1, index + 1);
-    scroll.scrollTo({
-      left: spreads[next].offsetLeft,
-      behavior: "smooth"
-    });
-  }
-});
 
   // ✅ FORCE START AT FIRST PAGE
   setTimeout(() => {

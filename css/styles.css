@@ -332,18 +332,28 @@ cursor:pointer;
   scroll-snap-align: start;
 }
 
-.mag-tap-zone {
+.mag-mobile-btn {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50%;
+  bottom: 16px;
+  z-index: 20;
 
-  z-index: 2;              /* 🔥 LOWER THIS */
-  pointer-events: none;    /* 🔥 KEY FIX */
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.mag-tap-left { left: 0; }
-.mag-tap-right { right: 0; }
+.mag-mobile-btn.prev { left: 16px; }
+.mag-mobile-btn.next { right: 16px; }
 
   .spread {
     flex: 0 0 100%;   /* 👈 each slide = full width */
@@ -1974,6 +1984,10 @@ section {
   width: 100%;
   overflow: visible;
 }
+
+  .mag-mobile-btn {
+    display: none;
+  }
 
   /* 🔥 ALL spreads stack in same position */
   .spread {
