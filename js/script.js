@@ -759,7 +759,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
 
   const scroll = document.querySelector(".magazine-scroll");
-  const spreads = document.querySelectorAll(".magazine .spread");
+  let spreads = document.querySelectorAll(".magazine .spread");
 
   const prevDesktop = document.querySelector(".mag-btn.prev");
   const nextDesktop = document.querySelector(".mag-btn.next");
@@ -770,6 +770,30 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!scroll || !spreads.length) return;
 
   let current = 0;
+
+  if (window.innerWidth <= 768) {
+  const newSlides = [];
+
+  spreads.forEach(spread => {
+    const pages = spread.querySelectorAll(".zoom-wrapper");
+
+    if (pages.length > 1) {
+      pages.forEach(page => {
+        const slide = document.createElement("div");
+        slide.className = "spread";
+        slide.appendChild(page.cloneNode(true));
+        newSlides.push(slide);
+      });
+    } else {
+      newSlides.push(spread);
+    }
+  });
+
+  scroll.innerHTML = "";
+  newSlides.forEach(s => scroll.appendChild(s));
+}
+
+spreads = scroll.querySelectorAll(".spread");
 
   const isMobile = window.innerWidth <= 768;
 
@@ -879,13 +903,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const scroll = document.querySelector(".magazine-scroll");
   if (!scroll) return;
 
-  const spreads = scroll.querySelectorAll(".spread");
+  const hintSpreads = scroll.querySelectorAll(".spread");
 
-  // 👉 If user already interacted before, hide immediately
   const hasSwiped = localStorage.getItem("magSwipeHint");
 
   if (hasSwiped) {
-    spreads.forEach(s => s.classList.add("hide-hint"));
+    hintSpreads.forEach(s => s.classList.add("hide-hint"));
     return;
   }
 
@@ -898,66 +921,15 @@ document.addEventListener("DOMContentLoaded", () => {
   scroll.addEventListener("touchend", (e) => {
     const endX = e.changedTouches[0].clientX;
 
-    // 👉 Only trigger if it's an actual swipe
     if (Math.abs(startX - endX) > 30) {
-
-      // Save so it never shows again
       localStorage.setItem("magSwipeHint", "true");
-
-      // Fade out all hints
-      spreads.forEach(s => s.classList.add("hide-hint"));
+      hintSpreads.forEach(s => s.classList.add("hide-hint"));
     }
   });
 
   setTimeout(() => {
-  spreads.forEach(s => s.classList.add("hide-hint"));
-}, 2500);
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const scroll = document.querySelector(".magazine-scroll");
-  if (!scroll || window.innerWidth <= 768) return;
-
-  // ✅ RE-QUERY AFTER DOM CHANGES
-  const spreads = scroll.querySelectorAll(".spread");
-
-  const prevBtn = document.querySelector(".mag-btn.prev");
-  const nextBtn = document.querySelector(".mag-btn.next");
-
-  if (!spreads.length || !prevBtn || !nextBtn) return;
-
-  let current = 0;
-
-  function updateView() {
-    spreads.forEach((s, i) => {
-      s.classList.toggle("active", i === current);
-    });
-
-    prevBtn.style.opacity = current === 0 ? 0.3 : 1;
-    nextBtn.style.opacity = current === spreads.length - 1 ? 0.3 : 1;
-  }
-
-  // ✅ FORCE FIRST ACTIVE (IMPORTANT)
-  spreads.forEach(s => s.classList.remove("active"));
-  spreads[0].classList.add("active");
-
-  updateView();
-
-  nextBtn.addEventListener("click", () => {
-    if (current < spreads.length - 1) {
-      current++;
-      updateView();
-    }
-  });
-
-  prevBtn.addEventListener("click", () => {
-    if (current > 0) {
-      current--;
-      updateView();
-    }
-  });
+    hintSpreads.forEach(s => s.classList.add("hide-hint"));
+  }, 2500);
 
 });
 

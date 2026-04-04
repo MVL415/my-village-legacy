@@ -2001,16 +2001,17 @@ section {
 
     opacity: 0;
     pointer-events: none;
+    visibility: hidden;
 
-    transition: opacity 0.3s ease;
-    transform: scale(0.98);
+    transform: translateZ(0); /* 🔥 prevents flicker on iOS */
+
 }
 
   /* 🔥 ONLY active one shows */
   .spread.active {
     opacity: 1;
     pointer-events: auto;
-    transform: scale(1);
+    visibility: visible;
   }
 
   .spread:first-child {
