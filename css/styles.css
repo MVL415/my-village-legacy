@@ -314,31 +314,26 @@ cursor:pointer;
     margin: 20px auto;
   }
 
- .magazine-scroll {
+.magazine-scroll {
   display: flex;
   overflow-x: auto;
 
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 
-  scroll-padding: 0 16px;
-
   gap: 0;
+  padding: 0 16px; /* ✅ keep this */
 
-  /* improves swipe consistency */
-  touch-action: pan-y;
   scroll-behavior: smooth;
 }
 
-/* 🔥 THIS IS THE BIG ONE */
 .magazine-scroll .spread {
-  flex: 0 0 100%;       /* force each page to full width */
-  scroll-snap-align: start;
+  flex: 0 0 calc(100% - 32px);  /* 👈 match container padding */
+  scroll-snap-align: center;
 }
-
   .spread {
     flex: 0 0 100%;   /* 👈 each slide = full width */
-    scroll-snap-align: center;
+    scroll-snap-align: start;
 
     display: flex;
     justify-content: center;
