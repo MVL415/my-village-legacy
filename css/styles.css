@@ -337,7 +337,9 @@ cursor:pointer;
   top: 0;
   bottom: 0;
   width: 50%;
-  z-index: 5;
+
+  z-index: 2;              /* 🔥 LOWER THIS */
+  pointer-events: none;    /* 🔥 KEY FIX */
 }
 
 .mag-tap-left { left: 0; }
