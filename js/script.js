@@ -757,20 +757,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const scroll = document.querySelector(".magazine-scroll");
-  const indicator = document.querySelector(".mag-indicator");
-
-  if (!scroll || !indicator) return;
-
-  scroll.addEventListener("scroll", () => {
-    const index = Math.floor(scroll.scrollLeft / scroll.clientWidth) + 1;
-    const total = document.querySelectorAll(".magazine-scroll .spread").length;
-
-    indicator.textContent = `${index} / ${total}`;
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
 
   const scroll = document.querySelector(".magazine-scroll");
   if (!scroll) return;
@@ -807,33 +793,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updatedSpreads = Array.from(scroll.querySelectorAll(".spread"));
 
-  updatedSpreads.forEach(spread => {
-  const pages = Array.from(spread.querySelectorAll(".zoom-wrapper"));
+    updatedSpreads.forEach(spread => {
+      const pages = Array.from(spread.querySelectorAll(".zoom-wrapper"));
 
-  if (pages.length > 1) {
+      if (pages.length > 1) {
 
-    const fragment = document.createDocumentFragment();
+        const fragment = document.createDocumentFragment();
 
-    pages.forEach(page => {
-      const newSlide = document.createElement("div");
-      newSlide.className = "spread";
-      newSlide.appendChild(page.cloneNode(true));
-      fragment.appendChild(newSlide);
+        pages.forEach(page => {
+          const newSlide = document.createElement("div");
+          newSlide.className = "spread";
+          newSlide.appendChild(page.cloneNode(true));
+          fragment.appendChild(newSlide);
+        });
+
+        // 🔥 REPLACE instead of append
+        spread.replaceWith(fragment);
+      }
     });
 
-    // 🔥 REPLACE instead of append
-    spread.replaceWith(fragment);
   }
-});
 
-  }
+  // ✅ TAP NAVIGATION (FIXED — ONLY RUNS ONCE)
+  scroll.addEventListener("click", (e) => {
+    const rect = scroll.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+
+    const spreads = scroll.querySelectorAll(".spread");
+    const index = Math.round(scroll.scrollLeft / scroll.clientWidth);
+
+    if (clickX < rect.width * 0.4) {
+      const prev = Math.max(0, index - 1);
+      scroll.scrollTo({
+        left: spreads[prev].offsetLeft,
+        behavior: "smooth"
+      });
+    } else if (clickX > rect.width * 0.6) {
+      const next = Math.min(spreads.length - 1, index + 1);
+      scroll.scrollTo({
+        left: spreads[next].offsetLeft,
+        behavior: "smooth"
+      });
+    }
+  });
 
   // ✅ FORCE START AT FIRST PAGE
-setTimeout(() => {
-  scroll.scrollLeft = 0;
-}, 0);
+  setTimeout(() => {
+    scroll.scrollLeft = 0;
+  }, 0);
 
 });
+    
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".zoom-wrapper img").forEach(img => {
@@ -966,63 +976,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const scroll = document.querySelector(".magazine-scroll");
-  if (!scroll) return;
-
-  let currentIndex = 0;
-
-  function goToPage(index) {
-    const spreads = scroll.querySelectorAll(".spread");
-    if (!spreads.length) return;
-
-    currentIndex = Math.max(0, Math.min(index, spreads.length - 1));
-
-    scroll.scrollTo({
-      left: spreads[currentIndex].offsetLeft,
-      behavior: "smooth"
-    });
-  }
-
-  // 👆 TAP NAVIGATION
-  document.addEventListener("DOMContentLoaded", () => {
-  const scroll = document.querySelector(".magazine-scroll");
-  if (!scroll) return;
-
-  const leftZone = document.querySelector(".mag-tap-left");
-  const rightZone = document.querySelector(".mag-tap-right");
-
-  let currentIndex = 0;
-
-  function goToPage(index) {
-    const spreads = scroll.querySelectorAll(".spread");
-    if (!spreads.length) return;
-
-    currentIndex = Math.max(0, Math.min(index, spreads.length - 1));
-
-    scroll.scrollTo({
-      left: spreads[currentIndex].offsetLeft,
-      behavior: "smooth"
-    });
-  }
-
-  // ✅ TAP ZONES (THIS is what you wanted to add)
-  if (leftZone && rightZone) {
-    leftZone.addEventListener("click", () => {
-      goToPage(currentIndex - 1);
-    });
-
-    rightZone.addEventListener("click", () => {
-      goToPage(currentIndex + 1);
-    });
-  }
-
-  // 🔄 KEEP INDEX IN SYNC
-  scroll.addEventListener("scroll", () => {
-    const index = Math.round(scroll.scrollLeft / scroll.clientWidth);
-    currentIndex = index;
-  });
 });
 
