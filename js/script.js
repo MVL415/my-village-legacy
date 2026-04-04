@@ -863,9 +863,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     img.addEventListener("touchmove", (e) => {
-      if (!isDragging) return;
+  if (scale === 1) return; 
 
-      e.preventDefault();
+  e.preventDefault();
 
       translateX = e.touches[0].clientX - startX;
       translateY = e.touches[0].clientY - startY;
