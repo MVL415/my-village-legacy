@@ -331,6 +331,18 @@ cursor:pointer;
   flex: 0 0 calc(100% - 32px);  /* 👈 match container padding */
   scroll-snap-align: center;
 }
+
+.mag-tap-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 5;
+}
+
+.mag-tap-left { left: 0; }
+.mag-tap-right { right: 0; }
+
   .spread {
     flex: 0 0 100%;   /* 👈 each slide = full width */
     scroll-snap-align: start;
