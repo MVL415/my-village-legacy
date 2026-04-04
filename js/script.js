@@ -987,21 +987,42 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 👆 TAP NAVIGATION
-  scroll.addEventListener("click", (e) => {
-    const width = scroll.clientWidth;
-    const clickX = e.clientX;
+  document.addEventListener("DOMContentLoaded", () => {
+  const scroll = document.querySelector(".magazine-scroll");
+  if (!scroll) return;
 
-    if (clickX < width * 0.4) {
-      goToPage(currentIndex - 1); // left side
-    } else if (clickX > width * 0.6) {
-      goToPage(currentIndex + 1); // right side
-    }
-  });
+  const leftZone = document.querySelector(".mag-tap-left");
+  const rightZone = document.querySelector(".mag-tap-right");
+
+  let currentIndex = 0;
+
+  function goToPage(index) {
+    const spreads = scroll.querySelectorAll(".spread");
+    if (!spreads.length) return;
+
+    currentIndex = Math.max(0, Math.min(index, spreads.length - 1));
+
+    scroll.scrollTo({
+      left: spreads[currentIndex].offsetLeft,
+      behavior: "smooth"
+    });
+  }
+
+  // ✅ TAP ZONES (THIS is what you wanted to add)
+  if (leftZone && rightZone) {
+    leftZone.addEventListener("click", () => {
+      goToPage(currentIndex - 1);
+    });
+
+    rightZone.addEventListener("click", () => {
+      goToPage(currentIndex + 1);
+    });
+  }
 
   // 🔄 KEEP INDEX IN SYNC
   scroll.addEventListener("scroll", () => {
-    const spreads = scroll.querySelectorAll(".spread");
     const index = Math.round(scroll.scrollLeft / scroll.clientWidth);
     currentIndex = index;
   });
 });
+
