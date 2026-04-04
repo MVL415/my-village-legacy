@@ -814,13 +814,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
-  const scroll = document.querySelector(".magazine-scroll");
-const spreads = document.querySelectorAll(".spread");
+let spreads = () => scroll.querySelectorAll(".spread");
 
 let currentIndex = 0;
 
 function goToPage(index) {
-  if (index < 0 || index >= spreads.length) return;
+  const allSpreads = spreads();
+
+  if (index < 0 || index >= allSpreads.length) return;
 
   currentIndex = index;
 
@@ -837,6 +838,7 @@ document.querySelector(".mag-mobile-btn.prev")
   .addEventListener("click", () => goToPage(currentIndex - 1));
 
 scroll.addEventListener("scroll", () => {
+  const allSpreads = spreads();
   currentIndex = Math.round(scroll.scrollLeft / scroll.clientWidth);
 });
 
