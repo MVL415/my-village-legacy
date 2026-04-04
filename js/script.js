@@ -815,27 +815,52 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ✅ TAP NAVIGATION (FIXED — ONLY RUNS ONCE)
-  scroll.addEventListener("click", (e) => {
-    const rect = scroll.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
+  let isScrolling = false;
+
+// 🔄 SNAP AFTER SCROLL
+scroll.addEventListener("scroll", () => {
+  isScrolling = true;
+
+  clearTimeout(scroll.snapTimeout);
+  scroll.snapTimeout = setTimeout(() => {
+    isScrolling = false;
 
     const spreads = scroll.querySelectorAll(".spread");
     const index = Math.round(scroll.scrollLeft / scroll.clientWidth);
 
-    if (clickX < rect.width * 0.4) {
-      const prev = Math.max(0, index - 1);
-      scroll.scrollTo({
-        left: spreads[prev].offsetLeft,
-        behavior: "smooth"
-      });
-    } else if (clickX > rect.width * 0.6) {
-      const next = Math.min(spreads.length - 1, index + 1);
-      scroll.scrollTo({
-        left: spreads[next].offsetLeft,
-        behavior: "smooth"
-      });
-    }
-  });
+    scroll.scrollTo({
+      left: spreads[index].offsetLeft,
+      behavior: "smooth"
+    });
+
+  }, 150);
+});
+
+// 👆 TAP NAVIGATION (SAFE)
+scroll.addEventListener("click", (e) => {
+  if (isScrolling) return;
+  if (e.target.closest(".zoom-wrapper")) return;
+
+  const rect = scroll.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+
+  const spreads = scroll.querySelectorAll(".spread");
+  const index = Math.round(scroll.scrollLeft / scroll.clientWidth);
+
+  if (clickX < rect.width * 0.4) {
+    const prev = Math.max(0, index - 1);
+    scroll.scrollTo({
+      left: spreads[prev].offsetLeft,
+      behavior: "smooth"
+    });
+  } else if (clickX > rect.width * 0.6) {
+    const next = Math.min(spreads.length - 1, index + 1);
+    scroll.scrollTo({
+      left: spreads[next].offsetLeft,
+      behavior: "smooth"
+    });
+  }
+});
 
   // ✅ FORCE START AT FIRST PAGE
   setTimeout(() => {
