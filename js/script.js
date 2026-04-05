@@ -77,7 +77,7 @@ const books = [
   },
   {
     id: "creative",
-    title: "Your Creative Career:Turn Your Passion into a Fulfilling and Financially Rewarding Lifestyle",
+    title: "Your Creative Career:...",
     author: "Anna Sabino",
     img: "images/book11.jpg",
     review: "Some parts of this book resonated with me more than others but overall I found it to be helpful and thought provoking. F.O.C.U.S. aka 'follow one course until successful' is a mantra I'll be taking with me.",
@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const read = 10;
+  const read = 11;
   const goal = 40;
 
   const percent = (read / goal) * 100;
@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const read = 10;
+  const read = 11;
   const goal = 40;
   const percent = (read / goal) * 100;
 
