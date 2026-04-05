@@ -77,7 +77,7 @@ const books = [
   },
   {
     id: "creative",
-    title: "Your Creative Career: Turn Your Passion into a Fulfilling and Financially Rewarding Lifestyle",
+    title: "Your Creative Career:Turn Your Passion into a Fulfilling and Financially Rewarding Lifestyle",
     author: "Anna Sabino",
     img: "images/book11.jpg",
     review: "Some parts of this book resonated with me more than others but overall I found it to be helpful and thought provoking. F.O.C.U.S. aka 'follow one course until successful' is a mantra I'll be taking with me.",
@@ -89,8 +89,17 @@ const books = [
     title: "Black Genius: Essays on an American Legacy",
     author: "Tre Johnson",
     img: "images/book10.jpg",
-    review: "In progress read...",
+    review: "After not being able to relate to the previous read, this was such a breath of fresh air. This book spoke to the Dope Black Nerd in me and I highly recommend checking it out.",
     question: "💬 Who or what comes to mind when you hear the term 'Black Genius'?"
+  },
+
+  {
+    id: "serpent",
+    title: "The Serpent and the Wings of Night",
+    author: "Carissa Broadbent",
+    img: "images/book12.jpg",
+    review: "In progress read...",
+    question: "💬 What's your favorite fantasy series?"
   }
   
  
