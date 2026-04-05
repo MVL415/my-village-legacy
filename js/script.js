@@ -89,7 +89,7 @@ const books = [
     title: "Black Genius: Essays on an American Legacy",
     author: "Tre Johnson",
     img: "images/book10.jpg",
-    review: "After not being able to relate to the previous read, this was such a breath of fresh air. This book spoke to the Dope Black Nerd in me and I highly recommend checking it out.",
+    review: "After not being able to fully relate to the last couple reads, this was such a breath of fresh air. This book spoke to the Dope Black Nerd in me and I highly recommend checking it out.",
     question: "💬 Who or what comes to mind when you hear the term 'Black Genius'?"
   },
 
