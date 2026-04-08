@@ -65,14 +65,12 @@ h3 {
 p {
   line-height: 1.6;
   color: var(--text-light);
+  margin-bottom: var(--space-md);
+  max-width: 620px;
 }
 
 h1, h2, h3 {
   margin-bottom: var(--space-sm);
-}
-
-p {
-  margin-bottom: var(--space-md);
 }
 
 /* =========================
@@ -545,6 +543,8 @@ cursor:pointer;
 
   .hero-title {
     font-size: 28px;
+    line-height: 1.05;
+  letter-spacing: -0.5px;
   }
 
   .hero-sub {
@@ -1762,7 +1762,8 @@ section {
 
 .hero-title {
   font-size: clamp(32px, 4vw, 48px);
-  line-height: 1.1;
+  line-height: 1.05;
+  letter-spacing: -0.5px;
 }
 
 .season {
