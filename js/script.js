@@ -108,7 +108,7 @@ const books = [
     author: "Ben H. Winters",
     img: "images/uabook.jpg",
     review: "In progress read...",
-    question: "💬 What comes to mind when you see this book cover?"
+    question: "💬 What feels most unsettling about this version of reality?"
   }
   
  
