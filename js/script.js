@@ -98,8 +98,17 @@ const books = [
     title: "The Serpent and the Wings of Night",
     author: "Carissa Broadbent",
     img: "images/book12.jpg",
+    review: "Smashed through this one at a rapid speed! Got to the end and jaw dropped. Still not sure who to trust and I'm looking forward to sequel to dive deeper into this world.",
+    question: "💬 Did the characters’ choices feel justified or were they driven by power, love, or revenge?"
+  },
+
+  {
+    id: "underground",
+    title: "Underground Airlines",
+    author: "Ben H. Winters",
+    img: "images/uabook.jpg",
     review: "In progress read...",
-    question: "💬 What's your favorite fantasy series?"
+    question: "💬 What comes to mind when you see this book cover?"
   }
   
  
