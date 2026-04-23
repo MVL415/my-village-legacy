@@ -103,13 +103,31 @@ const books = [
   },
 
   {
-    id: "underground",
-    title: "Underground Airlines",
-    author: "Ben H. Winters",
-    img: "images/uabook.jpg",
-    review: "In progress read...",
-    question: "💬 What feels most unsettling about this version of reality?"
-  }
+  id: "underground",
+  title: "Underground Airlines",
+  author: "Ben H. Winters",
+  img: "images/uabook.jpg",
+  review: "This one pulls you in quick and doesn’t let go. The world feels just close enough to reality to be uncomfortable, and I kept questioning what’s right versus what’s accepted.",
+  question: "💬 What feels most unsettling, the system itself or how normal it seems to the people living in it?"
+},
+
+{
+  id: "beautiful",
+  title: "Great Big Beautiful Life",
+  author: "Emily Henry",
+  img: "images/book14.jpg",
+  review: "This one feels lighter on the surface but there’s something deeper building underneath. 'The Story' portion was more entertaining than the budding romance between the authors. The characters were not my favorites from the start but ultimately grew on me.",
+  question: "💬 Do you think love stories are shaped more by timing or by the people themselves?"
+},
+
+{
+  id: "carrie",
+  title: "Carrie",
+  author: "Stephen King",
+  img: "images/book15.jpg",
+  review: "In progress read...",
+  question: "💬 Have you ever seen the movie or read the book? If you've done both, how'd you feel about the movie adaptation?"
+}
   
  
 ];
