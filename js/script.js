@@ -121,8 +121,8 @@ const books = [
 },
 
 {
-  id: "carrie",
-  title: "Carrie",
+  id: "shining",
+  title: "Shining",
   author: "Stephen King",
   img: "images/book15.jpg",
   review: "In progress read...",
