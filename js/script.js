@@ -122,11 +122,11 @@ const books = [
 
 {
   id: "shining",
-  title: "Shining",
+  title: "The Shining",
   author: "Stephen King",
   img: "images/book15.jpg",
   review: "In progress read...",
-  question: "💬 Have you ever seen the movie or read the book? If you've done both, how'd you feel about the movie adaptation?"
+  question: "💬 Have you ever watched the movie or read the book? If you've done both, how'd you feel about the movie adaptation?"
 }
   
  
