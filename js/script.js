@@ -121,10 +121,19 @@ const books = [
 },
 
 {
+  id: "girl",
+  title: "The Girl I Was",
+  author: "Jeneva Rose",
+  img: "images/book15.jpg",
+  review: "This one comes with a warning from the author that it's very different from her other books and that was an understatement. It’s a slow burn with not as much emotional depth as I hoped for. Once I started to get into it, I found myself wanting to know what happened next but I can’t say I was fully satisfied with the ending.",
+  question: "💬 If you could go back in time to talk some sense into your younger self, what age would you choose and why?"
+},
+
+{
   id: "shining",
   title: "The Shining",
   author: "Stephen King",
-  img: "images/book15.jpg",
+  img: "images/book16.jpg",
   review: "In progress read...",
   question: "💬 Have you ever watched the movie or read the book? If you've done both, how'd you feel about the movie adaptation?"
 }
@@ -258,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const read = 14;
+  const read = 15;
   const goal = 40;
 
   const percent = (read / goal) * 100;
@@ -274,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const read = 14;
+  const read = 15;
   const goal = 40;
   const percent = (read / goal) * 100;
 
