@@ -130,10 +130,37 @@ const books = [
 },
 
 {
+  id: "fortbragg",
+  title: "The Fort Bragg Cartel: Drug Trafficking and Murder in the Special Forces",
+  author: "Seth Harp",
+  img: "images/book16.jpg",
+  review: "Couldn’t put this one down. Every chapter seemed to reveal something more shocking than the last, and the fact that it’s nonfiction made it all the more unsettling. Definitely one of the most eye-opening books I’ve read this year.",
+  question: "💬 When institutions fail, who should be held accountable?"
+},
+
+{
+  id: "ending",
+  title: "The Ending Writes Itself",
+  author: "Evelyn Clarke",
+  img: "images/book17.jpg",
+  review: "I did not expect this to turn into the murder mystery that it ended up becoming. Despite a few too many cliche and 'wtf' moments I enjoyed this take on the life of writers and the publishing world.",
+  question: "💬 How did your main suspect change as the story unfolded? Did you suspect the right character from the start or were you surprised in the end?"
+},
+
+{
+  id: "shotready",
+  title: "Shot Ready",
+  author: "Stephen Curry",
+  img: "images/book18.jpg",
+  review: "I picked this book up at the library because of the photographs and was pleasantly surprised by the wisdom found in the text. A quick but motivating read. I appreciated how Curry focuses on the work behind success rather than just the results. Plenty of lessons here whether you’re an athlete or not.",
+  question: "💬 What habit has had the biggest impact on your personal growth?"
+},
+
+{
   id: "shining",
   title: "The Shining",
   author: "Stephen King",
-  img: "images/book16.jpg",
+  img: "images/book19.jpg",
   review: "In progress read...",
   question: "💬 Have you ever watched the movie or read the book? If you've done both, how'd you feel about the movie adaptation?"
 }
@@ -267,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const read = 15;
+  const read = 18;
   const goal = 40;
 
   const percent = (read / goal) * 100;
@@ -283,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const read = 15;
+  const read = 18;
   const goal = 40;
   const percent = (read / goal) * 100;
 
