@@ -157,12 +157,57 @@ const books = [
 },
 
 {
-  id: "shining",
-  title: "The Shining",
-  author: "Stephen King",
+  id: "opencontempt",
+  title: "In Open Contempt: Confronting White Supremacy in Art and Public Space",
+  author: "Irvin Weathersby Jr.",
   img: "images/book19.jpg",
+  review: "This book is a powerful exploration of the intersection of art, race, and public space. Weathersby challenges readers to confront uncomfortable truths about systemic racism and the role of art in shaping public perception. It’s a thought-provoking read that encourages reflection and action.",
+  question: "💬 How should communities decide which stories, people, and histories deserve to be remembered in public spaces?"
+},
+
+{
+  id: "findingme",
+  title: "Finding Me",
+  author: "Viola Davis",
+  img: "images/book20.jpg",
+  review: "I had no idea what I was getting into with this one. I expected a celebrity memoir but what I got was a story of resilience, self-discovery, and triumph over a lifetime of adversity. Viola Davis’ journey is inspiring and her honesty is refreshing.",
+  question: "💬 Has there been a memoir that surprised you?"
+},
+
+{
+  id: "fallrisk",
+  title: "The Fall Risk",
+  author: "Abby Jimenez",
+  img: "images/book21.jpg",
+  review: "This was a quick and easy read that felt like a pallete cleanser after some of the heavier books I’ve read recently. It’s a story about love, loss, and finding hope in unexpected places.",
+  question: "💬 Do short stories leave you wanting more or are you content with the story arc being wrapped up quickly?"
+},
+
+{
+  id: "astrallibrary",
+  title: "The Astral Library",
+  author: "Kate Quinn",
+  img: "images/book22.jpg",
+  review: "This one was a bit of a slow burn for me. I found myself getting lost in the world-building and character development, but the plot took a while to pick up. Once it did, I was hooked and couldn’t put it down.",
+  question: "💬 If you could choose a book to live in, which one would it be and why?"
+},
+
+{
+  id: "beautifulvillain",
+  title: "Beautiful Villain",
+  author: "Rebecca F. Kenney",
+  img: "images/book23.jpg",
+  review: "A retelling of The Great Gatsby with a fantasy twist. I enjoyed the unique perspective and the way the story was told, but I felt like it could have been more developed in certain areas. Felt rushed at times, but overall an enjoyable read if you're a fan of the original.",
+  question: "💬 How do you feel about retellings of classic stories? Do they enhance the original or detract from it?"
+},
+
+{
+  id: "shards",
+  title: "The Shards",
+  author: "Bret Easton Ellis",
+  img: "images/book24.jpg",
   review: "In progress read...",
-  question: "💬 Have you ever watched the movie or read the book? If you've done both, how'd you feel about the movie adaptation?"
+  question: "💬 This book has been turned into a Ryan Murphy produced FX show. Will you watch a movie or television version before reading the book?"
 }
   
  
@@ -294,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const read = 18;
+  const read = 23;
   const goal = 40;
 
   const percent = (read / goal) * 100;
@@ -310,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const read = 18;
+  const read = 23;
   const goal = 40;
   const percent = (read / goal) * 100;
 
