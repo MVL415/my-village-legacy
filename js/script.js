@@ -202,12 +202,39 @@ const books = [
 },
 
 {
+  id: "husbandswife",
+  title: "My Husband's Wife",
+  author: "Alice Feeney",
+  img: "images/book24.jpg",
+  review: "This book had so many twists and turns I'm not sure if they all worked. The story was interesting enough to keep me guessing.",
+  question: "💬 What's a book you've read where the big reveal just didn't seem to land? What about one where it did?"
+},
+
+{
+  id: "deardebbie",
+  title: "Dear Debbie",
+  author: "Freida McFadden",
+  img: "images/book25.jpg",
+  review: "I know when I pick up a book by this author that I'm in for a wild ride. I thought I knew what was going on and was pleasantly surprised at the end.",
+  question: "💬 Do you have a go to author who consistently meets your expectations?"
+},
+
+{
+  id: "shining",
+  title: "The Shining",
+  author: "Stephen King",
+  img: "images/book26.jpg",
+  review: "This one took a while to finish because of how creepy it was to read at night. Stephen King really knows how to get in your head, creating characters that stay with you even when you're finished reading.",
+  question: "💬 Have you read this book or seen the movie? Will you read a book after already watching the movie adaptation?"
+},
+
+{
   id: "shards",
   title: "The Shards",
   author: "Bret Easton Ellis",
-  img: "images/book24.jpg",
+  img: "images/book28.jpg",
   review: "In progress read...",
-  question: "💬 This book has been turned into a Ryan Murphy produced FX show. Will you watch a movie or television version before reading the book?"
+  question: "💬 This book has been turned into a Ryan Murphy produced FX show. Would you watch the television version before reading the book?"
 }
   
  
