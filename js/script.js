@@ -772,14 +772,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!heroImg || !thumbs.length) return;
 
+    // Remember the original hero image
+    const originalHeroSrc = heroImg.src;
+
+    // Thumbnail clicks
     thumbs.forEach(img => {
 
       img.addEventListener("click", () => {
 
-        // Change only the hero image in THIS gallery
         heroImg.src = img.src;
 
-        // Update active thumbnail only in THIS gallery
         thumbs.forEach(t => t.classList.remove("active"));
         img.classList.add("active");
 
@@ -787,9 +789,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    // Click hero to return to original image
+    heroImg.addEventListener("click", () => {
+
+      heroImg.src = originalHeroSrc;
+
+      thumbs.forEach(t => t.classList.remove("active"));
+
+    });
+
   });
 
 });
+
 
 const faders = document.querySelectorAll('.fade-in');
 

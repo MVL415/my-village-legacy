@@ -649,6 +649,7 @@ text-align:center;
   display: block;
    border-radius: var(--radius);
   box-shadow: var(--shadow);
+  cursor: pointer;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   margin-bottom: 8px;
 }
