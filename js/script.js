@@ -763,21 +763,33 @@ if (backToTop) {
   });
 }
 
-const thumbs = document.querySelectorAll(".thumb");
-const heroImg = document.querySelector(".hero");
+document.addEventListener("DOMContentLoaded", () => {
 
-if (thumbs.length && heroImg) {
-  thumbs.forEach(img => {
-    img.addEventListener("click", () => {
+  document.querySelectorAll(".hero-section").forEach(section => {
 
-      heroImg.src = img.src;
+    const heroImg = section.querySelector(".hero");
+    const thumbs = section.querySelectorAll(".thumb");
 
-      thumbs.forEach(t => t.classList.remove("active"));
-      img.classList.add("active");
+    if (!heroImg || !thumbs.length) return;
+
+    thumbs.forEach(img => {
+
+      img.addEventListener("click", () => {
+
+        // Change only the hero image in THIS gallery
+        heroImg.src = img.src;
+
+        // Update active thumbnail only in THIS gallery
+        thumbs.forEach(t => t.classList.remove("active"));
+        img.classList.add("active");
+
+      });
 
     });
+
   });
-}
+
+});
 
 const faders = document.querySelectorAll('.fade-in');
 
