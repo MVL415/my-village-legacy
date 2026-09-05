@@ -225,7 +225,16 @@ const books = [
   author: "Stephen King",
   img: "images/book26.jpg",
   review: "This one took a while to finish because of how creepy it was to read at night. Stephen King really knows how to get in your head, creating characters that stay with you even when you're finished reading.",
-  question: "💬 Have you read this book or seen the movie? Will you read a book after already watching the movie adaptation?"
+  question: "💬 What do you think makes the Overlook so unsettling, the hotel itself or what it brings out of the people who dare to enter?"
+},
+
+{
+  id: "shouldvesaid",
+  title: "What I Should've Said",
+  author: "Max Monroe",
+  img: "images/book27.jpg",
+  review: "Did not expect to get hit in the feels like this. I thought I was just picking up a little romcom but it turned into a story about love, loss, and the importance of spending time with those who matter most.",
+  question: "💬 If you knew you had limited time with someone you loved, what would you make sure you said or did?"
 },
 
 {
@@ -234,7 +243,7 @@ const books = [
   author: "Bret Easton Ellis",
   img: "images/book28.jpg",
   review: "In progress read...",
-  question: "💬 This book has been turned into a Ryan Murphy produced FX show. Would you watch the television version before reading the book?"
+  question: "💬 This book has been turned into a Ryan Murphy produced FX show. Would you watch the television version before finishing the book? Asking for...myself."
 }
   
  
